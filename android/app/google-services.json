@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "77506248560",
+    "project_id": "equipment-rental-app",
+    "storage_bucket": "equipment-rental-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77506248560:android:5acc01e4724d99cb4bd9b5",
+        "android_client_info": {
+          "package_name": "com.yetitech.rentallpartners"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy_GqUEon9SVA4pV5OlIAz6H2nj73Zj_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77506248560-ajnr78mir980roshm6it9747r1qcebf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yetitech.rentallpartners"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77506248560:android:8cc7c1474ee2b9f74bd9b5",
+        "android_client_info": {
+          "package_name": "com.theyetitech.equipmental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77506248560-9i0fttmb7lm903kqlt1dqckbgq9r1c5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theyetitech.equipmental",
+            "certificate_hash": "a4f6722addedb1c4044bf5a0b5ea5745cb19d715"
+          }
+        },
+        {
+          "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy_GqUEon9SVA4pV5OlIAz6H2nj73Zj_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77506248560-ajnr78mir980roshm6it9747r1qcebf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yetitech.rentallpartners"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
