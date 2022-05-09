@@ -97,7 +97,7 @@ class OrdersListSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "NPR ${order.totalAmount}",
+                "NPR ${f.format(order.grandTotal).toString()}",
                 style: TextStyle(
                   fontSize: 13,
                   color: primaryColor,

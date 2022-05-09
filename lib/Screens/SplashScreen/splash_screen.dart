@@ -7,12 +7,16 @@ import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
 import 'package:wakelock/wakelock.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key) {
     if (kDebugMode) Wakelock.enable();
-    setupInteractedMessage();
   }
 
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
   void navigate(BuildContext context) {
     Future.delayed(const Duration(seconds: 2), () async {
       if (await LoginSession().isSessionExist()) {
@@ -37,8 +41,14 @@ class SplashScreen extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     navigate(context);
+
     return Scaffold(
       backgroundColor: const Color(0xffED1A25),
       body: Center(
@@ -49,22 +59,4 @@ class SplashScreen extends StatelessWidget {
       ),
     );
   }
-
-  // It is assumed that all messages contain a data field with the key 'type'
-  Future<void> setupInteractedMessage() async {
-    // await FirebaseMessaging.instance
-    //     .setForegroundNotificationPresentationOptions(
-    //   alert: true, // Required to display a heads up notification
-    //   badge: true,
-    //   sound: true,
-    // );
-    // RemoteMessage? initialMessage =
-    //     await FirebaseMessaging.instance.getInitialMessage();
-    // if (initialMessage != null) {
-    //   _handleMessage(initialMessage);
-    // }
-    // FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
-  }
-
-  // void _handleMessage(RemoteMessage message) {}
 }

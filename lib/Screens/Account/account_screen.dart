@@ -8,6 +8,7 @@ import 'package:rental_partners/Screens/Account/Widgets/profile_image_box.dart';
 import 'package:rental_partners/Screens/Account/Widgets/profile_info_box.dart';
 import 'package:rental_partners/Screens/LoginScreen/login_screen.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
+import 'package:rental_partners/Theme/theme_change_listener.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<ProfileCubit>().fetchProfile();
+    listernToTheme(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Account".toUpperCase()),

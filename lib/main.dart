@@ -1,4 +1,5 @@
 // import 'package:firebase_core/firebase_core.dart';
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ GlobalKey<ScaffoldMessengerState> scaffoldMessageKey = GlobalKey();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -43,14 +45,15 @@ class MyApp extends StatelessWidget {
         light: lightThemeData,
         dark: darkThemeData,
         initial: AdaptiveThemeMode.light,
-        builder: (theme, darkTheme) => GetMaterialApp(
-          title: 'AEMPL Group',
-          scaffoldMessengerKey: scaffoldMessageKey,
-          theme: theme,
-          darkTheme: darkTheme,
-
-          home: SplashScreen(), // EquipmentDetailScreen(),
-        ),
+        builder: (theme, darkTheme) {
+          return GetMaterialApp(
+            title: 'AEMPL Group',
+            scaffoldMessengerKey: scaffoldMessageKey,
+            theme: theme,
+            darkTheme: darkTheme,
+            home: SplashScreen(),
+          );
+        },
       ),
     );
   }

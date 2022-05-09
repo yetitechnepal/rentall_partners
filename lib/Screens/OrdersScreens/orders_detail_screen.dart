@@ -156,11 +156,6 @@ class _OrdersDetailScreenState extends State<OrdersDetailScreen> {
                           const SizedBox(height: 8),
                           rowTextBox(
                             context,
-                            title: "Discount Amount",
-                            value: "NPR ${widget.order.discountAmount}",
-                          ),
-                          rowTextBox(
-                            context,
                             title: "Tax 13%",
                             value: "NPR ${widget.order.taxAmount}",
                           ),
@@ -169,15 +164,28 @@ class _OrdersDetailScreenState extends State<OrdersDetailScreen> {
                             title: "Promo",
                             value: "NPR ${widget.order.promotionDiscount}",
                           ),
+                          rowTextBox(
+                            context,
+                            title: "Offer Discount",
+                            value: "NPR ${widget.order.offerDiscount}",
+                          ),
                           const SizedBox(height: 8),
                           const Divider(thickness: 1, color: Color(0xffE5E5E5)),
                           const SizedBox(height: 8),
+                          // rowTextBox(
+                          //   context,
+                          //   title: "Total",
+                          //   value: "NPR ${widget.order.totalAmount}",
+                          //   isRightAlign: true,
+                          // ),
                           rowTextBox(
                             context,
-                            title: "Total",
-                            value: "NPR ${widget.order.totalAmount}",
+                            title: "Grand Total",
+                            value:
+                                "NPR ${f.format(order.grandTotal).toString()}",
                             isRightAlign: true,
                           ),
+                          const Divider(thickness: 1, color: Color(0xffE5E5E5)),
                           rowTextBox(
                             context,
                             title: "Paid",

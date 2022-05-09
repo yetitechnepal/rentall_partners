@@ -126,22 +126,26 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
                             future: docTypes.fetchDocTypes(),
                             builder: (ctx, snapshot) {
                               if (snapshot.hasData) {
-                                return ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: snapshot.data!.docs.length,
-                                    itemBuilder: (cont, index) {
-                                      return ListTile(
-                                        title: Text(
-                                            snapshot.data!.docs[index].value),
-                                        onTap: () {
-                                          setState(() {
-                                            docType =
-                                                snapshot.data!.docs[index];
-                                          });
-                                          Navigator.pop(ctx);
-                                        },
-                                      );
-                                    });
+                                return Container(
+                                  constraints:
+                                      const BoxConstraints(maxWidth: 400),
+                                  child: ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: snapshot.data!.docs.length,
+                                      itemBuilder: (cont, index) {
+                                        return ListTile(
+                                          title: Text(
+                                              snapshot.data!.docs[index].value),
+                                          onTap: () {
+                                            setState(() {
+                                              docType =
+                                                  snapshot.data!.docs[index];
+                                            });
+                                            Navigator.pop(ctx);
+                                          },
+                                        );
+                                      }),
+                                );
                               } else {
                                 return const Padding(
                                   padding: EdgeInsets.all(20),

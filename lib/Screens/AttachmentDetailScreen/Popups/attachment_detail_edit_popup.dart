@@ -144,123 +144,128 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
             },
           ),
         ),
-        body: Form(
-          child: Container(
-            alignment: Alignment.topCenter,
+        body: SingleChildScrollView(
+          child: Form(
             child: Container(
-              constraints: const BoxConstraints(maxWidth: 500),
-              child: ListView(
-                children: [
-                  textFieldText("Equipment Name"),
-                  AEMPLTextField(
-                    controller: widget.controllers[0],
-                    hintText: "Equipment name",
-                    prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
-                    validator: (value) {
-                      if (value!.isEmpty) return "Please enter name";
-                    },
-                  ),
-                  textFieldText("Weight"),
-                  AEMPLTextField(
-                    controller: widget.controllers[1],
-                    hintText: "Weight",
-                    prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
-                    validator: (value) {
-                      if (value!.isEmpty) return "Please enter weight";
-                    },
-                  ),
-                  textFieldText("Dimension"),
-                  AEMPLTextField(
-                    controller: widget.controllers[2],
-                    hintText: "Dimension",
-                    prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
-                    validator: (value) {
-                      if (value!.isEmpty) return "Please enter weight";
-                    },
-                  ),
-                  textFieldText("Hour of Renting"),
-                  AEMPLTextField(
-                    controller: widget.controllers[3],
-                    hintText: "Hour of renting",
-                    prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
-                    validator: (value) {
-                      if (value!.isEmpty) return "Please enter weight";
-                    },
-                  ),
-                  textFieldText("Date of Manufacturing"),
-                  AEMPLPopUpButton(
-                    hintText: "Date of manufacturing",
-                    value: manufacturedDate != null
-                        ? DateFormat("MMMM dd, yyyy").format(manufacturedDate)
-                        : null,
-                    prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
-                    onPressed: () async {
-                      DateTime? selectedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1950),
-                        lastDate: DateTime.now(),
-                        builder: (context, child) {
-                          return Theme(
-                            data: datePickerTheme(context),
-                            child: child!,
-                          );
-                        },
-                      );
-                      if (selectedDate != null) {
-                        setState(() => manufacturedDate = selectedDate);
-                      }
-                    },
-                  ),
-                  textFieldText("Location"),
-                  AEMPLTextField(
-                    controller: widget.controllers[5],
-                    hintText: "Location",
-                    prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
-                    validator: (value) {
-                      if (value!.isEmpty) return "Please enter weight";
-                    },
-                  ),
-                  textFieldText("Description"),
-                  AEMPLTextField(
-                    controller: widget.controllers[6],
-                    hintText: "Description",
-                    textInputAction: TextInputAction.done,
-                    maxLines: 6,
-                    prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
-                    validator: (value) {
-                      if (value!.isEmpty) return "Please enter weight";
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  Center(
-                    child: TextButton(
+              alignment: Alignment.topCenter,
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    textFieldText("Equipment Name"),
+                    AEMPLTextField(
+                      controller: widget.controllers[0],
+                      hintText: "Equipment name",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter name";
+                      },
+                    ),
+                    textFieldText("Weight"),
+                    AEMPLTextField(
+                      controller: widget.controllers[1],
+                      hintText: "Weight",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter weight";
+                      },
+                    ),
+                    textFieldText("Dimension"),
+                    AEMPLTextField(
+                      controller: widget.controllers[2],
+                      hintText: "Dimension",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter weight";
+                      },
+                    ),
+                    textFieldText("Hour of Renting"),
+                    AEMPLTextField(
+                      controller: widget.controllers[3],
+                      hintText: "Hour of renting",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter weight";
+                      },
+                    ),
+                    textFieldText("Date of Manufacturing"),
+                    AEMPLPopUpButton(
+                      hintText: "Date of manufacturing",
+                      value: manufacturedDate != null
+                          ? DateFormat("MMMM dd, yyyy").format(manufacturedDate)
+                          : null,
+                      prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
                       onPressed: () async {
-                        _AttachmentDetail _attachmentDetail = _AttachmentDetail(
-                          name: widget.controllers[0].text,
-                          weight: widget.controllers[1].text,
-                          dimension: widget.controllers[2].text,
-                          hor: widget.controllers[3].text,
-                          dom:
-                              DateFormat("yyyy-MM-dd").format(manufacturedDate),
-                          location: widget.controllers[5].text,
-                          description: widget.controllers[6].text,
-                          isVerified: widget.detail.isVerified,
+                        DateTime? selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1950),
+                          lastDate: DateTime.now(),
+                          builder: (context, child) {
+                            return Theme(
+                              data: datePickerTheme(context),
+                              child: child!,
+                            );
+                          },
                         );
-                        if (await _attachmentDetail.update(context,
-                            id: widget.id)) {
-                          AttachmentDetailsModel attachmentDetailsModel =
-                              AttachmentDetailsModel();
-                          await attachmentDetailsModel.fetchAttachmentDetails(
-                              context, widget.id);
-                          Navigator.pop(context);
+                        if (selectedDate != null) {
+                          setState(() => manufacturedDate = selectedDate);
                         }
                       },
-                      child: const Text("Update"),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                ],
+                    textFieldText("Location"),
+                    AEMPLTextField(
+                      controller: widget.controllers[5],
+                      hintText: "Location",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter weight";
+                      },
+                    ),
+                    textFieldText("Description"),
+                    AEMPLTextField(
+                      controller: widget.controllers[6],
+                      hintText: "Description",
+                      textInputAction: TextInputAction.done,
+                      maxLines: 6,
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter weight";
+                      },
+                    ),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: TextButton(
+                        onPressed: () async {
+                          _AttachmentDetail _attachmentDetail =
+                              _AttachmentDetail(
+                            name: widget.controllers[0].text,
+                            weight: widget.controllers[1].text,
+                            dimension: widget.controllers[2].text,
+                            hor: widget.controllers[3].text,
+                            dom: DateFormat("yyyy-MM-dd")
+                                .format(manufacturedDate),
+                            location: widget.controllers[5].text,
+                            description: widget.controllers[6].text,
+                            isVerified: widget.detail.isVerified,
+                          );
+                          if (await _attachmentDetail.update(context,
+                              id: widget.id)) {
+                            AttachmentDetailsModel attachmentDetailsModel =
+                                AttachmentDetailsModel();
+                            await attachmentDetailsModel.fetchAttachmentDetails(
+                                context, widget.id);
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: const Text("Update"),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
               ),
             ),
           ),

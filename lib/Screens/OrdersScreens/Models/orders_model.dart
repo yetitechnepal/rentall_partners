@@ -11,6 +11,8 @@ import 'package:rental_partners/Enums/orders_types.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/main.dart';
 
+final f = NumberFormat("#,##,###.0#", "en_US");
+
 class OrderItem {
   late int id;
   late String name;
@@ -56,7 +58,6 @@ class Order {
       totalAmount,
       orderBy,
       taxAmount,
-      discountAmount,
       promotionDiscount,
       offerDiscount,
       paid,
@@ -64,12 +65,11 @@ class Order {
   late int statusId, bookId;
   late bool isFuelIncluded;
   late DateTime orderDate, dateFrom, dateTo;
-
   late OrderTypes orderType;
 
-  List<OrderItem> items = [];
+  late double promo, offer, subTotal, grandTotal, tax;
 
-  final f = NumberFormat("#,##,###.0#", "en_US");
+  List<OrderItem> items = [];
   Order();
   Order.fromMap(map) {
     fromMap(map);
@@ -85,15 +85,18 @@ class Order {
     statusId = map['status_id'] ?? 0;
     invoiceAmount = f.format(map['invoice_amounts'] ?? 0).toString();
     totalAmount = f.format(map['total_amounts'] ?? 0).toString();
+    subTotal = map['total_amounts'];
     bookId = map['book_id'] ?? 0;
     orderBy = map['order_by'] ?? "";
     if (map.containsKey("client")) {
       orderBy = map['client'] ?? "";
     }
     taxAmount = f.format(map['tax_amount']).toString();
-    discountAmount = f.format(map['discount_amount']).toString();
+    tax = map['tax_amount'];
     promotionDiscount = f.format(map['promotion_discount']).toString();
+    promo = map['promotion_discount'];
     offerDiscount = f.format(map['offer_discount']).toString();
+    offer = map['offer_discount'];
     paid = f.format(map['paid'] ?? 0).toString();
     due = f.format(map['due'] ?? 0).toString();
     orderDate = DateTime.tryParse(map['order_date'] ?? "") ?? DateTime.now();
@@ -120,6 +123,13 @@ class Order {
         items.add(OrderItem.fromMap(mapp));
       });
     }
+    calculate();
+  }
+
+  calculate() {
+    subTotal = subTotal - tax;
+    subTotal = subTotal + offer + promo;
+    grandTotal = subTotal + 0.13 * subTotal;
   }
 
   Future<void> fetchOrderDetail(BuildContext context, int id) async {

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:rental_partners/Theme/dropshadows.dart';
 
 showImageBox(BuildContext context,
     {required List<String> imagePaths,
@@ -33,7 +34,7 @@ showImageBox(BuildContext context,
                           backgroundDecoration:
                               const BoxDecoration(color: Colors.transparent),
                           minScale: PhotoViewComputedScale.contained,
-                          maxScale: PhotoViewComputedScale.contained * 3.0,
+                          maxScale: PhotoViewComputedScale.contained * 5.0,
                           initialScale: PhotoViewComputedScale.contained,
                           imageProvider:
                               CachedNetworkImageProvider(imagePaths[index]),
@@ -46,13 +47,14 @@ showImageBox(BuildContext context,
                     top: 0,
                     child: SafeArea(
                       child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                        iconSize: 30,
+                        onPressed: () => Navigator.pop(context),
                         icon: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
+                            border: Border.all(color: Colors.black, width: 2),
                             borderRadius: BorderRadius.circular(100),
+                            boxShadow: BoxShadows.dropShadow(context),
                           ),
                           child: Icon(
                             Icons.close,
