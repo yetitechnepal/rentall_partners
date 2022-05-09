@@ -1,11 +1,10 @@
-// ignore_for_file: implementation_imports
+// ignore_for_file: implementation_imports, body_might_complete_normally_nullable
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:provider/src/provider.dart';
 import 'package:rental_partners/Blocs/category_bloc.dart';
 import 'package:rental_partners/Screens/EquipmentDetailScrenn/Model/equipment_detail_model.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
@@ -218,8 +217,9 @@ class _EditDetailBoxState extends State<EditDetailBox> {
                             prefix:
                                 const AEMPLIcon(AEMPLIcons.dimension, size: 20),
                             validator: (value) {
-                              if (value!.isEmpty)
+                              if (value!.isEmpty) {
                                 return "Please enter dimension";
+                              }
                             },
                           ),
                         ),

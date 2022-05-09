@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -118,8 +120,9 @@ class _AddEquipmentScreenState extends State<AddEquipmentScreen> {
                             prefix:
                                 const AEMPLIcon(AEMPLIcons.dimension, size: 20),
                             validator: (value) {
-                              if (value!.isEmpty)
+                              if (value!.isEmpty) {
                                 return "Please enter dimension";
+                              }
                             },
                           ),
                         ),

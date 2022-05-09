@@ -1,9 +1,8 @@
-// ignore_for_file: implementation_imports
+// ignore_for_file: implementation_imports, body_might_complete_normally_nullable
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:loader_overlay/src/overlay_controller_widget_extension.dart';
 import 'package:provider/src/provider.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/Singletons/api_call.dart';

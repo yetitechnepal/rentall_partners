@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Screens/AddEquipmentScreen/Model/add_equipment_model.dart';
@@ -71,15 +73,6 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                             if (value!.isEmpty) return "Please enter name";
                           },
                         ),
-                        // textFieldText("Model Category"),
-                        // AEMPLTextField(
-                        //   controller: controllers[1],
-                        //   hintText: "Model category",
-                        //   prefix: const AEMPLIcon(AEMPLIcons.category, size: 20),
-                        //   validator: (value) {
-                        //     if (value!.isEmpty) return "Please enter category";
-                        //   },
-                        // ),
                         textFieldText("Upload Image"),
                         ImagesUploadSection(
                           key: imageKey,

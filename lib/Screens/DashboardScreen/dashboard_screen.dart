@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rental_partners/Screens/DashboardScreen/Widgets/summary_section.dart';
 import 'package:rental_partners/Screens/DashboardScreen/Widgets/topbar.dart';
 import 'package:rental_partners/Screens/NotificationScreen/notification_screen.dart';
-import 'package:rental_partners/Singletons/login_session.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 
 class DashboardScreen extends StatelessWidget {

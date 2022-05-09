@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // ignore: implementation_imports
 import 'package:loader_overlay/src/overlay_controller_widget_extension.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
+import 'package:rental_partners/Singletons/login_session.dart';
 import 'package:rental_partners/main.dart';
 
 class ProfileAddress {
@@ -110,6 +111,7 @@ class ProfileModel {
 
   String perHourRate = "-", perDayRate = "-", perMonthRate = "-";
   fetchProfile() async {
+    LoginSession().getFCM();
     Response response = await API().get(endPoint: "accounts/profile/");
     if (response.statusCode == 200) {
       var data = response.data['data'];

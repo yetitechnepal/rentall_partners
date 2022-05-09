@@ -1,6 +1,6 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -13,15 +13,12 @@ import 'package:rental_partners/Screens/AttachmentDetailScreen/Models/attachment
 import 'package:rental_partners/Screens/EquipmentDetailScrenn/Model/equipment_detail_model.dart';
 import 'package:rental_partners/Screens/OrdersScreens/Models/orders_model.dart';
 import 'package:rental_partners/Screens/SplashScreen/splash_screen.dart';
-import 'package:rental_partners/Theme/colors.dart';
 import 'package:rental_partners/Theme/themes.dart';
 
 GlobalKey<ScaffoldMessengerState> scaffoldMessageKey = GlobalKey();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 

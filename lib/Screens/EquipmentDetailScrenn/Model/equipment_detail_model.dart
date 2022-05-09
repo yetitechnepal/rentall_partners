@@ -1,11 +1,12 @@
 // ignore_for_file: implementation_imports
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/src/overlay_controller_widget_extension.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
-import 'package:rental_partners/Singletons/login_session.dart';
 import 'package:rental_partners/main.dart';
 
 class EquipmentAttractmentModel {
@@ -109,7 +110,9 @@ class EquipmentDetailModel {
           attachments.add(EquipmentAttractmentModel.fromMap(
               response.data['data']['attachment'][index]));
         }
-      } catch (e) {}
+      } catch (e) {
+        log(e.toString());
+      }
     }
     context.read<EquipmentDetailModelCubit>().setEquipmentDetail(this);
 

@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_null_comparison, must_be_immutable
+// ignore_for_file: unnecessary_null_comparison, must_be_immutable, body_might_complete_normally_nullable
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';

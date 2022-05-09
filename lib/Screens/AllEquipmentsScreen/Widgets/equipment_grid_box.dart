@@ -29,7 +29,7 @@ class EquipmentGridBox extends StatelessWidget {
         children: [
           const SizedBox(height: 15),
           Container(
-            constraints: BoxConstraints(maxWidth: 500),
+            constraints: const BoxConstraints(maxWidth: 500),
             child: AEMPLTextField(
               onSubmit: (value) => setState(() => keyWord = value),
               onChanged: (value) => setState(() => keyWord = value),

@@ -8,7 +8,7 @@ class NotificationModel {
   String? image, colorCode;
   int? orderId, invoiceNumber;
   DateTime? dateTime;
-  Color color = Color(0x0ff00000);
+  Color color = const Color(0x0ff00000);
 
   NotificationModel.fromMap(map) {
     id = map['id'] ?? 0;

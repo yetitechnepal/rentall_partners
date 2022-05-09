@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 
 class OrdersSummaryModel {

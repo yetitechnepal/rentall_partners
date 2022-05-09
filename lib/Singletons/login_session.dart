@@ -1,6 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:rental_partners/Screens/LoginScreen/login_screen.dart';
+import 'package:rental_partners/Singletons/api_call.dart';
+import 'package:rental_partners/Utils/notification_listener.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String getLoginTypeToString(LoginType? loginType) {
@@ -77,5 +81,21 @@ class LoginSession {
 
   bool isVender() {
     return loginType == LoginType.vender;
+  }
+
+  getFCM() {
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+    _firebaseMessaging.getToken().then((token) async {
+      log("FCM token " + token.toString());
+      await API().post(
+        endPoint: "devices/",
+        data: {
+          "registration_id": token,
+          "type": Platform.isIOS ? "ios" : "android"
+        },
+        useToken: true,
+      );
+      listenToFCMNotification();
+    });
   }
 }

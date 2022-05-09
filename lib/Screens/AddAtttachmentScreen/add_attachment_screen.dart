@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -100,8 +101,9 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                     keyboardType: TextInputType.number,
                     prefix: const AEMPLIcon(AEMPLIcons.numbers, size: 20),
                     validator: (value) {
-                      if (value!.isEmpty)
+                      if (value!.isEmpty) {
                         return "Please enter attachment count";
+                      }
                     },
                   ),
                   textFieldText("Hours of renting"),
@@ -148,8 +150,9 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                     keyboardType: TextInputType.text,
                     prefix: const AEMPLIcon(AEMPLIcons.location, size: 20),
                     validator: (value) {
-                      if (value!.isEmpty)
+                      if (value!.isEmpty) {
                         return "Please enter attachment location";
+                      }
                     },
                   ),
                   textFieldText("Base rate per hour"),
@@ -183,8 +186,9 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
-                      if (value!.isEmpty)
+                      if (value!.isEmpty) {
                         return "Please enter fuel included rate";
+                      }
                     },
                   ),
                   textFieldText("Add Images"),

@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:77506248560:android:5acc01e4724d99cb4bd9b5",
+        "mobilesdk_app_id": "1:77506248560:android:8cc7c1474ee2b9f74bd9b5",
         "android_client_info": {
-          "package_name": "com.yetitech.rentallpartners"
+          "package_name": "com.theyetitech.equipmental"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "77506248560-9i0fttmb7lm903kqlt1dqckbgq9r1c5m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theyetitech.equipmental",
+            "certificate_hash": "a4f6722addedb1c4044bf5a0b5ea5745cb19d715"
+          }
+        },
         {
           "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
           "client_type": 3
@@ -43,20 +51,12 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:77506248560:android:8cc7c1474ee2b9f74bd9b5",
+        "mobilesdk_app_id": "1:77506248560:android:415610a694a30acf4bd9b5",
         "android_client_info": {
-          "package_name": "com.theyetitech.equipmental"
+          "package_name": "com.yetitech.rentallpartners"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "77506248560-9i0fttmb7lm903kqlt1dqckbgq9r1c5m.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.theyetitech.equipmental",
-            "certificate_hash": "a4f6722addedb1c4044bf5a0b5ea5745cb19d715"
-          }
-        },
         {
           "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
           "client_type": 3

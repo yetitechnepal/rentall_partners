@@ -1,13 +1,11 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, body_might_complete_normally_nullable
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/OperatorScreen/OperatorDashboardScreen/operator_dashboard_screen.dart';
 import 'package:rental_partners/Screens/LoginScreen/Model/login_model.dart';
 import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
-import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/Utils/text_field.dart';
 

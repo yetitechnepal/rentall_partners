@@ -1,11 +1,10 @@
-// ignore_for_file: implementation_imports
+// ignore_for_file: implementation_imports, body_might_complete_normally_nullable
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:loader_overlay/src/overlay_controller_widget_extension.dart';
 import 'package:rental_partners/Screens/EquipmentDetailScrenn/Model/equipment_detail_model.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Theme/colors.dart';
