@@ -124,8 +124,8 @@ class _ImageDisplaySliderState extends State<ImageDisplaySlider> {
                     width: double.infinity,
                     placeholder: (context, url) =>
                         const Center(child: CupertinoActivityIndicator()),
-                    errorWidget: (context, url, error) =>
-                        const Center(child: Icon(Icons.error)),
+                    errorWidget: (_, __, ___) =>
+                        Image.asset("assets/images/placeholder.png"),
                   ),
                   TextButton(
                     style: TextButtonStyles.overlayButtonStyle(),

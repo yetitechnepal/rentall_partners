@@ -58,51 +58,55 @@ class BioUpdatePopup extends StatelessWidget {
         appBar: AppBar(
           title: const Text("UPDATE BIO"),
         ),
-        body: Form(
-          key: formKey,
-          child: Container(
-            alignment: Alignment.topCenter,
+        body: SingleChildScrollView(
+          child: Form(
+            key: formKey,
             child: Container(
-              constraints: const BoxConstraints(maxWidth: 500),
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                children: [
-                  textFieldText(
-                      LoginSession().isVender() ? "Vender" : "Operator"),
-                  AEMPLTextField(
-                    controller: venderConttroller,
-                    prefix: const Icon(Icons.badge_outlined),
-                    hintText: LoginSession().isVender()
-                        ? "Vender name"
-                        : "Operator name",
-                    validator: (value) {
-                      if (value!.isEmpty) return "Enter vender name";
-                    },
-                  ),
-                  textFieldText("Bio"),
-                  AEMPLTextField(
-                    controller: bioConttroller,
-                    maxLines: 6,
-                    prefix: const Icon(Icons.info_outline),
-                    hintText: "Description",
-                  ),
-                  const SizedBox(height: 30),
-                  Center(
-                    child: TextButton(
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          if (await _updateBio(context,
-                              vender: venderConttroller.text,
-                              bio: bioConttroller.text)) {
-                            Navigator.pop(context);
-                          } else {}
-                        }
+              alignment: Alignment.topCenter,
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  children: [
+                    textFieldText(
+                        LoginSession().isVender() ? "Vender" : "Operator"),
+                    AEMPLTextField(
+                      controller: venderConttroller,
+                      prefix: const Icon(Icons.badge_outlined),
+                      hintText: LoginSession().isVender()
+                          ? "Vender name"
+                          : "Operator name",
+                      validator: (value) {
+                        if (value!.isEmpty) return "Enter vender name";
                       },
-                      child: const Text("Update"),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                ],
+                    textFieldText("Bio"),
+                    AEMPLTextField(
+                      controller: bioConttroller,
+                      maxLines: 6,
+                      prefix: const Icon(Icons.info_outline),
+                      hintText: "Description",
+                    ),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: TextButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            if (await _updateBio(context,
+                                vender: venderConttroller.text,
+                                bio: bioConttroller.text)) {
+                              Navigator.pop(context);
+                            } else {}
+                          }
+                        },
+                        child: const Text("Update"),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
               ),
             ),
           ),

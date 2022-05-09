@@ -32,7 +32,7 @@ class Informationpart extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
           mainAxisSpacing: 20,
           crossAxisSpacing: 20,
-          childAspectRatio: 4 / 3,
+          childAspectRatio: 7 / 4,
           children: [
             InformationBox(
               value: equipmentValue,
@@ -45,7 +45,7 @@ class Informationpart extends StatelessWidget {
                     title: "Attachment Orders",
                     icon: AEMPLIcons.attachment,
                   )
-                : const Expanded(child: SizedBox()),
+                : const SizedBox(),
           ],
         ),
       ],

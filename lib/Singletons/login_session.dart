@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -50,7 +49,6 @@ class LoginSession {
     await prefs.setString('refresh_token', refreshToken!);
     await prefs.setString('uuid', uuid!);
     await prefs.setString('loginType', getLoginTypeToString(loginType!));
-    log(getLoginTypeToString(loginType!));
   }
 
   loadSession() async {
@@ -59,7 +57,6 @@ class LoginSession {
     refreshToken = prefs.getString('refresh_token');
     uuid = prefs.getString('uuid');
     loginType = getStringToLoginType(prefs.getString('loginType'));
-    log(loginType.toString());
   }
 
   Future<bool> isSessionExist() async {
@@ -86,7 +83,6 @@ class LoginSession {
   getFCM() {
     FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     _firebaseMessaging.getToken().then((token) async {
-      log("FCM token " + token.toString());
       await API().post(
         endPoint: "devices/",
         data: {

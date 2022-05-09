@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:provider/src/provider.dart';
@@ -104,6 +105,10 @@ class ProfileImageBox extends StatelessWidget {
                         height: 120,
                         width: 120,
                         fit: BoxFit.cover,
+                        placeholder: (context, url) =>
+                            const Center(child: CupertinoActivityIndicator()),
+                        errorWidget: (_, __, ___) =>
+                            Image.asset("assets/images/placeholder.png"),
                       ),
                     ),
                   ),
@@ -119,6 +124,7 @@ class ProfileImageBox extends StatelessWidget {
                     context,
                     imagePaths: [image],
                     index: 0,
+                    heroTag: "profile Image",
                   ),
                   child: const SizedBox(
                     height: double.infinity,

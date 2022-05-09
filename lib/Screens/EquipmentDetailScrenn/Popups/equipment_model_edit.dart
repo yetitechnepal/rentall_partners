@@ -143,105 +143,113 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
             },
           ),
         ),
-        body: Container(
-          alignment: Alignment.topCenter,
+        body: SingleChildScrollView(
           child: Container(
-            constraints: const BoxConstraints(maxWidth: 500),
-            child: ListView(
-              children: [
-                Center(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 30),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: BoxShadows.dropShadow(context),
-                    ),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: AspectRatio(
-                            aspectRatio: 3 / 2,
-                            child: Builder(builder: (context) {
-                              if (image != null) {
-                                return Image(
-                                  fit: BoxFit.cover,
-                                  height: double.infinity,
-                                  width: double.infinity,
-                                  image: AssetEntityImageProvider(image!,
-                                      isOriginal: false),
-                                );
-                              } else {
-                                return CachedNetworkImage(
-                                  imageUrl: widget.image,
-                                  fit: BoxFit.cover,
-                                  height: double.infinity,
-                                  width: double.infinity,
-                                );
-                              }
-                            }),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: -10,
-                          right: -10,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(100),
-                              boxShadow: BoxShadows.dropShadow(context),
-                            ),
-                            child: IconButton(
-                              onPressed: pickImage,
-                              color: primaryColor,
-                              iconSize: 20,
-                              visualDensity: VisualDensity.compact,
-                              icon: const AEMPLIcon(AEMPLIcons.camera),
+            alignment: Alignment.topCenter,
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Center(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 30),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: BoxShadows.dropShadow(context),
+                      ),
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: AspectRatio(
+                              aspectRatio: 3 / 2,
+                              child: Builder(builder: (context) {
+                                if (image != null) {
+                                  return Image(
+                                    fit: BoxFit.cover,
+                                    height: double.infinity,
+                                    width: double.infinity,
+                                    image: AssetEntityImageProvider(image!,
+                                        isOriginal: false),
+                                  );
+                                } else {
+                                  return CachedNetworkImage(
+                                    imageUrl: widget.image,
+                                    fit: BoxFit.cover,
+                                    height: double.infinity,
+                                    width: double.infinity,
+                                    placeholder: (context, url) => const Center(
+                                        child: CupertinoActivityIndicator()),
+                                    errorWidget: (_, __, ___) => Image.asset(
+                                        "assets/images/placeholder.png"),
+                                  );
+                                }
+                              }),
                             ),
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            bottom: -10,
+                            right: -10,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(100),
+                                boxShadow: BoxShadows.dropShadow(context),
+                              ),
+                              child: IconButton(
+                                onPressed: pickImage,
+                                color: primaryColor,
+                                iconSize: 20,
+                                visualDensity: VisualDensity.compact,
+                                icon: const AEMPLIcon(AEMPLIcons.camera),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                  child: textFieldText("Model Name"),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                  child: AEMPLTextField(
-                    controller: controller,
-                    hintText: "Model name",
-                    prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
-                    validator: (value) {
-                      if (value!.isEmpty) return "Please enter name";
-                    },
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Model Name"),
                   ),
-                ),
-                const SizedBox(height: 60),
-                Center(
-                  child: TextButton(
-                      onPressed: () async {
-                        EditModel editModel =
-                            EditModel(controller.text, widget.image, image);
-                        if (await editModel.update(context, widget.id)) {
-                          EquipmentDetailModel equipmentDetailModel =
-                              EquipmentDetailModel();
-                          await equipmentDetailModel.fetchEquipmentDetail(
-                              context, widget.id);
-                          Navigator.pop(context);
-                        }
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controller,
+                      hintText: "Model name",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter name";
                       },
-                      child: const Text("Update")),
-                ),
-                const SizedBox(height: 60),
-              ],
+                    ),
+                  ),
+                  const SizedBox(height: 60),
+                  Center(
+                    child: TextButton(
+                        onPressed: () async {
+                          EditModel editModel =
+                              EditModel(controller.text, widget.image, image);
+                          if (await editModel.update(context, widget.id)) {
+                            EquipmentDetailModel equipmentDetailModel =
+                                EquipmentDetailModel();
+                            await equipmentDetailModel.fetchEquipmentDetail(
+                                context, widget.id);
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: const Text("Update")),
+                  ),
+                  const SizedBox(height: 60),
+                ],
+              ),
             ),
           ),
         ),

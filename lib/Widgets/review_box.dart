@@ -16,6 +16,10 @@ Widget reviewBox(BuildContext context, {String? title}) {
               fit: BoxFit.cover,
               imageUrl:
                   "https://www.denofgeek.com/wp-content/uploads/2019/02/mcu-1-iron-man.jpg?fit=1200%2C675",
+              placeholder: (context, url) =>
+                  const Center(child: CupertinoActivityIndicator()),
+              errorWidget: (_, __, ___) =>
+                  Image.asset("assets/images/placeholder.png"),
             ),
           ),
           const SizedBox(width: 10),

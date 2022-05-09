@@ -17,7 +17,6 @@ class OperatorInformationpart extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 10),
         TitleBar(title: title),
         OperatorInformationBox(
           value: value,

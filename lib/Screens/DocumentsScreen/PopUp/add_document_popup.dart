@@ -103,179 +103,185 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
         appBar: AppBar(
           title: const Text("ADD DOCUMENT"),
         ),
-        body: Container(
-          alignment: Alignment.topCenter,
+        body: SingleChildScrollView(
           child: Container(
-            constraints: const BoxConstraints(maxWidth: 500),
-            child: ListView(
-              children: [
-                textFieldText("Document Type"),
-                AEMPLPopUpButton(
-                  value: docType == null ? null : docType!.value,
-                  hintText: "Select document type",
-                  prefix: const Icon(Icons.document_scanner_outlined),
-                  onPressed: () {
-                    final DocTypes docTypes = DocTypes();
-                    showDialog(
-                      context: context,
-                      builder: (ctx) => Dialog(
-                        child: FutureBuilder<DocTypes>(
-                          future: docTypes.fetchDocTypes(),
-                          builder: (ctx, snapshot) {
-                            if (snapshot.hasData) {
-                              return ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder: (cont, index) {
-                                    return ListTile(
-                                      title: Text(
-                                          snapshot.data!.docs[index].value),
-                                      onTap: () {
-                                        setState(() {
-                                          docType = snapshot.data!.docs[index];
-                                        });
-                                        Navigator.pop(ctx);
-                                      },
-                                    );
-                                  });
-                            } else {
-                              return const Padding(
-                                padding: EdgeInsets.all(20),
-                                child: CupertinoActivityIndicator(),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                textFieldText("Document Number"),
-                AEMPLTextField(
-                  controller: controller,
-                  hintText: "Document identity number",
-                  prefix: const Icon(Icons.info_outline),
-                ),
-                textFieldText("Expiration date"),
-                AEMPLPopUpButton(
-                  value: expiryDate == null
-                      ? null
-                      : DateFormat("MMM dd, yyyy").format(expiryDate!),
-                  hintText: "Select date of expiration",
-                  prefix: const Icon(
-                    Icons.calendar_today_outlined,
-                    // color: Color(0xffF8F8F8),
-                  ),
-                  onPressed: () async {
-                    DateTime? selectedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now()
-                          .subtract(const Duration(days: 1000 * 365)),
-                      lastDate:
-                          DateTime.now().add(const Duration(days: 1000 * 365)),
-                      builder: (context, child) {
-                        return Theme(
-                          data: datePickerTheme(context),
-                          child: child!,
-                        );
-                      },
-                    );
-                    if (selectedDate == null) return;
-                    setState(() => expiryDate = selectedDate);
-                  },
-                ),
-                textFieldText("Image File(The file must be less than 1MB)"),
-                Builder(
-                  builder: (ctx) {
-                    if (image != null) {
-                      return Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Image(
-                            image: AssetEntityImageProvider(image!),
-                            height: 200,
-                            fit: BoxFit.contain,
+            alignment: Alignment.topCenter,
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  textFieldText("Document Type"),
+                  AEMPLPopUpButton(
+                    value: docType == null ? null : docType!.value,
+                    hintText: "Select document type",
+                    prefix: const Icon(Icons.document_scanner_outlined),
+                    onPressed: () {
+                      final DocTypes docTypes = DocTypes();
+                      showDialog(
+                        context: context,
+                        builder: (ctx) => Dialog(
+                          child: FutureBuilder<DocTypes>(
+                            future: docTypes.fetchDocTypes(),
+                            builder: (ctx, snapshot) {
+                              if (snapshot.hasData) {
+                                return ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (cont, index) {
+                                      return ListTile(
+                                        title: Text(
+                                            snapshot.data!.docs[index].value),
+                                        onTap: () {
+                                          setState(() {
+                                            docType =
+                                                snapshot.data!.docs[index];
+                                          });
+                                          Navigator.pop(ctx);
+                                        },
+                                      );
+                                    });
+                              } else {
+                                return const Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: CupertinoActivityIndicator(),
+                                );
+                              }
+                            },
                           ),
-                          Positioned(
-                            bottom: 0,
-                            right: 20,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.white,
-                              ),
-                              child: InkWell(
-                                // : Colors.white,
-                                borderRadius: BorderRadius.circular(100),
-                                onTap: onImageChoose,
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    border: Border.all(
-                                        color: const Color(0xff707070),
-                                        width: 1),
+                        ),
+                      );
+                    },
+                  ),
+                  textFieldText("Document Number"),
+                  AEMPLTextField(
+                    controller: controller,
+                    hintText: "Document identity number",
+                    prefix: const Icon(Icons.info_outline),
+                  ),
+                  textFieldText("Expiration date"),
+                  AEMPLPopUpButton(
+                    value: expiryDate == null
+                        ? null
+                        : DateFormat("MMM dd, yyyy").format(expiryDate!),
+                    hintText: "Select date of expiration",
+                    prefix: const Icon(
+                      Icons.calendar_today_outlined,
+                      // color: Color(0xffF8F8F8),
+                    ),
+                    onPressed: () async {
+                      DateTime? selectedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now()
+                            .subtract(const Duration(days: 1000 * 365)),
+                        lastDate: DateTime.now()
+                            .add(const Duration(days: 1000 * 365)),
+                        builder: (context, child) {
+                          return Theme(
+                            data: datePickerTheme(context),
+                            child: child!,
+                          );
+                        },
+                      );
+                      if (selectedDate == null) return;
+                      setState(() => expiryDate = selectedDate);
+                    },
+                  ),
+                  textFieldText("Image File(The file must be less than 1MB)"),
+                  Builder(
+                    builder: (ctx) {
+                      if (image != null) {
+                        return Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image(
+                              image: AssetEntityImageProvider(image!),
+                              height: 200,
+                              fit: BoxFit.contain,
+                            ),
+                            Positioned(
+                              bottom: 0,
+                              right: 20,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: Colors.white,
+                                ),
+                                child: InkWell(
+                                  // : Colors.white,
+                                  borderRadius: BorderRadius.circular(100),
+                                  onTap: onImageChoose,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      border: Border.all(
+                                          color: const Color(0xff707070),
+                                          width: 1),
+                                    ),
+                                    padding: const EdgeInsets.all(10),
+                                    child: const Icon(Icons.edit),
                                   ),
-                                  padding: const EdgeInsets.all(10),
-                                  child: const Icon(Icons.edit),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    }
+                          ],
+                        );
+                      }
 
-                    return const SizedBox();
-                  },
-                ),
-                Visibility(
-                  visible: image == null,
-                  child: Container(
-                    margin: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      border:
-                          Border.all(color: const Color(0xff707070), width: 1),
-                    ),
-                    child: InkWell(
-                      onTap: onImageChoose,
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(40),
-                        child: Text(image == null ? "Upload" : "Change"),
+                      return const SizedBox();
+                    },
+                  ),
+                  Visibility(
+                    visible: image == null,
+                    child: Container(
+                      margin: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: const Color(0xff707070), width: 1),
+                      ),
+                      child: InkWell(
+                        onTap: onImageChoose,
+                        child: Container(
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(40),
+                          child: Text(image == null ? "Upload" : "Change"),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: TextButton(
-                    onPressed: () async {
-                      if (controller.text.isEmpty ||
-                          image == null ||
-                          expiryDate == null ||
-                          docType == null) {
-                        scaffoldMessageKey.currentState!.showSnackBar(
-                          const SnackBar(content: Text("Please fill all data")),
-                        );
-                      } else {
-                        Document document = Document(
-                          (await image!.file)!.path,
-                          docType!.id.toString(),
-                          controller.text,
-                          DateFormat("yyyy-MM-dd").format(expiryDate!),
-                        );
-                        if (await document.addDoc(context)) {
-                          Navigator.pop(context);
+                  const SizedBox(height: 20),
+                  Center(
+                    child: TextButton(
+                      onPressed: () async {
+                        if (controller.text.isEmpty ||
+                            image == null ||
+                            expiryDate == null ||
+                            docType == null) {
+                          scaffoldMessageKey.currentState!.showSnackBar(
+                            const SnackBar(
+                                content: Text("Please fill all data")),
+                          );
+                        } else {
+                          Document document = Document(
+                            (await image!.file)!.path,
+                            docType!.id.toString(),
+                            controller.text,
+                            DateFormat("yyyy-MM-dd").format(expiryDate!),
+                          );
+                          if (await document.addDoc(context)) {
+                            Navigator.pop(context);
+                          }
                         }
-                      }
-                    },
-                    child: const Text("Save"),
+                      },
+                      child: const Text("Save"),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5),
-              ],
+                  const SizedBox(height: 5),
+                ],
+              ),
             ),
           ),
         ),

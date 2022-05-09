@@ -44,120 +44,126 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
         appBar: AppBar(title: Text("EQUIPMENT MODEL".toUpperCase())),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Form(
-            key: formKey,
-            child: ListView(
-              children: [
-                Container(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 16),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      boxShadow: BoxShadows.dropShadow(context),
-                    ),
-                    constraints: const BoxConstraints(maxWidth: 500),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        textFieldText("Model Name"),
-                        AEMPLTextField(
-                          controller: controllers[0],
-                          hintText: "Model name",
-                          prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
-                          validator: (value) {
-                            if (value!.isEmpty) return "Please enter name";
-                          },
-                        ),
-                        textFieldText("Upload Image"),
-                        ImagesUploadSection(
-                          key: imageKey,
-                          max: 1,
-                        ),
-                        const SizedBox(height: 20),
-                        Center(
-                          child: TextButton(
-                            onPressed: () async {
-                              if (formKey.currentState!.validate()) {
-                                AssetEntity image =
-                                    imageKey.currentState!.selectedImages.first;
-                                String imagePath = (await image.file)!.path;
-                                String imageId = image.id;
-
-                                AddEquipmentModelModel addEquipmentModelModel =
-                                    AddEquipmentModelModel(
-                                  image: imagePath,
-                                  name: controllers[0].text,
-                                  imageId: imageId,
-                                );
-                                models.add(addEquipmentModelModel);
-                                controllers[0].clear();
-                                imageKey.currentState!.resetSelection();
-                                setState(() => models = models);
-                              }
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
+              child: ListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  Container(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        boxShadow: BoxShadows.dropShadow(context),
+                      ),
+                      constraints: const BoxConstraints(maxWidth: 500),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          textFieldText("Model Name"),
+                          AEMPLTextField(
+                            controller: controllers[0],
+                            hintText: "Model name",
+                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            validator: (value) {
+                              if (value!.isEmpty) return "Please enter name";
                             },
-                            child: const Text("Add Model"),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                      ],
+                          textFieldText("Upload Image"),
+                          ImagesUploadSection(
+                            key: imageKey,
+                            max: 1,
+                          ),
+                          const SizedBox(height: 20),
+                          Center(
+                            child: TextButton(
+                              onPressed: () async {
+                                if (formKey.currentState!.validate()) {
+                                  AssetEntity image = imageKey
+                                      .currentState!.selectedImages.first;
+                                  String imagePath = (await image.file)!.path;
+                                  String imageId = image.id;
+
+                                  AddEquipmentModelModel
+                                      addEquipmentModelModel =
+                                      AddEquipmentModelModel(
+                                    image: imagePath,
+                                    name: controllers[0].text,
+                                    imageId: imageId,
+                                  );
+                                  models.add(addEquipmentModelModel);
+                                  controllers[0].clear();
+                                  imageKey.currentState!.resetSelection();
+                                  setState(() => models = models);
+                                }
+                              },
+                              child: const Text("Add Model"),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: TitleBar(title: "Models Added"),
-                ),
-                GridView.builder(
-                  keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 10),
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 165 / 190,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TitleBar(title: "Models Added"),
                   ),
-                  itemCount: models.length,
-                  itemBuilder: (context, index) => modelBoxLocal(context,
-                      model: models[index], onEdit: () async {
-                    AssetEntity image =
-                        (await AssetEntity.fromId(models[index].imageId))!;
-                    controllers[0].text = models[index].name;
-                    imageKey.currentState!.setImage([image]);
-                    models.removeAt(index);
-                    setState(() => models);
-                  }),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: TextButton(
-                    onPressed: () {
-                      EquipModels equipModels = EquipModels();
-                      for (var element in models) {
-                        equipModels.models.add(EquipModel(
-                            image: element.image, name: element.name));
-                      }
-                      equipModels.submit(context, widget.remoteId);
+                  GridView.builder(
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 10),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 165 / 190,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                    ),
+                    itemCount: models.length,
+                    itemBuilder: (context, index) => modelBoxLocal(context,
+                        model: models[index], onEdit: () async {
+                      AssetEntity image =
+                          (await AssetEntity.fromId(models[index].imageId))!;
+                      controllers[0].text = models[index].name;
+                      imageKey.currentState!.setImage([image]);
+                      models.removeAt(index);
+                      setState(() => models);
+                    }),
+                  ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        EquipModels equipModels = EquipModels();
+                        for (var element in models) {
+                          equipModels.models.add(EquipModel(
+                              image: element.image, name: element.name));
+                        }
+                        equipModels.submit(context, widget.remoteId);
 
-                      // Get.to(
-                      //   () => AddEquipmentSeriesScreen(
-                      //     addEquipmentModel: widget.addEquipmentModel,
-                      //   ),
-                      // );
-                    },
-                    child: const Text("Next"),
+                        // Get.to(
+                        //   () => AddEquipmentSeriesScreen(
+                        //     addEquipmentModel: widget.addEquipmentModel,
+                        //   ),
+                        // );
+                      },
+                      child: const Text("Next"),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 30),
-              ],
+                  const SizedBox(height: 30),
+                ],
+              ),
             ),
           ),
         ),

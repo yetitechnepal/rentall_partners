@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:rental_partners/Screens/LoginScreen/login_screen.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
+import 'package:rental_partners/main.dart';
 
 class API {
   static final API _api = API._internal();
@@ -35,8 +36,6 @@ class API {
   refreshToken({BuildContext? context, onCallback}) async {
     Response response;
     String path = "accounts/refresh/";
-    log(path);
-    log("okayyy yy y yy y y");
     try {
       response = await dio.get(
         path,
@@ -62,14 +61,28 @@ class API {
   API._internal() {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (req, handler) => handler.next(req),
+      onResponse: (response, responseHandeler) {
+        if (response.data == "") {
+          scaffoldMessageKey.currentState!.clearSnackBars();
+          scaffoldMessageKey.currentState!.showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Server Error",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              backgroundColor: Color.fromARGB(255, 183, 50, 40),
+              duration: Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.horizontal,
+            ),
+          );
+        }
+        responseHandeler.next(response);
+      },
       onError: (error, e) async {
-        log(" 2 Okkaaaayyy");
-        log(error.toString());
         var res = error.response!;
-        log(res.statusCode.toString());
         DioError dioError = error;
-        log(res.statusCode.toString());
-        log(res.requestOptions.path);
         if (res.requestOptions.path == "accounts/refresh/") {
           Get.offAll(() => LoginScreen());
           return;
@@ -77,6 +90,22 @@ class API {
           await refreshToken();
           var ress = await _retry(res.requestOptions);
           dioError.response = ress;
+          e.next(dioError);
+          return;
+        } else if (res.statusCode == 500) {
+          scaffoldMessageKey.currentState!.showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Service Error",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              backgroundColor: Color.fromARGB(255, 183, 50, 40),
+              duration: Duration(milliseconds: 1100),
+              dismissDirection: DismissDirection.horizontal,
+            ),
+          );
           e.next(dioError);
           return;
         } else {
@@ -220,7 +249,6 @@ class API {
     } on DioError catch (e) {
       response = e.response!;
     }
-
     log(response.data.toString());
     return response;
   }

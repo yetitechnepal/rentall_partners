@@ -147,123 +147,134 @@ class _ProfileContentAddEditBoxState extends State<ProfileContentAddEditBox> {
                 : "Edit Contact".toUpperCase(),
           ),
         ),
-        body: Form(
-          key: formKey,
-          child: Container(
-            alignment: Alignment.topCenter,
+        body: SingleChildScrollView(
+          child: Form(
+            key: formKey,
             child: Container(
-              constraints: const BoxConstraints(maxWidth: 500),
-              child: ListView(
-                children: [
-                  textFieldText("Contact Type"),
-                  AEMPLPopUpButton(
-                    hintText: "Select contact type",
-                    value: contactType != null ? contactType!.value : null,
-                    prefix: const Icon(Icons.contact_support_outlined),
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (ctx) => Dialog(
-                          child: FutureBuilder<List<ContactType>>(
-                              future: fetchContactTypes(),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  return ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: snapshot.data!.length,
-                                    itemBuilder: (ctx, index) => ListTile(
-                                      onTap: () {
-                                        setState(() => contactType =
-                                            snapshot.data![index]);
-                                        Navigator.pop(context);
-                                      },
-                                      title: Text(snapshot.data![index].value),
-                                    ),
-                                  );
-                                } else {
-                                  return Container(
-                                    padding: const EdgeInsets.all(20),
-                                    child: const CupertinoActivityIndicator(),
-                                  );
-                                }
-                              }),
-                        ),
-                      );
-                    },
-                  ),
-                  textFieldText("Contact"),
-                  AEMPLTextField(
-                    controller: controller,
-                    hintText: "Enter contact",
-                    prefix: const Icon(Icons.contact_phone_outlined),
-                    validator: (value) {
-                      if (contactType == null) {
-                        return "Please select contact type";
-                      } else if (value!.isEmpty) {
-                        if (contactType!.value.toUpperCase() == "PHONE") {
-                          return "Enter phone number";
-                        } else {
-                          return "Enter email";
-                        }
-                      } else {
-                        var email = value;
-                        bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(email);
-                        if (contactType!.value.toUpperCase() == "PHONE" &&
-                            emailValid) {
-                          return "Enter valid phone number";
-                        }
-                        if (contactType!.value.toUpperCase() == "EMAIL" &&
-                            !emailValid) {
-                          return "Enter valid email";
-                        }
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  CheckboxListTile(
-                    value: isPrimary,
-                    title: Text(
-                      "Is primary",
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
+              alignment: Alignment.topCenter,
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    textFieldText("Contact Type"),
+                    AEMPLPopUpButton(
+                      hintText: "Select contact type",
+                      value: contactType != null ? contactType!.value : null,
+                      prefix: const Icon(Icons.contact_support_outlined),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => Dialog(
+                            child: FutureBuilder<List<ContactType>>(
+                                future: fetchContactTypes(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder: (ctx, index) => ListTile(
+                                        onTap: () {
+                                          setState(() => contactType =
+                                              snapshot.data![index]);
+                                          Navigator.pop(context);
+                                        },
+                                        title:
+                                            Text(snapshot.data![index].value),
+                                      ),
+                                    );
+                                  } else {
+                                    return Container(
+                                      padding: const EdgeInsets.all(20),
+                                      child: const CupertinoActivityIndicator(),
+                                    );
+                                  }
+                                }),
+                          ),
+                        );
+                      },
                     ),
-                    onChanged: (value) {
-                      setState(() => isPrimary = value!);
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  Center(
-                    child: TextButton(
-                      onPressed: () async {
-                        if (formKey.currentState!.validate()) {
-                          if (contactType == null || controller.text.isEmpty) {
-                            scaffoldMessageKey.currentState!.showSnackBar(
-                                const SnackBar(
-                                    content: Text("Please fill all data")));
-                            return;
+                    textFieldText("Contact"),
+                    AEMPLTextField(
+                      controller: controller,
+                      hintText: "Enter contact",
+                      prefix: const Icon(Icons.contact_phone_outlined),
+                      keyboardType: contactType == null
+                          ? TextInputType.text
+                          : contactType!.value == "Phone"
+                              ? TextInputType.phone
+                              : TextInputType.text,
+                      validator: (value) {
+                        if (contactType == null) {
+                          return "Please select contact type";
+                        } else if (value!.isEmpty) {
+                          if (contactType!.value.toUpperCase() == "PHONE") {
+                            return "Enter phone number";
+                          } else {
+                            return "Enter email";
                           }
-                          if (await addUpdateContact(
-                            context,
-                            id: widget.isAddNew ? null : widget.contact!.id,
-                            conactType: contactType!.id.toString(),
-                            conactValue: controller.text,
-                            isPrimary: isPrimary,
-                          )) {
-                            Navigator.pop(context);
+                        } else {
+                          var email = value;
+                          bool emailValid = RegExp(
+                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(email);
+                          if (contactType!.value.toUpperCase() == "PHONE" &&
+                              emailValid) {
+                            return "Enter valid phone number";
+                          }
+                          if (contactType!.value.toUpperCase() == "EMAIL" &&
+                              !emailValid) {
+                            return "Enter valid email";
                           }
                         }
                       },
-                      child: Text(
-                          widget.isAddNew ? "Add contact" : "Update contact"),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                ],
+                    const SizedBox(height: 20),
+                    CheckboxListTile(
+                      value: isPrimary,
+                      title: Text(
+                        "Is primary",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                      onChanged: (value) {
+                        setState(() => isPrimary = value!);
+                      },
+                    ),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: TextButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            if (contactType == null ||
+                                controller.text.isEmpty) {
+                              scaffoldMessageKey.currentState!.showSnackBar(
+                                  const SnackBar(
+                                      content: Text("Please fill all data")));
+                              return;
+                            }
+                            if (await addUpdateContact(
+                              context,
+                              id: widget.isAddNew ? null : widget.contact!.id,
+                              conactType: contactType!.id.toString(),
+                              conactValue: controller.text,
+                              isPrimary: isPrimary,
+                            )) {
+                              Navigator.pop(context);
+                            }
+                          }
+                        },
+                        child: Text(
+                            widget.isAddNew ? "Add contact" : "Update contact"),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
               ),
             ),
           ),

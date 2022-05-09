@@ -135,157 +135,170 @@ class _EditDetailBoxState extends State<EditDetailBox> {
         ),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Form(
-            key: formKey,
-            child: Container(
-              alignment: Alignment.topCenter,
+          child: SingleChildScrollView(
+            child: Form(
+              key: formKey,
               child: Container(
-                constraints: const BoxConstraints(maxWidth: 500),
-                child: ListView(
-                  children: [
-                    textFieldText("Equipment Name"),
-                    AEMPLTextField(
-                      controller: controllers[0],
-                      hintText: "Equipment name",
-                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
-                      validator: (value) {
-                        if (value!.isEmpty) return "Please enter name";
-                      },
-                    ),
-                    textFieldText("Equipment Category"),
-                    AEMPLPopUpButton(
-                      value: _selectedCategory == null
-                          ? null
-                          : _selectedCategory!.name,
-                      hintText: "Select Equipment category",
-                      prefix: const AEMPLIcon(AEMPLIcons.category, size: 20),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: BlocBuilder<CategoriesCubit,
-                                    CategoriesModel>(builder: (ctx, state) {
-                                  return ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: state.categories.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return ListTile(
-                                        leading: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          child: CachedNetworkImage(
-                                            imageUrl:
-                                                state.categories[index].image,
-                                            width: 60,
-                                            height: 60,
-                                            fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 500),
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      textFieldText("Equipment Name"),
+                      AEMPLTextField(
+                        controller: controllers[0],
+                        hintText: "Equipment name",
+                        prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                        validator: (value) {
+                          if (value!.isEmpty) return "Please enter name";
+                        },
+                      ),
+                      textFieldText("Equipment Category"),
+                      AEMPLPopUpButton(
+                        value: _selectedCategory == null
+                            ? null
+                            : _selectedCategory!.name,
+                        hintText: "Select Equipment category",
+                        prefix: const AEMPLIcon(AEMPLIcons.category, size: 20),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: BlocBuilder<CategoriesCubit,
+                                      CategoriesModel>(builder: (ctx, state) {
+                                    return ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: state.categories.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return ListTile(
+                                          leading: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(6),
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  state.categories[index].image,
+                                              width: 60,
+                                              height: 60,
+                                              fit: BoxFit.cover,
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                      child:
+                                                          CupertinoActivityIndicator()),
+                                              errorWidget: (_, __, ___) =>
+                                                  Image.asset(
+                                                      "assets/images/placeholder.png"),
+                                            ),
                                           ),
-                                        ),
-                                        title:
-                                            Text(state.categories[index].name),
-                                        subtitle: Text(
-                                          state.categories[index].description,
-                                          maxLines: 1,
-                                        ),
-                                        onTap: () {
-                                          setState(() => _selectedCategory =
-                                              state.categories[index]);
-                                          Navigator.pop(ctx);
-                                        },
-                                      );
-                                    },
-                                  );
-                                }),
-                              );
-                            });
-                      },
-                    ),
-                    textFieldText("Equipment Dimension and Weight"),
-                    Row(
-                      children: [
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: AEMPLTextField(
-                            margin: 0,
-                            controller: controllers[2],
-                            hintText: "Dimension",
-                            prefix:
-                                const AEMPLIcon(AEMPLIcons.dimension, size: 20),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "Please enter dimension";
-                              }
-                            },
+                                          title: Text(
+                                              state.categories[index].name),
+                                          subtitle: Text(
+                                            state.categories[index].description,
+                                            maxLines: 1,
+                                          ),
+                                          onTap: () {
+                                            setState(() => _selectedCategory =
+                                                state.categories[index]);
+                                            Navigator.pop(ctx);
+                                          },
+                                        );
+                                      },
+                                    );
+                                  }),
+                                );
+                              });
+                        },
+                      ),
+                      textFieldText("Equipment Dimension and Weight"),
+                      Row(
+                        children: [
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: AEMPLTextField(
+                              margin: 0,
+                              controller: controllers[2],
+                              hintText: "Dimension",
+                              prefix: const AEMPLIcon(AEMPLIcons.dimension,
+                                  size: 20),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Please enter dimension";
+                                }
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: AEMPLTextField(
-                            margin: 0,
-                            controller: controllers[3],
-                            hintText: "Weight",
-                            prefix:
-                                const AEMPLIcon(AEMPLIcons.weight, size: 20),
-                            validator: (value) {
-                              if (value!.isEmpty) return "Please enter weight";
-                            },
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: AEMPLTextField(
+                              margin: 0,
+                              controller: controllers[3],
+                              hintText: "Weight",
+                              prefix:
+                                  const AEMPLIcon(AEMPLIcons.weight, size: 20),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Please enter weight";
+                                }
+                              },
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                      ],
-                    ),
-                    // textFieldText("Equipment Description"),
-                    // AEMPLTextField(
-                    //   controller: controllers[4],
-                    //   hintText: "Equipment description",
-                    //   keyboardType: TextInputType.multiline,
-                    //   maxLines: 6,
-                    //   prefix: const AEMPLIcon(AEMPLIcons.description, size: 20),
-                    //   validator: (value) {
-                    //     if (value!.isEmpty) return "Please enter detail";
-                    //   },
-                    // ),
-                    const SizedBox(height: 60),
-                    Center(
-                      child: TextButton(
-                        onPressed: () async {
-                          if (formKey.currentState!.validate()) {
-                            if (_selectedCategory == null) {
-                              const snackBar = SnackBar(
-                                  content: Text('Please select category'));
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            } else {
-                              EquipmentDetailModel equipmentDetailModel =
-                                  EquipmentDetailModel();
-                              equipmentDetailModel.setUpdate(
-                                equipId: widget.id,
-                                categoryId: _selectedCategory!.id,
-                                name: controllers[0].text,
-                                dimension: controllers[2].text,
-                                weight: controllers[3].text,
-                              );
-                              if (await equipmentDetailModel
-                                  .updateDetail(context)) {
+                          const SizedBox(width: 16),
+                        ],
+                      ),
+                      // textFieldText("Equipment Description"),
+                      // AEMPLTextField(
+                      //   controller: controllers[4],
+                      //   hintText: "Equipment description",
+                      //   keyboardType: TextInputType.multiline,
+                      //   maxLines: 6,
+                      //   prefix: const AEMPLIcon(AEMPLIcons.description, size: 20),
+                      //   validator: (value) {
+                      //     if (value!.isEmpty) return "Please enter detail";
+                      //   },
+                      // ),
+                      const SizedBox(height: 60),
+                      Center(
+                        child: TextButton(
+                          onPressed: () async {
+                            if (formKey.currentState!.validate()) {
+                              if (_selectedCategory == null) {
+                                const snackBar = SnackBar(
+                                    content: Text('Please select category'));
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              } else {
                                 EquipmentDetailModel equipmentDetailModel =
                                     EquipmentDetailModel();
-                                await equipmentDetailModel.fetchEquipmentDetail(
-                                    context, widget.id);
-                                Navigator.pop(widget.ctx);
+                                equipmentDetailModel.setUpdate(
+                                  equipId: widget.id,
+                                  categoryId: _selectedCategory!.id,
+                                  name: controllers[0].text,
+                                  dimension: controllers[2].text,
+                                  weight: controllers[3].text,
+                                );
+                                if (await equipmentDetailModel
+                                    .updateDetail(context)) {
+                                  EquipmentDetailModel equipmentDetailModel =
+                                      EquipmentDetailModel();
+                                  await equipmentDetailModel
+                                      .fetchEquipmentDetail(context, widget.id);
+                                  Navigator.pop(widget.ctx);
+                                }
                               }
                             }
-                          }
-                        },
-                        child: const Text("Update"),
+                          },
+                          child: const Text("Update"),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 60),
-                  ],
+                      const SizedBox(height: 60),
+                    ],
+                  ),
                 ),
               ),
             ),

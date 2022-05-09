@@ -141,13 +141,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.6"
-  expandable_page_view:
-    dependency: "direct main"
-    description:
-      name: expandable_page_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.13"
   extended_image:
     dependency: transitive
     description:

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -31,7 +32,7 @@ class DocumentsScreen extends StatelessWidget {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.all(16),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 450,
+            maxCrossAxisExtent: 400,
             childAspectRatio: 1.1,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20,
@@ -66,6 +67,10 @@ class DocumentsScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
+                    placeholder: (context, url) =>
+                        const Center(child: CupertinoActivityIndicator()),
+                    errorWidget: (_, __, ___) =>
+                        Image.asset("assets/images/placeholder.png"),
                   ),
                 ),
               ),

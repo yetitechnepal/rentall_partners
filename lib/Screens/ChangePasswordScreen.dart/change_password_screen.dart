@@ -51,73 +51,77 @@ class ChangePasswordScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text("CHANGE PASSWORD"),
         ),
-        body: Form(
-          key: formKey,
-          child: Container(
-            alignment: Alignment.topCenter,
+        body: SingleChildScrollView(
+          child: Form(
+            key: formKey,
             child: Container(
-              constraints: const BoxConstraints(maxWidth: 500),
-              child: ListView(
-                children: [
-                  textFieldText("Old Password"),
-                  AEMPLTextField(
-                    controller: controllers[0],
-                    hintText: "Enter old password",
-                    obscureText: true,
-                    maxLines: 1,
-                    prefix: const AEMPLIcon(AEMPLIcons.password),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Enter old password";
-                      }
-                    },
-                  ),
-                  textFieldText("New Password"),
-                  AEMPLTextField(
-                    controller: controllers[1],
-                    hintText: "Enter new password",
-                    obscureText: true,
-                    maxLines: 1,
-                    prefix: const AEMPLIcon(AEMPLIcons.password),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Enter new password";
-                      }
-                    },
-                  ),
-                  textFieldText("Confirm Password"),
-                  AEMPLTextField(
-                    controller: controllers[2],
-                    hintText: "Enter confirm password",
-                    obscureText: true,
-                    maxLines: 1,
-                    prefix: const AEMPLIcon(AEMPLIcons.password),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Enter confirm password";
-                      } else if (value != controllers[1].text) {
-                        return "Confirm password doesnot match";
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 30),
-                  Center(
-                    child: TextButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          changePassword(
-                            context,
-                            currentPassword: controllers[0].text,
-                            newPassword: controllers[1].text,
-                            confirmPassword: controllers[2].text,
-                          );
+              alignment: Alignment.topCenter,
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    textFieldText("Old Password"),
+                    AEMPLTextField(
+                      controller: controllers[0],
+                      hintText: "Enter old password",
+                      obscureText: true,
+                      maxLines: 1,
+                      prefix: const AEMPLIcon(AEMPLIcons.password),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter old password";
                         }
                       },
-                      child: const Text("Change"),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                ],
+                    textFieldText("New Password"),
+                    AEMPLTextField(
+                      controller: controllers[1],
+                      hintText: "Enter new password",
+                      obscureText: true,
+                      maxLines: 1,
+                      prefix: const AEMPLIcon(AEMPLIcons.password),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter new password";
+                        }
+                      },
+                    ),
+                    textFieldText("Confirm Password"),
+                    AEMPLTextField(
+                      controller: controllers[2],
+                      hintText: "Enter confirm password",
+                      obscureText: true,
+                      maxLines: 1,
+                      prefix: const AEMPLIcon(AEMPLIcons.password),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter confirm password";
+                        } else if (value != controllers[1].text) {
+                          return "Confirm password doesnot match";
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            changePassword(
+                              context,
+                              currentPassword: controllers[0].text,
+                              newPassword: controllers[1].text,
+                              confirmPassword: controllers[2].text,
+                            );
+                          }
+                        },
+                        child: const Text("Change"),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
               ),
             ),
           ),

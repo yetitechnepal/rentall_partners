@@ -32,10 +32,10 @@ class DashboardTopBar extends StatelessWidget {
                     height: 100,
                     width: 100,
                     fit: BoxFit.cover,
-                    progressIndicatorBuilder: (context, url, progress) =>
+                    placeholder: (context, url) =>
                         const Center(child: CupertinoActivityIndicator()),
-                    errorWidget: (context, url, error) =>
-                        Image.asset("assets/images/logo.png"),
+                    errorWidget: (_, __, ___) =>
+                        Image.asset("assets/images/placeholder.png"),
                   ),
                 ),
               ),

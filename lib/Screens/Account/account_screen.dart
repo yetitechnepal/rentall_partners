@@ -65,22 +65,27 @@ class AccountScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Container(
-        alignment: Alignment.topCenter,
+      body: SingleChildScrollView(
         child: Container(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: BlocBuilder<ProfileCubit, ProfileModel>(
-              builder: (context, state) {
-            return ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-              children: [
-                ProfileImageBox(image: state.profile),
-                ProfileInfoBox(profile: state),
-                AddressPanBox(profile: state),
-                ContactDetailBox(profile: state),
-              ],
-            );
-          }),
+          alignment: Alignment.topCenter,
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 500),
+            child: BlocBuilder<ProfileCubit, ProfileModel>(
+                builder: (context, state) {
+              return ListView(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                children: [
+                  ProfileImageBox(image: state.profile),
+                  ProfileInfoBox(profile: state),
+                  AddressPanBox(profile: state),
+                  ContactDetailBox(profile: state),
+                ],
+              );
+            }),
+          ),
         ),
       ),
     );

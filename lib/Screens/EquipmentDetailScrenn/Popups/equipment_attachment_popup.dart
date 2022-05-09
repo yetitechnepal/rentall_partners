@@ -159,6 +159,10 @@ class _EquipmentAttachmentBoxState extends State<_EquipmentAttachmentBox> {
                                 width: double.infinity,
                                 height: double.infinity,
                                 fit: BoxFit.cover,
+                                placeholder: (context, url) => const Center(
+                                    child: CupertinoActivityIndicator()),
+                                errorWidget: (_, __, ___) => Image.asset(
+                                    "assets/images/placeholder.png"),
                               ),
                             ),
                           ),

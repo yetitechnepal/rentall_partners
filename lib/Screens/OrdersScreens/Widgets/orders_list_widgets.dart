@@ -14,6 +14,8 @@ class OrdersListSection extends StatelessWidget {
     return BlocBuilder<OrderListCubit, OrderList>(
       builder: (context, state) {
         return ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: state.orders.length,
           itemBuilder: (context, index) {

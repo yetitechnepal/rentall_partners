@@ -75,6 +75,10 @@ class NotificationScreen extends StatelessWidget {
                     height: 50,
                     width: 50,
                     fit: BoxFit.cover,
+                    placeholder: (context, url) =>
+                        const Center(child: CupertinoActivityIndicator()),
+                    errorWidget: (_, __, ___) =>
+                        Image.asset("assets/images/placeholder.png"),
                   ),
                 ),
                 const SizedBox(width: 15),

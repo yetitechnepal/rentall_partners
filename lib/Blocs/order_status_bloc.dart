@@ -31,4 +31,14 @@ class OrderStatusesCubit extends Cubit<OrderStatuses> {
     await orderStatuses.fetchStatus();
     emit(orderStatuses);
   }
+
+  int getStatusId(String value) {
+    int id = 0;
+    for (var status in state.statuses) {
+      if (value == status.value) {
+        id = status.id;
+      }
+    }
+    return id;
+  }
 }

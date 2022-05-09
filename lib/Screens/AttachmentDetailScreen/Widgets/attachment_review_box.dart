@@ -128,6 +128,10 @@ class _AttachmentReviewBoxState extends State<AttachmentReviewBox>
                 width: 45,
                 fit: BoxFit.cover,
                 imageUrl: review.profile,
+                placeholder: (context, url) =>
+                    const Center(child: CupertinoActivityIndicator()),
+                errorWidget: (_, __, ___) =>
+                    Image.asset("assets/images/placeholder.png"),
               ),
             ),
             const SizedBox(width: 10),

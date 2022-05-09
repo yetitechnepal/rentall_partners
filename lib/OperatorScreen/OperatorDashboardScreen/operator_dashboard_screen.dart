@@ -1,6 +1,7 @@
 // ignore_for_file: implementation_imports
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
@@ -53,6 +54,10 @@ class OperatorDashboardScreen extends StatelessWidget {
                             fit: BoxFit.cover,
                             height: 60,
                             width: 60,
+                            placeholder: (context, url) => const Center(
+                                child: CupertinoActivityIndicator()),
+                            errorWidget: (_, __, ___) =>
+                                Image.asset("assets/images/placeholder.png"),
                           ),
                         ),
                       ),
@@ -86,10 +91,11 @@ class OperatorDashboardScreen extends StatelessWidget {
       ),
       body: GridView.extent(
         maxCrossAxisExtent: 200,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 6),
         // crossAxisCount: 2,
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
+        childAspectRatio: 8 / 6,
         children: const [
           OperatorSummarySectiion(
             title: "Today’s Books",

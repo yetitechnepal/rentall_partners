@@ -6,8 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Blocs/filter_bloc.dart';
+import 'package:rental_partners/Blocs/order_status_bloc.dart';
 import 'package:rental_partners/Enums/orders_types.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
+import 'package:rental_partners/main.dart';
 
 class OrderItem {
   late int id;
@@ -73,7 +75,6 @@ class Order {
     fromMap(map);
   }
   fromMap(map) {
-    log(map.toString());
     invoiceNumber = map['invoice_number'].toString();
     isFuelIncluded = map['fuel_included'] ?? false;
     orderLocation = map['order_location'] ?? "";
@@ -102,14 +103,13 @@ class Order {
       orderType = OrderTypes.pending;
     } else if (status == "Dispatch") {
       orderType = OrderTypes.dispatch;
-    } else if (status == "Confirmed") {
+    } else if (status == "Confirm") {
       orderType = OrderTypes.confirmed;
     } else if (status == "Completed") {
       orderType = OrderTypes.completed;
     } else {
       orderType = OrderTypes.cancelled;
     }
-    log(map.containsKey("item").toString());
     if (map.containsKey("item")) {
       map['item'].forEach((mapp) {
         items.add(OrderItem.fromMap(mapp));
@@ -130,6 +130,41 @@ class Order {
     if (response.statusCode == 200) {
       var data = response.data['data'];
       fromMap(data);
+    }
+  }
+
+  Future<bool> dispatch(BuildContext context) async {
+    context.loaderOverlay.show();
+    int statusId = context.read<OrderStatusesCubit>().getStatusId("Dispatch");
+    Response response = await API().post(
+        endPoint: "book/book-status/",
+        data: {"book_id": bookId, "status": statusId});
+
+    context.loaderOverlay.hide();
+    scaffoldMessageKey.currentState!
+        .showSnackBar(SnackBar(content: Text(response.data['message'])));
+    if (response.statusCode == 200) {
+      orderType = OrderTypes.dispatch;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> complete(BuildContext context) async {
+    context.loaderOverlay.show();
+    int statusId = context.read<OrderStatusesCubit>().getStatusId("Completed");
+    Response response = await API().post(
+        endPoint: "book/book-status/",
+        data: {"book_id": bookId, "status": statusId});
+    context.loaderOverlay.hide();
+    scaffoldMessageKey.currentState!
+        .showSnackBar(SnackBar(content: Text(response.data['message'])));
+    if (response.statusCode == 200) {
+      orderType = OrderTypes.completed;
+      return true;
+    } else {
+      return false;
     }
   }
 }
