@@ -53,16 +53,29 @@ Future<String?> pickImage(BuildContext context) async {
 }
 
 class ProfileUploadBox extends StatefulWidget {
-  const ProfileUploadBox({Key? key}) : super(key: key);
+  final String? image;
+  const ProfileUploadBox({Key? key, this.image}) : super(key: key);
 
   @override
-  State<ProfileUploadBox> createState() => _ProfileUploadBoxState();
+  State<ProfileUploadBox> createState() => ProfileUploadBoxState();
 }
 
-class _ProfileUploadBoxState extends State<ProfileUploadBox> {
+class ProfileUploadBoxState extends State<ProfileUploadBox>
+    with AutomaticKeepAliveClientMixin {
   String? image;
   @override
+  void initState() {
+    image = widget.image;
+    super.initState();
+  }
+
+  String? getImagePath() {
+    return image;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Center(
       child: Stack(
         children: [
@@ -142,4 +155,7 @@ class _ProfileUploadBoxState extends State<ProfileUploadBox> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

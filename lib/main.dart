@@ -10,6 +10,7 @@ import 'package:rental_partners/Blocs/filter_bloc.dart';
 import 'package:rental_partners/Blocs/order_status_bloc.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/Screens/AttachmentDetailScreen/Models/attachment_details_model.dart';
+import 'package:rental_partners/Screens/BecomeVenderScreens/Model/vender_model.dart';
 
 import 'package:rental_partners/Screens/EquipmentDetailScrenn/Model/equipment_detail_model.dart';
 import 'package:rental_partners/Screens/OrdersScreens/Models/orders_model.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<OrderStatusesCubit>(
             create: (context) => OrderStatusesCubit()),
         BlocProvider<FliterBlocCubit>(create: (context) => FliterBlocCubit()),
+        BlocProvider<VenderModelCubit>(create: (context) => VenderModelCubit()),
       ],
       child: AdaptiveTheme(
         light: lightThemeData,

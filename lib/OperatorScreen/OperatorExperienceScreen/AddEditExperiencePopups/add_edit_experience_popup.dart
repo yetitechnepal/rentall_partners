@@ -1,10 +1,13 @@
 // ignore_for_file: implementation_imports, body_might_complete_normally_nullable
 
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/src/provider.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
+import 'package:rental_partners/Screens/BecomeVenderScreens/Model/vender_model.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Theme/date_picker_theme.dart';
 import 'package:rental_partners/Utils/text_field.dart';
@@ -23,7 +26,10 @@ class SkillSet {
 class SkillSets {
   List<SkillSet> skills = [];
   Future<SkillSets> fetchSkills() async {
-    Response response = await API().get(endPoint: "operator-skills/");
+    Response response = await API().get(
+      endPoint: "operator-skills/",
+      useToken: false,
+    );
     if (response.statusCode == 200) {
       var data = response.data['data'];
       for (var element in data) {
@@ -34,20 +40,25 @@ class SkillSets {
   }
 }
 
-showAddEditExperiencePopup(BuildContext context,
-    {ProfileExperience? experience}) {
+showAddEditExperiencePopup(
+  BuildContext context, {
+  ProfileExperience? experience,
+  Function(Experience)? onAdd,
+}) {
   showGeneralDialog(
     context: context,
     pageBuilder: (ctx, a, aa) {
-      return ExperiencePopup(experience: experience);
+      return ExperiencePopup(experience: experience, onAdd: onAdd);
     },
   );
 }
 
 class ExperiencePopup extends StatefulWidget {
   final ProfileExperience? experience;
+  final Function(Experience)? onAdd;
 
-  const ExperiencePopup({Key? key, this.experience}) : super(key: key);
+  const ExperiencePopup({Key? key, this.experience, this.onAdd})
+      : super(key: key);
 
   @override
   State<ExperiencePopup> createState() => _ExperiencePopupState();
@@ -235,21 +246,35 @@ class _ExperiencePopupState extends State<ExperiencePopup> {
                     child: TextButton(
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
-                          bool isSuccess = await saveExperience(
-                            context,
-                            id: widget.experience == null
-                                ? null
-                                : widget.experience!.id,
-                            companyName: companyNameController.text,
-                            skillId: selectedSkill!.id,
-                            isCurentlyWorking: isCurrentlyWorking,
-                            startDate:
-                                DateFormat("yyyy-MM-dd").format(startDate!),
-                            endDate: endDate == null
-                                ? null
-                                : DateFormat("yyyy-MM-dd").format(endDate!),
-                          );
-                          if (isSuccess) {
+                          log(widget.onAdd.toString());
+                          if (widget.onAdd == null) {
+                            bool isSuccess = await saveExperience(
+                              context,
+                              id: widget.experience == null
+                                  ? null
+                                  : widget.experience!.id,
+                              companyName: companyNameController.text,
+                              skillId: selectedSkill!.id,
+                              isCurentlyWorking: isCurrentlyWorking,
+                              startDate:
+                                  DateFormat("yyyy-MM-dd").format(startDate!),
+                              endDate: endDate == null
+                                  ? null
+                                  : DateFormat("yyyy-MM-dd").format(endDate!),
+                            );
+                            if (isSuccess) {
+                              Navigator.pop(context);
+                            }
+                          } else {
+                            Experience experience = Experience(
+                              skillType: selectedSkill!.id,
+                              skillName: selectedSkill!.value,
+                              companyName: companyNameController.text,
+                              isCurrentlyWorking: isCurrentlyWorking,
+                              startDate: startDate!,
+                              endDate: endDate,
+                            );
+                            widget.onAdd!(experience);
                             Navigator.pop(context);
                           }
                         }

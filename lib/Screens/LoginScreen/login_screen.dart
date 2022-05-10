@@ -1,10 +1,14 @@
 // ignore_for_file: must_be_immutable, body_might_complete_normally_nullable
 
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/OperatorScreen/OperatorDashboardScreen/operator_dashboard_screen.dart';
+import 'package:rental_partners/Screens/BecomeVenderScreens/Model/vender_model.dart';
 import 'package:rental_partners/Screens/BecomeVenderScreens/become_vender_screen.dart';
 import 'package:rental_partners/Screens/ForgetPasswordScreen/forget_password_screen.dart';
 import 'package:rental_partners/Screens/LoginScreen/Model/login_model.dart';
@@ -207,12 +211,24 @@ class LoginScreen extends StatelessWidget {
                                   context,
                                   padding: 5,
                                   title: "Become a vendor?",
-                                  onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (ctx) => BecomeVenderScreen(),
-                                    ),
-                                  ),
+                                  onPressed: () {
+                                    bool isSame = context
+                                        .read<VenderModelCubit>()
+                                        .state
+                                        .setLoginType(LoginType.vender);
+                                    log(isSame.toString());
+                                    if (!isSame) {
+                                      context
+                                          .read<VenderModelCubit>()
+                                          .resetData();
+                                    }
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (ctx) => BecomeVenderScreen(),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -230,7 +246,24 @@ class LoginScreen extends StatelessWidget {
                                   context,
                                   padding: 5,
                                   title: "Sign up as operator?",
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    bool isSame = context
+                                        .read<VenderModelCubit>()
+                                        .state
+                                        .setLoginType(LoginType.operator);
+                                    log(isSame.toString());
+                                    if (!isSame) {
+                                      context
+                                          .read<VenderModelCubit>()
+                                          .resetData();
+                                    }
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (ctx) => BecomeVenderScreen(),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
