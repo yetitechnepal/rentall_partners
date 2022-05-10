@@ -11,8 +11,9 @@ class AEMPLTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final int? maxLines;
   final String? Function(String?)? validator;
-  final bool obscureText, autofocus;
+  final bool obscureText, autofocus, disabled;
   final Function(String)? onSubmit, onChanged;
+  final int? maxLength;
 
   const AEMPLTextField({
     Key? key,
@@ -30,6 +31,8 @@ class AEMPLTextField extends StatelessWidget {
     this.textInputAction = TextInputAction.next,
     this.onSubmit,
     this.onChanged,
+    this.disabled = false,
+    this.maxLength,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -48,6 +51,7 @@ class AEMPLTextField extends StatelessWidget {
         maxLines: maxLines,
         textInputAction: textInputAction,
         autofocus: autofocus,
+        enabled: !disabled,
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 13),
@@ -63,7 +67,9 @@ class AEMPLTextField extends StatelessWidget {
             color: Colors.transparent,
             child: suffix,
           ),
+          counterText: "",
         ),
+        maxLength: maxLength,
         onChanged: onChanged,
         obscureText: obscureText,
         validator: validator,

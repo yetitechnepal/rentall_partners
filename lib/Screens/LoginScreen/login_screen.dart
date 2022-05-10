@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/OperatorScreen/OperatorDashboardScreen/operator_dashboard_screen.dart';
+import 'package:rental_partners/Screens/ForgetPasswordScreen/forget_password_screen.dart';
 import 'package:rental_partners/Screens/LoginScreen/Model/login_model.dart';
 import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
@@ -129,6 +130,31 @@ class LoginScreen extends StatelessWidget {
                             ),
                           );
                         }),
+                        const SizedBox(height: 20),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (ctx) => ForgetPasswordScreen(),
+                              ),
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20.0,
+                                vertical: 10,
+                              ),
+                              child: Text(
+                                "Forgot Password?",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 60),
                         Center(
                           child: TextButton(

@@ -172,12 +172,6 @@ class _OrdersDetailScreenState extends State<OrdersDetailScreen> {
                           const SizedBox(height: 8),
                           const Divider(thickness: 1, color: Color(0xffE5E5E5)),
                           const SizedBox(height: 8),
-                          // rowTextBox(
-                          //   context,
-                          //   title: "Total",
-                          //   value: "NPR ${widget.order.totalAmount}",
-                          //   isRightAlign: true,
-                          // ),
                           rowTextBox(
                             context,
                             title: "Grand Total",
