@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rental_partners/Screens/BecomeVenderScreens/Popups/add_vender_document_popup.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 
 class BecomeVenderDocumentScreen extends StatelessWidget {
+  const BecomeVenderDocumentScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("ADD DOCUMENTS"),
+        title: const Text("LEGAL DOCUMENTS"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => showVenderAddDocumentPopup(
+              context,
+              (document) {},
+            ),
             icon: const Icon(Icons.add),
           ),
         ],
@@ -24,8 +30,8 @@ class BecomeVenderDocumentScreen extends StatelessWidget {
               ).copyWith(top: 20, bottom: 20),
               itemCount: 3,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 450,
-                childAspectRatio: 1.6,
+                maxCrossAxisExtent: 500,
+                childAspectRatio: 1.4,
                 mainAxisSpacing: 16,
                 crossAxisSpacing:
                     MediaQuery.of(context).size.width > 450 ? 16 : 0,
@@ -82,20 +88,34 @@ class BecomeVenderDocumentScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 3),
-                    Text(
-                      "Image",
-                      style: const TextStyle(
+                    const Text(
+                      "Document Type",
+                      style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 3),
+                    const SizedBox(height: 1),
+                    Text(
+                      "PAN",
+                      style: const TextStyle(
+                          fontSize: 12, color: Color(0xff707070)),
+                    ),
+                    const SizedBox(height: 5),
+                    const Text(
+                      "Document Identity Number",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 1),
                     Text(
                       "1234567",
                       style: const TextStyle(
                           fontSize: 12, color: Color(0xff707070)),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 5),
                     const Text(
                       "Expiration",
                       style: TextStyle(
@@ -103,7 +123,7 @@ class BecomeVenderDocumentScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 3),
+                    const SizedBox(height: 1),
                     Text(
                       DateFormat("MMM dd, yyyy").format(DateTime.now()),
                       style: const TextStyle(
