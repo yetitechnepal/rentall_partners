@@ -29,6 +29,7 @@ class InformationBox extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

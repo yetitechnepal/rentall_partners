@@ -2,8 +2,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/OperatorScreen/OperatorDashboardScreen/operator_dashboard_screen.dart';
+import 'package:rental_partners/Screens/BecomeVenderScreens/become_vender_screen.dart';
 import 'package:rental_partners/Screens/ForgetPasswordScreen/forget_password_screen.dart';
 import 'package:rental_partners/Screens/LoginScreen/Model/login_model.dart';
 import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
@@ -29,6 +31,12 @@ class LoginScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: const Color(0xffED1A25),
+            toolbarHeight: 0,
+            systemOverlayStyle: SystemUiOverlayStyle.light,
+          ),
           backgroundColor: const Color(0xffED1A25),
           body: SingleChildScrollView(
             child: Container(
@@ -133,34 +141,25 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(height: 20),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: InkWell(
-                            onTap: () => Navigator.push(
+                          child: _button(
+                            context,
+                            title: "Forgot Password?",
+                            onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (ctx) => ForgetPasswordScreen(),
-                              ),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20.0,
-                                vertical: 10,
-                              ),
-                              child: Text(
-                                "Forgot Password?",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                builder: (ctx) => const ForgetPasswordScreen(),
                               ),
                             ),
                           ),
                         ),
                         const SizedBox(height: 60),
-                        Center(
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: TextButton(
                             style: TextButton.styleFrom(
                               backgroundColor: Colors.white.withOpacity(01),
                               primary: Colors.white38,
+                              elevation: 0,
                             ),
                             onPressed: () async {
                               if (formKey.currentState!.validate()) {
@@ -197,6 +196,46 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 20),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: _button(
+                                  context,
+                                  padding: 5,
+                                  title: "Become a vendor?",
+                                  onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (ctx) => BecomeVenderScreen(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                              child: VerticalDivider(
+                                width: 1,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Expanded(
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: _button(
+                                  context,
+                                  padding: 5,
+                                  title: "Sign up as operator?",
+                                  onPressed: () {},
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         const SizedBox(height: 60),
                       ],
                     ),
@@ -204,6 +243,30 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _button(
+    BuildContext context, {
+    required String title,
+    Function()? onPressed,
+    double? padding,
+  }) {
+    return InkWell(
+      onTap: onPressed,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: padding ?? 20.0,
+          vertical: 10,
+        ),
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

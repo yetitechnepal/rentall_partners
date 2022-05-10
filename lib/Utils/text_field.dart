@@ -79,12 +79,21 @@ class AEMPLTextField extends StatelessWidget {
   }
 }
 
-Widget textFieldText(String title) {
+Widget textFieldText(
+  String title, {
+  double fontSize = 13,
+  FontWeight fontWeight = FontWeight.w500,
+  Color? color,
+}) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
     child: Text(
       title,
-      style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
+      style: TextStyle(
+        fontWeight: fontWeight,
+        fontSize: fontSize,
+        color: color,
+      ),
     ),
   );
 }
