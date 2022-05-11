@@ -11,6 +11,7 @@ import 'package:provider/src/provider.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Theme/button.dart';
+import 'package:rental_partners/Theme/colors.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/image_viewer.dart';
@@ -29,11 +30,13 @@ uploadImage(BuildContext context) async {
       aspectRatioLockEnabled: true,
       resetAspectRatioEnabled: false,
     ),
-    androidUiSettings: const AndroidUiSettings(
+    androidUiSettings: AndroidUiSettings(
       toolbarTitle: 'Upload profile image',
-      toolbarColor: Colors.deepOrange,
+      toolbarColor: Theme.of(context).primaryColor,
+      backgroundColor: Colors.black,
       toolbarWidgetColor: Colors.white,
       initAspectRatio: CropAspectRatioPreset.square,
+      activeControlsWidgetColor: Theme.of(context).primaryColor,
       lockAspectRatio: true,
     ),
   );

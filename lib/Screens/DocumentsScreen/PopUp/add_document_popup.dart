@@ -222,11 +222,15 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(100),
                                       border: Border.all(
-                                          color: const Color(0xff707070),
-                                          width: 1),
+                                        color: Theme.of(context).primaryColor,
+                                        width: 2,
+                                      ),
                                     ),
                                     padding: const EdgeInsets.all(10),
-                                    child: const Icon(Icons.edit),
+                                    child: Icon(
+                                      Icons.edit,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
                                   ),
                                 ),
                               ),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rental_partners/Theme/colors.dart';
 
@@ -84,7 +85,7 @@ ThemeData darkThemeData = ThemeData(
     ),
   ),
   checkboxTheme: CheckboxThemeData(
-    fillColor: MaterialStateProperty.all(primaryColor),
+    fillColor: MaterialStateProperty.all(primaryColorDark),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
   ),
 );

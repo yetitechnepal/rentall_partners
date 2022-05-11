@@ -24,20 +24,42 @@ showImageBox(BuildContext context,
                 alignment: Alignment.center,
                 children: [
                   PageView.builder(
+                    allowImplicitScrolling: true,
                     itemCount: imagePaths.length,
                     controller: PageController(initialPage: index),
                     itemBuilder: (BuildContext context, int index) {
                       return Hero(
                         tag: heroTag,
-                        child: PhotoView(
-                          tightMode: true,
-                          backgroundDecoration:
-                              const BoxDecoration(color: Colors.transparent),
-                          minScale: PhotoViewComputedScale.contained,
-                          maxScale: PhotoViewComputedScale.contained * 5.0,
-                          initialScale: PhotoViewComputedScale.contained,
-                          imageProvider:
-                              CachedNetworkImageProvider(imagePaths[index]),
+                        child: CachedNetworkImage(
+                          imageBuilder: (context, provider) {
+                            return PhotoView(
+                              tightMode: true,
+                              backgroundDecoration: const BoxDecoration(
+                                  color: Colors.transparent),
+                              minScale: PhotoViewComputedScale.contained,
+                              maxScale: PhotoViewComputedScale.contained * 5.0,
+                              initialScale: PhotoViewComputedScale.contained,
+                              imageProvider: provider,
+                            );
+                          },
+                          imageUrl: imagePaths[index],
+                          progressIndicatorBuilder: (context, val, progress) =>
+                              Center(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              constraints: const BoxConstraints(maxWidth: 300),
+                              decoration: BoxDecoration(
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor,
+                                boxShadow: BoxShadows.dropShadow(context),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: LinearProgressIndicator(
+                                  value: progress.progress),
+                            ),
+                          ),
+                          errorWidget: (_, __, ___) =>
+                              Image.asset("assets/images/placeholder.png"),
                         ),
                       );
                     },

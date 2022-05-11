@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, body_might_complete_normally_nullable
 
 import 'dart:developer';
+import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,10 @@ class LoginScreen extends StatelessWidget {
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 500),
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
+                  height: math.max(
+                      MediaQuery.of(context).size.height -
+                          MediaQuery.of(context).viewPadding.top,
+                      600),
                   child: Form(
                     key: formKey,
                     child: ListView(
