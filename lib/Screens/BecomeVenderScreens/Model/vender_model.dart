@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Screens/LoginScreen/login_screen.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
@@ -44,6 +45,10 @@ class VenderModel {
       loginType = login;
       return false;
     }
+  }
+
+  setExperiences(List<Experience> exp) {
+    experiences = exp;
   }
 
   setGeneratInformation({
@@ -101,7 +106,7 @@ class VenderModel {
 
   Future<bool> register(BuildContext context) async {
     context.loaderOverlay.show();
-    var data = {
+    Map<String, dynamic> data = {
       "general_info": {
         "name": companyName,
         "email": primaryEmail,
@@ -121,8 +126,25 @@ class VenderModel {
         "district": district,
         "country": country
       },
-      "experience": [],
     };
+
+    if (loginType == LoginType.operator) {
+      List<Map> expMaps = [];
+      for (var exp in experiences) {
+        expMaps.add({
+          "start_date": DateFormat("yyyy-MM-dd").format(exp.startDate),
+          "currently_working": exp.isCurrentlyWorking,
+          "end_date": exp.endDate == null
+              ? null
+              : DateFormat("yyyy-MM-dd").format(exp.endDate!),
+          "operator_skills": exp.skillType,
+          "company": exp.companyName
+        });
+      }
+      log(expMaps.toString());
+      data.addAll({"experience": expMaps});
+    }
+    log(data.toString());
     Response response = await API().post(
         endPoint: "accounts/partner-registration/",
         data: data,

@@ -211,24 +211,10 @@ class LoginScreen extends StatelessWidget {
                                   context,
                                   padding: 5,
                                   title: "Become a vendor?",
-                                  onPressed: () {
-                                    bool isSame = context
-                                        .read<VenderModelCubit>()
-                                        .state
-                                        .setLoginType(LoginType.vender);
-                                    log(isSame.toString());
-                                    if (!isSame) {
-                                      context
-                                          .read<VenderModelCubit>()
-                                          .resetData();
-                                    }
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (ctx) => BecomeVenderScreen(),
-                                      ),
-                                    );
-                                  },
+                                  onPressed: () => becomeNavigation(
+                                    context,
+                                    LoginType.vender,
+                                  ),
                                 ),
                               ),
                             ),
@@ -246,24 +232,10 @@ class LoginScreen extends StatelessWidget {
                                   context,
                                   padding: 5,
                                   title: "Sign up as operator?",
-                                  onPressed: () {
-                                    bool isSame = context
-                                        .read<VenderModelCubit>()
-                                        .state
-                                        .setLoginType(LoginType.operator);
-                                    log(isSame.toString());
-                                    if (!isSame) {
-                                      context
-                                          .read<VenderModelCubit>()
-                                          .resetData();
-                                    }
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (ctx) => BecomeVenderScreen(),
-                                      ),
-                                    );
-                                  },
+                                  onPressed: () => becomeNavigation(
+                                    context,
+                                    LoginType.operator,
+                                  ),
                                 ),
                               ),
                             ),
@@ -302,6 +274,20 @@ class LoginScreen extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+      ),
+    );
+  }
+
+  becomeNavigation(BuildContext context, LoginType type) {
+    bool isSame = context.read<VenderModelCubit>().state.setLoginType(type);
+    log(isSame.toString());
+    if (!isSame) {
+      context.read<VenderModelCubit>().resetData();
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => BecomeVenderScreen(),
       ),
     );
   }

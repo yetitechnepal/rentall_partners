@@ -17,6 +17,7 @@ import 'package:rental_partners/main.dart';
 class BecomeVenderContactScreen extends StatelessWidget {
   late List<TextEditingController> controllers;
   final formKey = GlobalKey<FormState>();
+  final experienceKey = GlobalKey<ExperienceListBoxState>();
 
   BecomeVenderContactScreen({Key? key}) : super(key: key);
   @override
@@ -95,7 +96,7 @@ class BecomeVenderContactScreen extends StatelessWidget {
                     const SizedBox(height: 30),
                     Visibility(
                       visible: !isVender,
-                      child: ExperienceListBox(),
+                      child: ExperienceListBox(key: experienceKey),
                     ),
                     const SizedBox(height: 50),
                     Center(
@@ -111,109 +112,51 @@ class BecomeVenderContactScreen extends StatelessWidget {
                                   primaryPhone: controllers[1].text,
                                   secondaryPhone: controllers[2].text,
                                 );
-
-                            context.read<VenderModelCubit>().state.requestOTP();
-                            TextEditingController otpController =
-                                TextEditingController();
-                            TextEditingController passwordController =
-                                TextEditingController();
-
-                            showCupertinoDialog(
-                                context: context,
-                                builder: (ctx) {
-                                  return CupertinoAlertDialog(
+                            if (!isVender) {
+                              List<Experience> experiences =
+                                  experienceKey.currentState!.experiences;
+                              if (experiences.isEmpty) {
+                                showCupertinoDialog(
+                                  context: context,
+                                  builder: (ctx) => CupertinoAlertDialog(
                                     title: const Text(
-                                      "We send OTP to your email account\nEnter OTP and set password",
-                                    ),
-                                    content: Column(
-                                      children: [
-                                        const SizedBox(height: 15),
-                                        CupertinoTextField(
-                                          controller: otpController,
-                                          placeholder: "Enter OTP",
-                                          maxLength: 4,
-                                        ),
-                                        const SizedBox(height: 10),
-                                        CupertinoTextField(
-                                          controller: passwordController,
-                                          placeholder: "Enter Password",
-                                          obscureText: true,
-                                        ),
-                                        const SizedBox(height: 5),
-                                      ],
-                                    ),
+                                        "No experiences added, continue?"),
                                     actions: [
                                       CupertinoDialogAction(
                                         child: const Text(
-                                          "Done",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green,
-                                          ),
+                                          "Continue",
+                                          style: TextStyle(color: Colors.red),
                                         ),
-                                        onPressed: () async {
-                                          if (otpController.text.isEmpty) {
-                                            Fluttertoast.showToast(
-                                                msg: "Please enter otp");
-                                            return;
-                                          } else if (passwordController
-                                              .text.isEmpty) {
-                                            Fluttertoast.showToast(
-                                                msg: "Please enter password");
-                                            return;
-                                          }
-
+                                        onPressed: () {
                                           Navigator.pop(ctx);
-                                          await context
-                                              .read<VenderModelCubit>()
-                                              .state
-                                              .setPassword(
-                                                password:
-                                                    passwordController.text,
-                                                otp: otpController.text,
-                                              );
-                                          if (await context
-                                              .read<VenderModelCubit>()
-                                              .state
-                                              .register(context)) {
-                                            scaffoldMessageKey.currentState!
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                  content: Text(
-                                                      "Please upload your legal documents")),
-                                            );
-                                            context
-                                                .read<VenderModelCubit>()
-                                                .resetData();
-                                            Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (_) =>
-                                                      const MainScreen()),
-                                              (route) => false,
-                                            );
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) =>
-                                                    const DocumentsScreen(),
-                                              ),
-                                            );
-                                          }
+                                          registerNow(context);
                                         },
                                       ),
                                       CupertinoDialogAction(
                                         child: const Text(
-                                          "Cancel",
-                                          style: TextStyle(color: Colors.red),
+                                          "No, I will add experiences",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         onPressed: () {
                                           Navigator.pop(ctx);
                                         },
                                       ),
                                     ],
-                                  );
-                                });
+                                  ),
+                                );
+                              } else {
+                                context
+                                    .read<VenderModelCubit>()
+                                    .state
+                                    .setExperiences(experiences);
+                                registerNow(context);
+                              }
+                            } else {
+                              registerNow(context);
+                            }
                           }
                         },
                       ),
@@ -227,5 +170,94 @@ class BecomeVenderContactScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void registerNow(BuildContext context) {
+    context.read<VenderModelCubit>().state.requestOTP();
+    TextEditingController otpController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+
+    showCupertinoDialog(
+        context: context,
+        builder: (ctx) {
+          return CupertinoAlertDialog(
+            title: const Text(
+              "We send OTP to your email account\nEnter OTP and set password",
+            ),
+            content: Column(
+              children: [
+                const SizedBox(height: 15),
+                CupertinoTextField(
+                  controller: otpController,
+                  placeholder: "Enter OTP",
+                  maxLength: 4,
+                ),
+                const SizedBox(height: 10),
+                CupertinoTextField(
+                  controller: passwordController,
+                  placeholder: "Enter Password",
+                  obscureText: true,
+                ),
+                const SizedBox(height: 5),
+              ],
+            ),
+            actions: [
+              CupertinoDialogAction(
+                child: const Text(
+                  "Done",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+                onPressed: () async {
+                  if (otpController.text.isEmpty) {
+                    Fluttertoast.showToast(msg: "Please enter otp");
+                    return;
+                  } else if (passwordController.text.isEmpty) {
+                    Fluttertoast.showToast(msg: "Please enter password");
+                    return;
+                  }
+
+                  Navigator.pop(ctx);
+                  await context.read<VenderModelCubit>().state.setPassword(
+                        password: passwordController.text,
+                        otp: otpController.text,
+                      );
+                  if (await context
+                      .read<VenderModelCubit>()
+                      .state
+                      .register(context)) {
+                    scaffoldMessageKey.currentState!.showSnackBar(
+                      const SnackBar(
+                          content: Text("Please upload your legal documents")),
+                    );
+                    context.read<VenderModelCubit>().resetData();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => const MainScreen()),
+                      (route) => false,
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const DocumentsScreen(),
+                      ),
+                    );
+                  }
+                },
+              ),
+              CupertinoDialogAction(
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.red),
+                ),
+                onPressed: () {
+                  Navigator.pop(ctx);
+                },
+              ),
+            ],
+          );
+        });
   }
 }
