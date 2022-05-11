@@ -1,12 +1,14 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/OperatorScreen/OperatorExperienceScreen/operator_experince_screen.dart';
 import 'package:rental_partners/Screens/Account/PopUps/address_edit_popup.dart';
 import 'package:rental_partners/Screens/ChangePasswordScreen.dart/change_password_screen.dart';
 import 'package:rental_partners/Screens/DocumentsScreen/documents_screen.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
+import 'package:rental_partners/Theme/colors.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 
 class AddressPanBox extends StatelessWidget {
@@ -31,6 +33,21 @@ class AddressPanBox extends StatelessWidget {
         _viewText(
           context,
           value: profile.pan,
+          backgroundColor: Theme.of(context).disabledColor,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: const Text(
+            "Markup %",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        _viewText(
+          context,
+          value: profile.commisionPercentage,
           backgroundColor: Theme.of(context).disabledColor,
         ),
         Visibility(
@@ -120,6 +137,47 @@ class AddressPanBox extends StatelessWidget {
             MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
           ),
         ),
+        const SizedBox(height: 15),
+        _viewTextButton(context, value: "About", onPressed: () async {
+          PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+          String appName = packageInfo.appName;
+          String version = packageInfo.version;
+          String buildNumber = packageInfo.buildNumber;
+          showCupertinoDialog(
+            context: context,
+            builder: (ctx) => CupertinoAlertDialog(
+              title: const Text("About"),
+              content: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  Text(
+                    appName,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "version: $version ($buildNumber)",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                CupertinoDialogAction(
+                  child: const Text("Ok"),
+                  onPressed: () => Navigator.pop(ctx),
+                ),
+              ],
+            ),
+          );
+        }),
         const SizedBox(height: 15),
         _themeButton(context),
         const SizedBox(height: 5),

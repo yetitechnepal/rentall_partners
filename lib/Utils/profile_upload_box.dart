@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:rental_partners/Theme/button.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
+import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/image_viewer.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -36,6 +37,7 @@ Future<String?>? uploadImage(BuildContext context) async {
 }
 
 Future<String?> pickImage(BuildContext context) async {
+  await checkImagePermission(context);
   final List<AssetEntity>? result = await AssetPicker.pickAssets(
     context,
     maxAssets: 1,

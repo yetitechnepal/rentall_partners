@@ -13,6 +13,7 @@ import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Theme/button.dart';
 import 'package:rental_partners/Theme/colors.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
+import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/image_viewer.dart';
 import 'package:rental_partners/main.dart';
@@ -64,6 +65,7 @@ uploadImage(BuildContext context) async {
 }
 
 Future<String?> pickImage(BuildContext context) async {
+  await checkImagePermission(context);
   final List<AssetEntity>? result = await AssetPicker.pickAssets(
     context,
     maxAssets: 1,

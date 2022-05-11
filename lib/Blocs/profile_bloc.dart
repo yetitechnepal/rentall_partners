@@ -109,7 +109,10 @@ class ProfileModel {
   List<ProfileDocument> documents = [];
   List<ProfileExperience> experiences = [];
 
-  String perHourRate = "-", perDayRate = "-", perMonthRate = "-";
+  String perHourRate = "-",
+      perDayRate = "-",
+      perMonthRate = "-",
+      commisionPercentage = "-";
   fetchProfile() async {
     LoginSession().getFCM();
     Response response = await API().get(endPoint: "accounts/profile/");
@@ -123,6 +126,8 @@ class ProfileModel {
       pan = data['pan'] ?? "";
       isContractDone = data['is_contract_done'] ?? false;
       isKycVerified = data['is_kyc_verified'] ?? false;
+
+      commisionPercentage = data['commission_percentage'].toString() + "%";
       contacts = [];
       for (var element in data['contact']) {
         contacts.add(ProfileContact.fromMap(element));

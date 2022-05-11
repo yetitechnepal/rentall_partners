@@ -95,7 +95,7 @@ class OperatorDashboardScreen extends StatelessWidget {
         // crossAxisCount: 2,
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
-        childAspectRatio: 8 / 6,
+        childAspectRatio: 1,
         children: const [
           OperatorSummarySectiion(
             title: "Today’s Books",

@@ -9,6 +9,7 @@ import 'package:provider/src/provider.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Theme/date_picker_theme.dart';
+import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/Utils/text_field.dart';
 import 'package:rental_partners/main.dart';
@@ -298,6 +299,7 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
   }
 
   onImageChoose() async {
+  await checkImagePermission(context);
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
       context,
       selectedAssets: [],

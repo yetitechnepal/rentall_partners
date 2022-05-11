@@ -5,6 +5,7 @@ import 'package:rental_partners/Screens/AttachmentDetailScreen/Models/attachment
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Theme/button.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
+import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/main.dart';
@@ -134,6 +135,7 @@ class _GalleryPopupBoxState extends State<GalleryPopupBox> {
       ),
       child: TextButton(
         onPressed: () async {
+          await checkImagePermission(context);
           final List<AssetEntity>? result = await AssetPicker.pickAssets(
             context,
             selectedAssets: images,

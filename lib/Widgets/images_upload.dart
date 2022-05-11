@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 import 'package:rental_partners/Utils/add_button.dart';
+import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class ImagesUploadSection extends StatefulWidget {
@@ -49,6 +50,7 @@ class ImagesUploadSectionState extends State<ImagesUploadSection>
         itemBuilder: (context, index) {
           if (index == selectedImages.length) {
             return addButton(context, onPressed: () async {
+              await checkImagePermission(context);
               final List<AssetEntity>? result = await AssetPicker.pickAssets(
                 context,
                 selectedAssets: selectedImages,
