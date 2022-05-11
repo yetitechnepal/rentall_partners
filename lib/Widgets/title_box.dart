@@ -25,10 +25,10 @@ class TitleBar extends StatelessWidget {
             title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).textTheme.bodyText1!.color!,
+              // color: Theme.of(context).textTheme.bodyText1!.color!,
             ),
           ),
           suffix ??

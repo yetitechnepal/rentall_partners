@@ -27,12 +27,12 @@ uploadImage(BuildContext context) async {
     aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
     aspectRatioPresets: [CropAspectRatioPreset.square],
     iosUiSettings: const IOSUiSettings(
-      title: 'Upload profile image',
+      title: 'Upload',
       aspectRatioLockEnabled: true,
       resetAspectRatioEnabled: false,
     ),
     androidUiSettings: AndroidUiSettings(
-      toolbarTitle: 'Upload profile image',
+      toolbarTitle: 'Upload',
       toolbarColor: Theme.of(context).primaryColor,
       backgroundColor: Colors.black,
       toolbarWidgetColor: Colors.white,
@@ -69,7 +69,7 @@ Future<String?> pickImage(BuildContext context) async {
   final List<AssetEntity>? result = await AssetPicker.pickAssets(
     context,
     maxAssets: 1,
-    gridCount: MediaQuery.of(context).size.width ~/ 100,
+    gridCount: MediaQuery.of(context).size.width ~/ 80,
     textDelegate: EnglishTextDelegate(),
     specialPickerType: SpecialPickerType.noPreview,
   );

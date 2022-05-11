@@ -61,16 +61,14 @@ class EquipmentGridBox extends StatelessWidget {
               itemCount: equipments.length,
               itemBuilder: (context, index) {
                 return Column(
-                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: BoxShadows.dropShadow(context),
-                      ),
-                      child: AspectRatio(
-                        aspectRatio: 147 / 109,
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: BoxShadows.dropShadow(context),
+                        ),
                         child: Stack(
                           children: [
                             Container(
@@ -118,12 +116,15 @@ class EquipmentGridBox extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      equipments[index]!.name,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                      child: Text(
+                        equipments[index]!.name,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

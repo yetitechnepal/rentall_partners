@@ -42,7 +42,7 @@ Future<String?> pickImage(BuildContext context) async {
     context,
     maxAssets: 1,
     textDelegate: EnglishTextDelegate(),
-    gridCount: MediaQuery.of(context).size.width ~/ 100,
+    gridCount: MediaQuery.of(context).size.width ~/ 80,
     specialPickerType: SpecialPickerType.noPreview,
   );
   String imagePath;

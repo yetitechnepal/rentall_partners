@@ -167,30 +167,34 @@ class _ProfileContentAddEditBoxState extends State<ProfileContentAddEditBox> {
                         showDialog(
                           context: context,
                           builder: (ctx) => Dialog(
-                            child: FutureBuilder<List<ContactType>>(
-                                future: fetchContactTypes(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: snapshot.data!.length,
-                                      itemBuilder: (ctx, index) => ListTile(
-                                        onTap: () {
-                                          setState(() => contactType =
-                                              snapshot.data![index]);
-                                          Navigator.pop(context);
-                                        },
-                                        title:
-                                            Text(snapshot.data![index].value),
-                                      ),
-                                    );
-                                  } else {
-                                    return Container(
-                                      padding: const EdgeInsets.all(20),
-                                      child: const CupertinoActivityIndicator(),
-                                    );
-                                  }
-                                }),
+                            child: Container(
+                              constraints: BoxConstraints(maxWidth: 300),
+                              child: FutureBuilder<List<ContactType>>(
+                                  future: fetchContactTypes(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: snapshot.data!.length,
+                                        itemBuilder: (ctx, index) => ListTile(
+                                          onTap: () {
+                                            setState(() => contactType =
+                                                snapshot.data![index]);
+                                            Navigator.pop(context);
+                                          },
+                                          title:
+                                              Text(snapshot.data![index].value),
+                                        ),
+                                      );
+                                    } else {
+                                      return Container(
+                                        padding: const EdgeInsets.all(20),
+                                        child:
+                                            const CupertinoActivityIndicator(),
+                                      );
+                                    }
+                                  }),
+                            ),
                           ),
                         );
                       },

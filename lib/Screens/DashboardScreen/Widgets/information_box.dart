@@ -26,7 +26,7 @@ class InformationBox extends StatelessWidget {
           MaterialPageRoute(builder: (context) => OrdersListScreen()),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,7 +49,6 @@ class InformationBox extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
               Text(
                 title,
                 style: TextStyle(

@@ -48,10 +48,12 @@ class AEMPLTextField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
-        maxLines: maxLines,
+        maxLines: null,
+        minLines: maxLines,
         textInputAction: textInputAction,
         autofocus: autofocus,
         enabled: !disabled,
+        textAlignVertical: TextAlignVertical.top,
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 13),

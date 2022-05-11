@@ -69,9 +69,11 @@ showImageBox(BuildContext context,
                     top: 0,
                     child: SafeArea(
                       child: IconButton(
-                        iconSize: 30,
+                        iconSize: 40,
+                        splashRadius: 40,
                         onPressed: () => Navigator.pop(context),
                         icon: Container(
+                          alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(color: Colors.black, width: 2),
@@ -81,6 +83,7 @@ showImageBox(BuildContext context,
                           child: Icon(
                             Icons.close,
                             color: Theme.of(context).primaryColor,
+                            size: 27,
                           ),
                         ),
                       ),

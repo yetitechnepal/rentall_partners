@@ -100,7 +100,7 @@ class _GalleryPopupBoxState extends State<GalleryPopupBox> {
             selectedAssets: images,
             maxAssets: 20,
             gridThumbSize: 100,
-            gridCount: MediaQuery.of(context).size.width ~/ 100,
+            gridCount: MediaQuery.of(context).size.width ~/ 80,
             textDelegate: EnglishTextDelegate(),
           );
           if (result == null) return;

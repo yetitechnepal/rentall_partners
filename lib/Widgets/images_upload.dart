@@ -55,7 +55,7 @@ class ImagesUploadSectionState extends State<ImagesUploadSection>
                 context,
                 selectedAssets: selectedImages,
                 maxAssets: widget.max,
-                gridCount: MediaQuery.of(context).size.width ~/ 100,
+                gridCount: MediaQuery.of(context).size.width ~/ 80,
                 specialPickerType: widget.max == 1
                     ? SpecialPickerType.noPreview
                     : SpecialPickerType.wechatMoment,

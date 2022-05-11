@@ -207,13 +207,17 @@ class _ImageDisplaySliderState extends State<AttachmentGalleryBox> {
                             );
                           },
                           color: primaryColor,
-                          iconSize: 20,
+                          iconSize: 30,
                           icon: Container(
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(100),
                               boxShadow: BoxShadows.dropShadow(context),
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 1,
+                              ),
                             ),
                             child: const AEMPLIcon(AEMPLIcons.trash),
                           ),

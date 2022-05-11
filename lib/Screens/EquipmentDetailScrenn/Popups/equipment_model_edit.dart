@@ -96,7 +96,7 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
       selectedAssets: [],
       maxAssets: 1,
       textDelegate: EnglishTextDelegate(),
-      gridCount: MediaQuery.of(context).size.width ~/ 100,
+      gridCount: MediaQuery.of(context).size.width ~/ 80,
       specialPickerType: SpecialPickerType.noPreview,
     );
     if (result == null) return;

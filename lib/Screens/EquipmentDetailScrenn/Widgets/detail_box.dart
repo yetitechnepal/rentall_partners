@@ -20,50 +20,47 @@ class EquipmentDetailBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Row(
-              children: [
-                const Text(
-                  "Details",
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 13),
+          child: Row(
+            children: [
+              const Text(
+                "Details",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 5),
+              Image.asset(
+                isVerified
+                    ? "assets/icons/verified.png"
+                    : "assets/icons/forbidden.png",
+                height: 15,
+              ),
+              const Spacer(),
+              IconButton(
+                onPressed: () {
+                  showEquipmentDetailEditPopup(
+                    context,
+                    id: equipId,
+                    category: category,
+                    dimension: dimension,
+                    name: name,
+                    weight: weight,
+                  );
+                },
+                iconSize: 30,
+                icon: Text(
+                  "Edit",
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 10,
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-                const SizedBox(width: 5),
-                Image.asset(
-                  isVerified
-                      ? "assets/icons/verified.png"
-                      : "assets/icons/forbidden.png",
-                  height: 15,
-                ),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    showEquipmentDetailEditPopup(
-                      context,
-                      id: equipId,
-                      category: category,
-                      dimension: dimension,
-                      name: name,
-                      weight: weight,
-                    );
-                  },
-                  iconSize: 30,
-                  icon: Text(
-                    "Edit",
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: Theme.of(context).primaryColor,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         Container(
