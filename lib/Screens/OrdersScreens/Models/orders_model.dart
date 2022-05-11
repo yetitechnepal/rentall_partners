@@ -58,8 +58,6 @@ class Order {
       totalAmount,
       orderBy,
       taxAmount,
-      promotionDiscount,
-      offerDiscount,
       paid,
       due;
   late int statusId, bookId;
@@ -93,9 +91,7 @@ class Order {
     }
     taxAmount = f.format(map['tax_amount']).toString();
     tax = map['tax_amount'];
-    promotionDiscount = f.format(map['promotion_discount']).toString();
     promo = map['promotion_discount'];
-    offerDiscount = f.format(map['offer_discount']).toString();
     offer = map['offer_discount'];
     paid = f.format(map['paid'] ?? 0).toString();
     due = f.format(map['due'] ?? 0).toString();

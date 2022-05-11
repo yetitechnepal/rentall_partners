@@ -69,6 +69,7 @@ Future<String?> pickImage(BuildContext context) async {
   final List<AssetEntity>? result = await AssetPicker.pickAssets(
     context,
     maxAssets: 1,
+    gridCount: MediaQuery.of(context).size.width ~/ 100,
     textDelegate: EnglishTextDelegate(),
     specialPickerType: SpecialPickerType.noPreview,
   );

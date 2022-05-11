@@ -140,6 +140,7 @@ class _GalleryPopupBoxState extends State<GalleryPopupBox> {
             context,
             selectedAssets: images,
             maxAssets: 20,
+            gridCount: MediaQuery.of(context).size.width ~/ 100,
             textDelegate: EnglishTextDelegate(),
           );
           if (result == null) return;

@@ -6,6 +6,7 @@ import 'package:rental_partners/Screens/LoginScreen/login_screen.dart';
 import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:new_version/new_version.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key? key}) : super(key: key) {
@@ -43,12 +44,37 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    checkNewVersion();
+  }
+
+  checkNewVersion() async {
+    NewVersion newVersion = NewVersion();
+    try {
+      final status = await newVersion.getVersionStatus();
+      debugPrint(status!.canUpdate.toString());
+      if (status.canUpdate) {
+        newVersion.showUpdateDialog(
+          context: context,
+          versionStatus: status,
+          dialogTitle: 'New update available',
+          dialogText:
+              'You need updated app to get all the features of the system',
+          updateButtonText: 'Update Now',
+          dismissButtonText: 'Later',
+          dismissAction: () {
+            Navigator.pop(context);
+          },
+        );
+      } else {
+        navigate(context);
+      }
+    } catch (e) {
+      navigate(context);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    navigate(context);
-
     return Scaffold(
       backgroundColor: const Color(0xffED1A25),
       body: Center(

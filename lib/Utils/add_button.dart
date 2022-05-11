@@ -8,7 +8,7 @@ Widget addButton(BuildContext context, {Function()? onPressed}) {
   return Container(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      color: Colors.white,
+      color: Theme.of(context).scaffoldBackgroundColor,
       boxShadow: BoxShadows.dropShadow(context),
     ),
     child: Stack(

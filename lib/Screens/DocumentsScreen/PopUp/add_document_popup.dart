@@ -299,12 +299,13 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
   }
 
   onImageChoose() async {
-  await checkImagePermission(context);
+    await checkImagePermission(context);
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
       context,
       selectedAssets: [],
       maxAssets: 1,
       textDelegate: EnglishTextDelegate(),
+      gridCount: MediaQuery.of(context).size.width ~/ 100,
       specialPickerType: SpecialPickerType.noPreview,
     );
     if (result == null) return;

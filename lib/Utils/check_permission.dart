@@ -1,10 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:system_settings/system_settings.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 checkImagePermission(BuildContext context) async {
-  if (await Permission.photos.request().isPermanentlyDenied) {
+  PermissionState permission = await AssetPicker.permissionCheck();
+  if (permission == PermissionState.restricted) {
     showCupertinoDialog(
       context: context,
       builder: (ctx) => CupertinoAlertDialog(

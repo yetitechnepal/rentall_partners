@@ -94,12 +94,13 @@ class _GalleryPopupBoxState extends State<GalleryPopupBox> {
       ),
       child: TextButton(
         onPressed: () async {
-  await checkImagePermission(context);
+          await checkImagePermission(context);
           final List<AssetEntity>? result = await AssetPicker.pickAssets(
             context,
             selectedAssets: images,
             maxAssets: 20,
             gridThumbSize: 100,
+            gridCount: MediaQuery.of(context).size.width ~/ 100,
             textDelegate: EnglishTextDelegate(),
           );
           if (result == null) return;

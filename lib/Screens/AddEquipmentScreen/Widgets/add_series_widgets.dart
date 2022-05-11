@@ -171,6 +171,7 @@ class AddSeriesPopupBox extends StatefulWidget {
 class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
   final controllers = List.generate(7, (index) => TextEditingController());
   final formKey = GlobalKey<FormState>();
+  bool isVATIncluded = false;
 
   DateTime? manufaturedDate;
   @override
@@ -262,7 +263,11 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               keyboardType: TextInputType.number,
               prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
               validator: (value) {
-                if (value!.isEmpty) return "Please enter base rate";
+                if (value!.isEmpty) {
+                  return "Please enter base rate";
+                } else if (double.tryParse(value) == null) {
+                  return "Please enter number only";
+                }
               },
             ),
             textFieldText("Feul Included Rate per hour"),
@@ -272,8 +277,18 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               keyboardType: TextInputType.number,
               prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
               validator: (value) {
-                if (value!.isEmpty) return "Please enter feul inclusion rate";
+                if (value!.isEmpty) {
+                  return "Please enter feul inclusion rate";
+                } else if (double.tryParse(value) == null) {
+                  return "Please enter number only";
+                }
               },
+            ),
+            const SizedBox(height: 10),
+            CheckboxListTile(
+              value: isVATIncluded,
+              title: const Text("VAT included rates"),
+              onChanged: (value) => setState(() => isVATIncluded = value!),
             ),
             textFieldText("Series Description"),
             AEMPLTextField(
@@ -292,13 +307,20 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               child: TextButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
+                    double baseRate = double.parse(controllers[4].text);
+                    double fuelIncludedRate = double.parse(controllers[5].text);
+
+                    if (isVATIncluded) {
+                      baseRate = baseRate / 1.13;
+                      fuelIncludedRate = fuelIncludedRate / 1.13;
+                    }
                     Series seriesModel = Series(
                       seriesName: controllers[0].text,
                       hourOfRenting: controllers[1].text,
                       location: controllers[2].text,
                       count: controllers[3].text,
-                      price: controllers[4].text,
-                      fuelIncludedRate: controllers[5].text,
+                      price: baseRate.toStringAsFixed(2),
+                      fuelIncludedRate: fuelIncludedRate.toStringAsFixed(2),
                       description: controllers[6].text,
                       equipment: widget.equip,
                       model: widget.modelId,
