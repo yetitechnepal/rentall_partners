@@ -103,8 +103,9 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                               prefix:
                                   const AEMPLIcon(AEMPLIcons.weight, size: 20),
                               validator: (value) {
-                                if (value!.isEmpty)
+                                if (value!.isEmpty) {
                                   return "Please enter weight";
+                                }
                               },
                             ),
                           ),

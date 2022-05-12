@@ -11,7 +11,6 @@ import 'package:provider/src/provider.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Theme/button.dart';
-import 'package:rental_partners/Theme/colors.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:rental_partners/Utils/image_icon.dart';

@@ -8,7 +8,6 @@ import 'package:rental_partners/Screens/Account/PopUps/address_edit_popup.dart';
 import 'package:rental_partners/Screens/ChangePasswordScreen.dart/change_password_screen.dart';
 import 'package:rental_partners/Screens/DocumentsScreen/documents_screen.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
-import 'package:rental_partners/Theme/colors.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 
 class AddressPanBox extends StatelessWidget {

@@ -168,7 +168,7 @@ class _ProfileContentAddEditBoxState extends State<ProfileContentAddEditBox> {
                           context: context,
                           builder: (ctx) => Dialog(
                             child: Container(
-                              constraints: BoxConstraints(maxWidth: 300),
+                              constraints: const BoxConstraints(maxWidth: 300),
                               child: FutureBuilder<List<ContactType>>(
                                   future: fetchContactTypes(),
                                   builder: (context, snapshot) {
