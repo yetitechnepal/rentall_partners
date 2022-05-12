@@ -13,16 +13,24 @@ class OrdersListSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderListCubit, OrderList>(
       builder: (context, state) {
-        return ListView.separated(
+        return GridView.builder(
           shrinkWrap: true,
+          padding: MediaQuery.of(context).size.width > 500
+              ? const EdgeInsets.symmetric(horizontal: 20)
+              : EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: state.orders.length,
           itemBuilder: (context, index) {
             return _orderBox(context, state.orders[index]);
           },
-          separatorBuilder: (BuildContext context, int index) =>
-              const SizedBox(height: 10),
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 600,
+            childAspectRatio:
+                MediaQuery.of(context).size.width > 600 ? 500 / 150 : 500 / 200,
+            mainAxisSpacing: 20,
+            crossAxisSpacing: 20,
+          ),
         );
       },
     );

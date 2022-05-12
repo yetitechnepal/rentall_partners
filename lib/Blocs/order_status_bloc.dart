@@ -18,7 +18,9 @@ class OrderStatuses {
     Response response = await API().get(endPoint: "status/");
     if (response.statusCode == 200) {
       for (var element in response.data['data']) {
-        statuses.add(OrderStatus.fromMap(element));
+        if (element['value'].toUpperCase() != "Pending".toUpperCase()) {
+          statuses.add(OrderStatus.fromMap(element));
+        }
       }
     }
   }

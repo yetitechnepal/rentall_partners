@@ -49,9 +49,9 @@ class InvoiceModel {
     });
   }
 
-  Future<InvoiceModel> fetchInvoice(int id) async {
+  Future<InvoiceModel> fetchInvoice(String id) async {
     Response response =
-        await API().get(endPoint: "payment/1008/invoice-details/");
+        await API().get(endPoint: "payment/$id/invoice-details/");
     if (response.statusCode == 200) {
       fromMap(response.data['data']);
     }

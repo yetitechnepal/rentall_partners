@@ -186,7 +186,7 @@ class _OrdersDetailScreenState extends State<OrdersDetailScreen> {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    _buttonBox(context, order.orderType),
+                    _buttonBox(context, order.orderType, order.invoiceNumber),
                     const SizedBox(height: 30),
                   ],
                 ),
@@ -232,7 +232,7 @@ class _OrdersDetailScreenState extends State<OrdersDetailScreen> {
     );
   }
 
-  Widget _buttonBox(BuildContext context, OrderTypes type) {
+  Widget _buttonBox(BuildContext context, OrderTypes type, String invoiceId) {
     if (type == OrderTypes.dispatch) {
       return Center(
         child: TextButton(
@@ -320,7 +320,7 @@ class _OrdersDetailScreenState extends State<OrdersDetailScreen> {
         child: TextButton(
           style: TextButtonStyles.overlayOrderDetailButtonStyle(),
           onPressed: () {
-            showInvoiceModel(context, 0);
+            showInvoiceModel(context, invoiceId);
           },
           child: const Text("View Invoice"),
         ),

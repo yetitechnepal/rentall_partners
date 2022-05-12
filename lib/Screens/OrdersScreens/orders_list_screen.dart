@@ -89,21 +89,15 @@ class OrdersListScreen extends StatelessWidget {
           ),
           Expanded(
             child: SingleChildScrollView(
-              child: Container(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 500),
-                  child: BlocBuilder<FliterBlocCubit, FilterBloc>(
-                      builder: (context, filter) {
-                    return FutureBuilder<OrderList>(
-                      future: _orderList.fetchOrders(context, filter),
-                      builder: (context, AsyncSnapshot asyncSnapshot) {
-                        return const OrdersListSection();
-                      },
-                    );
-                  }),
-                ),
-              ),
+              child: BlocBuilder<FliterBlocCubit, FilterBloc>(
+                  builder: (context, filter) {
+                return FutureBuilder<OrderList>(
+                  future: _orderList.fetchOrders(context, filter),
+                  builder: (context, AsyncSnapshot asyncSnapshot) {
+                    return const OrdersListSection();
+                  },
+                );
+              }),
             ),
           ),
         ],
