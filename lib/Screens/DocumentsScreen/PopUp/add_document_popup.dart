@@ -1,5 +1,7 @@
 // ignore_for_file: implementation_imports
 
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -300,12 +302,15 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
 
   onImageChoose() async {
     await checkImagePermission(context);
+
+    int gridCount = min(MediaQuery.of(context).size.width ~/ 80, 7);
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
       context,
       selectedAssets: [],
       maxAssets: 1,
+      pageSize: 1 * gridCount,
       textDelegate: EnglishTextDelegate(),
-      gridCount: MediaQuery.of(context).size.width ~/ 80,
+      gridCount: gridCount,
       specialPickerType: SpecialPickerType.noPreview,
     );
     if (result == null) return;

@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:rental_partners/Theme/button.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
@@ -48,7 +50,7 @@ class AEMPLTextField extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
-        maxLines: null,
+        maxLines: obscureText ? 1 : null,
         minLines: maxLines,
         textInputAction: textInputAction,
         autofocus: autofocus,

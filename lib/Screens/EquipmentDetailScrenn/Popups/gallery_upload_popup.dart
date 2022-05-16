@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Screens/EquipmentDetailScrenn/Model/equipment_detail_model.dart';
@@ -95,12 +97,14 @@ class _GalleryPopupBoxState extends State<GalleryPopupBox> {
       child: TextButton(
         onPressed: () async {
           await checkImagePermission(context);
+          int gridCount = min(MediaQuery.of(context).size.width ~/ 80, 7);
           final List<AssetEntity>? result = await AssetPicker.pickAssets(
             context,
             selectedAssets: images,
             maxAssets: 20,
             gridThumbSize: 100,
-            gridCount: MediaQuery.of(context).size.width ~/ 80,
+            gridCount: gridCount,
+            pageSize: 1 * gridCount,
             textDelegate: EnglishTextDelegate(),
           );
           if (result == null) return;

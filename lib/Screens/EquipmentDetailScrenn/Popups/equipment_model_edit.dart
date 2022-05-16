@@ -1,5 +1,7 @@
 // ignore_for_file: implementation_imports, body_might_complete_normally_nullable
 
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -91,12 +93,14 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
 
   pickImage() async {
     await checkImagePermission(context);
+    int gridCount = min(MediaQuery.of(context).size.width ~/ 80, 7);
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
       context,
       selectedAssets: [],
       maxAssets: 1,
+      pageSize: 1 * gridCount,
       textDelegate: EnglishTextDelegate(),
-      gridCount: MediaQuery.of(context).size.width ~/ 80,
+      gridCount: gridCount,
       specialPickerType: SpecialPickerType.noPreview,
     );
     if (result == null) return;

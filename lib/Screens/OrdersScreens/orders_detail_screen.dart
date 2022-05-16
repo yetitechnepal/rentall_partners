@@ -151,9 +151,86 @@ class _OrdersDetailScreenState extends State<OrdersDetailScreen> {
                                 (BuildContext context, int index) =>
                                     const Divider(),
                           ),
+
+                          Visibility(
+                            visible: widget.order.adjustments.isNotEmpty,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 8),
+                                const Divider(
+                                  thickness: 1,
+                                  color: Color(0xffE5E5E5),
+                                ),
+                                const Text(
+                                  "Adjustment",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: widget.order.adjustments.length,
+                                  itemBuilder: (context, index) {
+                                    var item = widget.order.adjustments[index];
+                                    return rowTextBox(
+                                      context,
+                                      title: item.type,
+                                      value:
+                                          "NPR ${item.amount.toStringAsFixed(1)}",
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Visibility(
+                            visible: widget.order.adjustments.isNotEmpty,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 8),
+                                const Divider(
+                                  thickness: 1,
+                                  color: Color(0xffE5E5E5),
+                                ),
+                                const Text(
+                                  "Breakdowns",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: widget.order.breakdowns.length,
+                                  itemBuilder: (context, index) {
+                                    var item = widget.order.breakdowns[index];
+                                    return rowTextBox(
+                                      context,
+                                      title: item.type,
+                                      value:
+                                          "(NPR ${item.amount.toStringAsFixed(1)})",
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                           const SizedBox(height: 8),
                           const Divider(thickness: 1, color: Color(0xffE5E5E5)),
                           const SizedBox(height: 8),
+                          rowTextBox(
+                            context,
+                            title: "Sub total",
+                            value:
+                                "NPR ${f.format(widget.order.subTotal).toString()}",
+                          ),
                           rowTextBox(
                             context,
                             title: "Tax 13%",

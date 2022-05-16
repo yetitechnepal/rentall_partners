@@ -1,6 +1,7 @@
 // ignore_for_file: implementation_imports
 
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
@@ -65,10 +66,13 @@ uploadImage(BuildContext context) async {
 
 Future<String?> pickImage(BuildContext context) async {
   await checkImagePermission(context);
+
+  int gridCount = min(MediaQuery.of(context).size.width ~/ 80, 7);
   final List<AssetEntity>? result = await AssetPicker.pickAssets(
     context,
     maxAssets: 1,
-    gridCount: MediaQuery.of(context).size.width ~/ 80,
+    gridCount: gridCount,
+    pageSize: 1 * gridCount,
     textDelegate: EnglishTextDelegate(),
     specialPickerType: SpecialPickerType.noPreview,
   );
