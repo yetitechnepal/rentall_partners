@@ -37,7 +37,7 @@ class OrdersListScreen extends StatelessWidget {
                 firstDate:
                     DateTime.now().subtract(const Duration(days: 100 * 365)),
                 lastDate: DateTime.now(),
-                builder: (context, child) {
+                builder: (ctx, child) {
                   return Theme(
                     data: datePickerTheme(context),
                     child: child!,
@@ -46,8 +46,9 @@ class OrdersListScreen extends StatelessWidget {
               );
               if (range == null) {
                 return;
+              } else {
+                context.read<FliterBlocCubit>().setDateRange(range);
               }
-              context.read<FliterBlocCubit>().setDateRange(range);
             },
             icon: AEMPLIcon(
               AEMPLIcons.filter,
@@ -77,6 +78,7 @@ class OrdersListScreen extends StatelessWidget {
                   itemCount: state.statuses.length,
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
                   itemBuilder: (ctx, index) => _orderTypePill(
                     context,
                     title: state.statuses[index].value,
@@ -88,17 +90,15 @@ class OrdersListScreen extends StatelessWidget {
             }),
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: BlocBuilder<FliterBlocCubit, FilterBloc>(
-                  builder: (context, filter) {
-                return FutureBuilder<OrderList>(
-                  future: _orderList.fetchOrders(context, filter),
-                  builder: (context, AsyncSnapshot asyncSnapshot) {
-                    return const OrdersListSection();
-                  },
-                );
-              }),
-            ),
+            child: BlocBuilder<FliterBlocCubit, FilterBloc>(
+                builder: (context, filter) {
+              return FutureBuilder<OrderList>(
+                future: _orderList.fetchOrders(context, filter),
+                builder: (context, AsyncSnapshot asyncSnapshot) {
+                  return const OrdersListSection();
+                },
+              );
+            }),
           ),
         ],
       ),

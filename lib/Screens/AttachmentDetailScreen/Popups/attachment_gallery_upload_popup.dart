@@ -142,11 +142,13 @@ class _GalleryPopupBoxState extends State<GalleryPopupBox> {
           int gridCount = min(MediaQuery.of(context).size.width ~/ 80, 7);
           final List<AssetEntity>? result = await AssetPicker.pickAssets(
             context,
-            selectedAssets: images,
-            maxAssets: 20,
-            gridCount: gridCount,
-            pageSize: 1 * gridCount,
-            textDelegate: EnglishTextDelegate(),
+            pickerConfig: AssetPickerConfig(
+              selectedAssets: images,
+              maxAssets: 20,
+              gridCount: gridCount,
+              pageSize: 100,
+              requestType: RequestType.image,
+            ),
           );
           if (result == null) return;
           setState(() => images = result);

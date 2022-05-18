@@ -14,20 +14,18 @@ class OrdersListSection extends StatelessWidget {
     return BlocBuilder<OrderListCubit, OrderList>(
       builder: (context, state) {
         return GridView.builder(
-          shrinkWrap: true,
           padding: MediaQuery.of(context).size.width > 500
               ? const EdgeInsets.symmetric(horizontal: 20)
               : EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           itemCount: state.orders.length,
           itemBuilder: (context, index) {
             return _orderBox(context, state.orders[index]);
           },
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 600,
+            maxCrossAxisExtent: 500,
             childAspectRatio:
-                MediaQuery.of(context).size.width > 600 ? 500 / 150 : 500 / 200,
+                MediaQuery.of(context).size.width > 500 ? 500 / 150 : 500 / 200,
             mainAxisSpacing: 20,
             crossAxisSpacing: 20,
           ),
@@ -55,43 +53,46 @@ class OrdersListSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Order No",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).textTheme.bodyText1!.color,
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Order No",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).textTheme.bodyText1!.color,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "#" + order.invoiceNumber.toString(),
-                    style: TextStyle(
-                        fontSize: 13,
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? const Color(0xff4F5251)
-                            : const Color(0xFFACABAB)),
-                  ),
-                ],
-              ),
-              Text(
-                DateFormat("MMM dd").format(order.dateFrom) +
-                    " - " +
-                    DateFormat("MMM dd").format(order.dateTo),
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Theme.of(context).textTheme.bodyText1!.color,
+                    Text(
+                      "#" + order.invoiceNumber.toString(),
+                      style: TextStyle(
+                          fontSize: 13,
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? const Color(0xff4F5251)
+                                  : const Color(0xFFACABAB)),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                Text(
+                  DateFormat("MMM dd").format(order.dateFrom) +
+                      " - " +
+                      DateFormat("MMM dd").format(order.dateTo),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).textTheme.bodyText1!.color,
+                  ),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 18),
+          const SizedBox(height: 5),
           Text(
             "Order Amount",
             style: TextStyle(

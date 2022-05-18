@@ -40,10 +40,13 @@ Future<String?> pickImage(BuildContext context) async {
   await checkImagePermission(context);
   final List<AssetEntity>? result = await AssetPicker.pickAssets(
     context,
-    maxAssets: 1,
-    textDelegate: EnglishTextDelegate(),
-    gridCount: MediaQuery.of(context).size.width ~/ 80,
-    specialPickerType: SpecialPickerType.noPreview,
+    pickerConfig: AssetPickerConfig(
+      maxAssets: 1,
+      gridCount: MediaQuery.of(context).size.width ~/ 80,
+      specialPickerType: SpecialPickerType.noPreview,
+      pageSize: 100,
+      requestType: RequestType.image,
+    ),
   );
   String imagePath;
   if (result == null) {

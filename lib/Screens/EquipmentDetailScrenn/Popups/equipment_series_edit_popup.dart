@@ -144,107 +144,117 @@ class _EquipmentSeriesEditBoxState extends State<_EquipmentSeriesEditBox> {
         ),
         body: Form(
           key: formKey,
-          child: ListView(
-            children: [
-              textFieldText("Series Name"),
-              AEMPLTextField(
-                controller: controllers[0],
-                hintText: "Series name",
-                prefix: const AEMPLIcon(AEMPLIcons.attachment, size: 20),
-                validator: (value) {
-                  if (value!.isEmpty) return "Please enter series name";
-                },
-              ),
-              textFieldText("Series Description"),
-              AEMPLTextField(
-                controller: controllers[1],
-                hintText: "Series description",
-                keyboardType: TextInputType.multiline,
-                maxLines: 6,
-                prefix: const AEMPLIcon(AEMPLIcons.description, size: 20),
-                validator: (value) {
-                  if (value!.isEmpty) return "Please enter series detail";
-                },
-              ),
-              textFieldText("Date of Manufacture"),
-              AEMPLPopUpButton(
-                hintText: "Select Date",
-                prefix: const Icon(Icons.calendar_today_sharp),
-                value: manufaturedDate == null
-                    ? null
-                    : DateFormat("MMM dd, yyyy").format(manufaturedDate!),
-                onPressed: () async {
-                  DateTime? selectedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now()
-                        .subtract(const Duration(days: 365 * 100)),
-                    lastDate: DateTime.now(),
-                    builder: (context, child) {
-                      return Theme(
-                        data: datePickerTheme(context),
-                        child: child!,
-                      );
-                    },
-                  );
-                  setState(() => manufaturedDate = selectedDate);
-                },
-              ),
-              textFieldText("Hour of Renting"),
-              AEMPLTextField(
-                controller: controllers[2],
-                hintText: "Hour of renting",
-                prefix: const Icon(Icons.lock_clock_outlined, size: 20),
-                validator: (value) {
-                  if (value!.isEmpty) return "Please enter hours of renting";
-                },
-              ),
-              textFieldText("Series Location"),
-              AEMPLTextField(
-                controller: controllers[4],
-                hintText: "Series location",
-                prefix: const AEMPLIcon(AEMPLIcons.location, size: 20),
-                validator: (value) {
-                  if (value!.isEmpty) return "Please enter series location";
-                },
-              ),
-              const SizedBox(height: 10),
-              Center(
-                child: TextButton(
-                  onPressed: () async {
-                    if (formKey.currentState!.validate()) {
-                      if (manufaturedDate == null) {
-                        scaffoldMessageKey.currentState!.showSnackBar(
-                            const SnackBar(
-                                content:
-                                    Text("Please choose date of manufacture")));
-                      } else {
-                        EditSeries editSeries = EditSeries(
-                          id: widget.series.id,
-                          dateOfManufacture:
-                              DateFormat("yyyy-MM-dd").format(manufaturedDate!),
-                          description: controllers[1].text,
-                          hourOfRun: controllers[2].text,
-                          location: controllers[4].text,
-                          name: controllers[0].text,
+          child: SingleChildScrollView(
+            child: Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    textFieldText("Series Name"),
+                    AEMPLTextField(
+                      controller: controllers[0],
+                      hintText: "Series name",
+                      prefix: const AEMPLIcon(AEMPLIcons.attachment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter series name";
+                      },
+                    ),
+                    textFieldText("Series Description"),
+                    AEMPLTextField(
+                      controller: controllers[1],
+                      hintText: "Series description",
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 6,
+                      prefix: const AEMPLIcon(AEMPLIcons.description, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter series detail";
+                      },
+                    ),
+                    textFieldText("Date of Manufacture"),
+                    AEMPLPopUpButton(
+                      hintText: "Select Date",
+                      prefix: const Icon(Icons.calendar_today_sharp),
+                      value: manufaturedDate == null
+                          ? null
+                          : DateFormat("MMM dd, yyyy").format(manufaturedDate!),
+                      onPressed: () async {
+                        DateTime? selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now()
+                              .subtract(const Duration(days: 365 * 100)),
+                          lastDate: DateTime.now(),
+                          builder: (context, child) {
+                            return Theme(
+                              data: datePickerTheme(context),
+                              child: child!,
+                            );
+                          },
                         );
-                        if (await editSeries.update(context)) {
-                          EquipmentDetailModel equipmentDetailModel =
-                              EquipmentDetailModel();
-                          await equipmentDetailModel.fetchEquipmentDetail(
-                            context,
-                            widget.id,
-                          );
-                          Navigator.pop(context);
-                        }
-                      }
-                    }
-                  },
-                  child: const Text("Update Series"),
+                        setState(() => manufaturedDate = selectedDate);
+                      },
+                    ),
+                    textFieldText("Hour of Renting"),
+                    AEMPLTextField(
+                      controller: controllers[2],
+                      hintText: "Hour of renting",
+                      prefix: const Icon(Icons.lock_clock_outlined, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty)
+                          return "Please enter hours of renting";
+                      },
+                    ),
+                    textFieldText("Series Location"),
+                    AEMPLTextField(
+                      controller: controllers[4],
+                      hintText: "Series location",
+                      prefix: const AEMPLIcon(AEMPLIcons.location, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty)
+                          return "Please enter series location";
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    Center(
+                      child: TextButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            if (manufaturedDate == null) {
+                              scaffoldMessageKey.currentState!.showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          "Please choose date of manufacture")));
+                            } else {
+                              EditSeries editSeries = EditSeries(
+                                id: widget.series.id,
+                                dateOfManufacture: DateFormat("yyyy-MM-dd")
+                                    .format(manufaturedDate!),
+                                description: controllers[1].text,
+                                hourOfRun: controllers[2].text,
+                                location: controllers[4].text,
+                                name: controllers[0].text,
+                              );
+                              if (await editSeries.update(context)) {
+                                EquipmentDetailModel equipmentDetailModel =
+                                    EquipmentDetailModel();
+                                await equipmentDetailModel.fetchEquipmentDetail(
+                                  context,
+                                  widget.id,
+                                );
+                                Navigator.pop(context);
+                              }
+                            }
+                          }
+                        },
+                        child: const Text("Update Series"),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
                 ),
               ),
-              const SizedBox(height: 0),
-            ],
+            ),
           ),
         ),
       ),

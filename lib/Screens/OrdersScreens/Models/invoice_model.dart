@@ -10,7 +10,7 @@ class InvoiceItemModel {
     id = map['item_id'] ?? 0;
     name = map['item_name'] ?? "";
     quantity = map['frequency'] ?? 0;
-    unitPrice = map['unit_price'] ?? 0;
+    unitPrice = map['base_rate'] ?? 0;
     var priceList = map['price_list'];
     subTotal = unitPrice;
     for (var price in priceList) {

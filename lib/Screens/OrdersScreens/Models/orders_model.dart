@@ -207,6 +207,7 @@ class Order {
     for (var breakdown in breakdowns) {
       subTotal -= breakdown.amount;
     }
+    taxAmount = f.format(0.13 * subTotal);
     grandTotal = subTotal + 0.13 * subTotal;
   }
 

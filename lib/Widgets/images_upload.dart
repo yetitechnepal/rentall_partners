@@ -53,13 +53,16 @@ class ImagesUploadSectionState extends State<ImagesUploadSection>
               await checkImagePermission(context);
               final List<AssetEntity>? result = await AssetPicker.pickAssets(
                 context,
-                selectedAssets: selectedImages,
-                maxAssets: widget.max,
-                gridCount: MediaQuery.of(context).size.width ~/ 80,
-                specialPickerType: widget.max == 1
-                    ? SpecialPickerType.noPreview
-                    : SpecialPickerType.wechatMoment,
-                textDelegate: EnglishTextDelegate(),
+                pickerConfig: AssetPickerConfig(
+                  selectedAssets: selectedImages,
+                  maxAssets: widget.max,
+                  gridCount: MediaQuery.of(context).size.width ~/ 80,
+                  pageSize: 100,
+                  requestType: RequestType.image,
+                  specialPickerType: widget.max == 1
+                      ? SpecialPickerType.noPreview
+                      : SpecialPickerType.wechatMoment,
+                ),
               );
               if (result == null) return;
               setState(() => selectedImages = result);

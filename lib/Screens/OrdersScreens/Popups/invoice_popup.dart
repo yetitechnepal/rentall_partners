@@ -53,40 +53,35 @@ class _InvoiceBoxState extends State<InvoiceBox> {
                       const SizedBox(height: 20),
                       const SizedBox(height: 5),
                       _rowText(
-                        title: "Invoice number: ",
+                        title: "Invoice: ",
                         value: "#" + model.invoiceNumber.toString(),
                       ),
                       const SizedBox(height: 5),
                       _rowText(
-                        title: "Date from: ",
+                        title: "Invoice date: ",
                         value: DateFormat("MMM dd, yyyy hh:mm aa")
                             .format(model.dateFrom!),
                       ),
                       const SizedBox(height: 5),
                       _rowText(
-                        title: "Date to: ",
+                        title: "Due date: ",
                         value: DateFormat("MMM dd, yyyy hh:mm aa")
-                            .format(model.dateTo!),
+                            .format(model.dueDate!),
                       ),
                       const Divider(),
                       _rowText(
-                        title: "Company name: ",
+                        title: "From: ",
                         value: model.companyName,
                       ),
                       const Divider(),
                       const SizedBox(height: 5),
                       _rowText(
-                        title: "Client name: ",
+                        title: "To: ",
                         value: model.client.toString(),
                       ),
                       const SizedBox(height: 5),
                       _rowText(
-                        title: "Client address: ",
-                        value: model.clientAddress.toString(),
-                      ),
-                      const SizedBox(height: 5),
-                      _rowText(
-                        title: "Billing address: ",
+                        title: "Address: ",
                         value: model.billingAddress,
                       ),
                       const Divider(),
@@ -102,6 +97,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
                       DataTable(
                         columnSpacing: 10,
                         border: TableBorder.all(
+                          borderRadius: BorderRadius.circular(5),
                           color: Theme.of(context).highlightColor,
                         ),
                         columns: const [
@@ -201,6 +197,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
                       DataTable(
                         columnSpacing: 10,
                         border: TableBorder.all(
+                          borderRadius: BorderRadius.circular(5),
                           color: Theme.of(context).highlightColor,
                         ),
                         columns: const [
@@ -266,6 +263,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
                       DataTable(
                         columnSpacing: 10,
                         border: TableBorder.all(
+                          borderRadius: BorderRadius.circular(5),
                           color: Theme.of(context).highlightColor,
                         ),
                         columns: const [
@@ -352,7 +350,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
     return Row(
       children: [
         Expanded(
-          flex: 2,
+          flex: 3,
           child: Align(
             alignment: Alignment.centerRight,
             child: Text(
@@ -366,6 +364,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
         ),
         const SizedBox(width: 3),
         Expanded(
+          flex: 2,
           child: Align(
             alignment: Alignment.centerRight,
             child: Text(

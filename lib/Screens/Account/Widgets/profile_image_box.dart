@@ -70,11 +70,13 @@ Future<String?> pickImage(BuildContext context) async {
   int gridCount = min(MediaQuery.of(context).size.width ~/ 80, 7);
   final List<AssetEntity>? result = await AssetPicker.pickAssets(
     context,
-    maxAssets: 1,
-    gridCount: gridCount,
-    pageSize: 1 * gridCount,
-    textDelegate: EnglishTextDelegate(),
-    specialPickerType: SpecialPickerType.noPreview,
+    pickerConfig: AssetPickerConfig(
+      maxAssets: 1,
+      gridCount: gridCount,
+      pageSize: 100,
+      specialPickerType: SpecialPickerType.noPreview,
+      requestType: RequestType.image,
+    ),
   );
   String imagePath;
   if (result == null) {

@@ -96,12 +96,14 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
     int gridCount = min(MediaQuery.of(context).size.width ~/ 80, 7);
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
       context,
-      selectedAssets: [],
-      maxAssets: 1,
-      pageSize: 1 * gridCount,
-      textDelegate: EnglishTextDelegate(),
-      gridCount: gridCount,
-      specialPickerType: SpecialPickerType.noPreview,
+      pickerConfig: AssetPickerConfig(
+        selectedAssets: [],
+        maxAssets: 1,
+        gridCount: gridCount,
+        pageSize: 100,
+        requestType: RequestType.image,
+        specialPickerType: SpecialPickerType.noPreview,
+      ),
     );
     if (result == null) return;
     setState(() => image = result.first);

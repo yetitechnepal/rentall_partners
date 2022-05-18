@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rental_partners/Theme/colors.dart';
 
-datePickerTheme(BuildContext context) => Theme.of(context).copyWith(
+datePickerTheme(BuildContext context) {
+  if (Theme.of(context).brightness == Brightness.light) {
+    return Theme.of(context).copyWith(
       colorScheme: ColorScheme.light(
-        primary: primaryColor, // header background color
-        onPrimary: Colors.black, // header text color
-        onSurface: primaryColor, // body text color
+        primary: primaryColor,
+        onPrimary: Colors.black,
+        onSurface: primaryColor,
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -18,3 +20,23 @@ datePickerTheme(BuildContext context) => Theme.of(context).copyWith(
         ),
       ),
     );
+  } else {
+    return Theme.of(context).copyWith(
+      colorScheme: ColorScheme.dark(
+        primary: primaryColor,
+        onPrimary: Colors.white70,
+        onSurface: Colors.white70,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          primary: Colors.red,
+          padding: const EdgeInsets.all(5),
+          visualDensity: VisualDensity.compact,
+          textStyle: TextStyle(
+            color: primaryColor,
+          ),
+        ),
+      ),
+    );
+  }
+}
