@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:flutter/material.dart';
 import 'package:rental_partners/Theme/button.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';

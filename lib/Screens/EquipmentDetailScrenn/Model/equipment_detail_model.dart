@@ -19,7 +19,6 @@ class EquipmentAttractmentModel {
     price = map['price'] ?? "";
     dimension = map['dimension'] ?? "";
     withFuel = map['fuel_included_rate'] ?? "";
-    // withFuel = "";
     image = "";
     if (map['image'].length > 0) {
       image = map['image'].first.toString();
@@ -27,8 +26,8 @@ class EquipmentAttractmentModel {
   }
 }
 
-class EquipmentSeriesModel {
-  late int id, counts;
+class EquipmentModelModel {
+  late int id;
   late String name,
       image,
       description,
@@ -36,32 +35,24 @@ class EquipmentSeriesModel {
       hor,
       dom,
       price,
-      fuelIncludedRate;
-
-  EquipmentSeriesModel.fromMap(map) {
+      fuelIncludedRate,
+      dimension,
+      weight;
+  late int counts;
+  EquipmentModelModel.fromJson(map) {
     id = map['id'] ?? 0;
-    name = map['series'] ?? "";
+    name = map['name'] ?? "";
     image = map['image'] ?? "";
+    dimension = map['dimension'] ?? "";
+    weight = map['weight'] ?? "";
+
     description = map['description'] ?? "";
     location = map['location'] ?? "";
     hor = map['hor'] ?? "";
     dom = map['dom'] ?? "";
-    counts = map['count'] ?? 0;
     price = map['price'] ?? "";
     fuelIncludedRate = map['fuel_included_rate'] ?? "";
-  }
-}
-
-class EquipmentModelModel {
-  late int id;
-  late String name, image;
-  List<EquipmentSeriesModel> series = [];
-  EquipmentModelModel.fromJson(map) {
-    id = map['id'] ?? 0;
-    name = map['model'] ?? "";
-    image = map['image'] ?? "";
-    map['series']
-        .forEach((map) => series.add(EquipmentSeriesModel.fromMap(map)));
+    counts = map['count'] ?? 0;
   }
 }
 
@@ -87,7 +78,7 @@ class EquipmentDetailModel {
   Future<EquipmentDetailModel> fetchEquipmentDetail(
       BuildContext context, int equipId) async {
     Response response =
-        await API().get(endPoint: "equipment/company/$equipId/detail/");
+        await API().get(endPoint: "vendor/equipment/$equipId/detail/");
     if (response.statusCode == 200) {
       models = [];
       attachments = [];
@@ -95,15 +86,12 @@ class EquipmentDetailModel {
         var data = response.data['data']['equipment'];
         id = data['id'];
         name = data['name'];
-        dimension = data['dimension'];
-        weight = data['weight'];
         category = data['category'];
         isVerified = data['is_verified'] ?? false;
-        for (var element in data['images']) {
-          images.add(ImageModel.fromMap(element));
+        for (var model in data['model']) {
+          images.add(ImageModel.fromMap({"id": 0, "path": model['image']}));
+          models.add(EquipmentModelModel.fromJson(model));
         }
-        data['model']
-            .forEach((map) => models.add(EquipmentModelModel.fromJson(map)));
         for (int index = 0;
             index < response.data['data']['attachment'].length;
             index++) {
@@ -123,14 +111,10 @@ class EquipmentDetailModel {
     required int equipId,
     required int categoryId,
     required String name,
-    required String dimension,
-    required String weight,
   }) {
     catId = categoryId;
     id = equipId;
     this.name = name;
-    this.dimension = dimension;
-    this.weight = weight;
   }
 
   Future<bool> updateDetail(BuildContext context) async {
@@ -138,9 +122,7 @@ class EquipmentDetailModel {
     Response response =
         await API().put(endPoint: "equipment/equipment/$id/", data: {
       "category": catId,
-      "dimension": dimension,
       "name": name,
-      "weight": weight,
     });
 
     context.loaderOverlay.hide();

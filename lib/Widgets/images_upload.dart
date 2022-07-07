@@ -59,9 +59,9 @@ class ImagesUploadSectionState extends State<ImagesUploadSection>
                   gridCount: MediaQuery.of(context).size.width ~/ 80,
                   pageSize: 100,
                   requestType: RequestType.image,
-                  specialPickerType: widget.max == 1
-                      ? SpecialPickerType.noPreview
-                      : SpecialPickerType.wechatMoment,
+                  // specialPickerType: widget.max == 1
+                  //     ? SpecialPickerType.noPreview
+                  //     : SpecialPickerType.,
                 ),
               );
               if (result == null) return;

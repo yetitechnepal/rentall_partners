@@ -103,28 +103,29 @@ class AttachmentLinkedEquipmentBox extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 13, horizontal: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: CachedNetworkImage(
-                      imageUrl: eqipment.image,
-                      fit: BoxFit.cover,
-                      height: double.infinity,
-                      width: double.infinity,
-                      placeholder: (context, url) =>
-                          const Center(child: CupertinoActivityIndicator()),
-                      errorWidget: (_, __, ___) =>
-                          Image.asset("assets/images/placeholder.png"),
-                    ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(10)),
+                  child: CachedNetworkImage(
+                    imageUrl: eqipment.image,
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                    width: double.infinity,
+                    placeholder: (context, url) =>
+                        const Center(child: CupertinoActivityIndicator()),
+                    errorWidget: (_, __, ___) =>
+                        Image.asset("assets/images/placeholder.png"),
                   ),
                 ),
-                const SizedBox(height: 10),
-                Text(
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Text(
                   eqipment.name,
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -133,8 +134,9 @@ class AttachmentLinkedEquipmentBox extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 10),
+            ],
           ),
           TextButton(
             style: TextButtonStyles.overlayButtonStyle(),

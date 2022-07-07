@@ -19,15 +19,46 @@ import 'package:rental_partners/main.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class EditModel {
-  final String name;
+  final String name,
+      dimension,
+      weight,
+      description,
+      location,
+      hor,
+      dom,
+      count,
+      price,
+      fuelIncludedRate;
   final String networkImage;
   AssetEntity? localImage;
 
-  EditModel(this.name, this.networkImage, this.localImage);
+  EditModel({
+    required this.name,
+    required this.networkImage,
+    this.localImage,
+    required this.dimension,
+    required this.weight,
+    required this.description,
+    required this.location,
+    required this.hor,
+    required this.dom,
+    required this.count,
+    required this.price,
+    required this.fuelIncludedRate,
+  });
 
-  Future<bool> update(BuildContext context, int id) async {
+  Future<bool> update(BuildContext context, int? id, int equipId) async {
     FormData formData = FormData.fromMap({
-      "model": name,
+      "name": name,
+      "dimension": dimension,
+      "weight": weight,
+      "description": description,
+      "location": location,
+      "hour_of_renting": hor,
+      "manufactured_year": dom,
+      "count": count,
+      // "rate": price,
+      // "fuel_included_rate": fuelIncludedRate,
     });
     if (localImage == null) {
       formData.fields.add(MapEntry("image", networkImage));
@@ -44,8 +75,20 @@ class EditModel {
         ),
       );
     }
-    Response response =
-        await API().put(endPoint: "equipment/model/$id/", data: formData);
+    if (id != null) {
+      formData.fields.add(MapEntry("id", id.toString()));
+    } else {
+      formData.fields.add(MapEntry("equipment", equipId.toString()));
+      formData.fields.add(MapEntry("rate", price.toString()));
+      formData.fields
+          .add(MapEntry("fuel_included_rate", fuelIncludedRate.toString()));
+    }
+    Response response;
+    if (id == null) {
+      response = await API().post(endPoint: "equipment/model/", data: formData);
+    } else {
+      response = await API().put(endPoint: "equipment/model/", data: formData);
+    }
     context.loaderOverlay.hide();
     final snackBar = SnackBar(content: Text(response.data['message']));
     scaffoldMessageKey.currentState!.showSnackBar(snackBar);
@@ -59,23 +102,21 @@ class EditModel {
 
 showEquipmentModelEditPopup(
   BuildContext context, {
-  required int id,
-  required String image,
-  required String name,
+  required int equipId,
+  EquipmentModelModel? model,
 }) {
   showGeneralDialog(
       context: context,
       pageBuilder: (ctx, a, aa) {
-        return _EquipmentModelEdit(id: id, name: name, image: image);
+        return _EquipmentModelEdit(equipId: equipId, model: model);
       });
 }
 
 class _EquipmentModelEdit extends StatefulWidget {
-  final int id;
-  final String name, image;
+  final int equipId;
+  final EquipmentModelModel? model;
 
-  const _EquipmentModelEdit(
-      {Key? key, required this.id, required this.name, required this.image})
+  const _EquipmentModelEdit({Key? key, required this.equipId, this.model})
       : super(key: key);
   @override
   State<_EquipmentModelEdit> createState() => _EquipmentModelEditState();
@@ -83,11 +124,49 @@ class _EquipmentModelEdit extends StatefulWidget {
 
 class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
   AssetEntity? image;
-  late final TextEditingController controller;
+  late final List<TextEditingController> controllers;
+  bool isVATIncluded = false;
 
   @override
   initState() {
-    controller = TextEditingController(text: widget.name);
+    controllers = List.generate(10, (index) {
+      String value = "";
+      if (widget.model != null) {
+        switch (index) {
+          case 0:
+            value = widget.model!.name;
+            break;
+          case 1:
+            value = widget.model!.dimension;
+            break;
+          case 2:
+            value = widget.model!.weight;
+            break;
+          case 3:
+            value = widget.model!.location;
+            break;
+          case 4:
+            value = widget.model!.hor;
+            break;
+          case 5:
+            value = widget.model!.dom;
+            break;
+          case 6:
+            value = widget.model!.counts.toString();
+            break;
+          case 7:
+            value = widget.model!.price;
+            break;
+          case 8:
+            value = widget.model!.fuelIncludedRate;
+            break;
+          case 9:
+            value = widget.model!.description;
+            break;
+        }
+      }
+      return TextEditingController(text: value);
+    });
     super.initState();
   }
 
@@ -116,7 +195,8 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
       overlayWidget: loader(context),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Edit Model".toUpperCase()),
+          title: Text((widget.model == null ? "Add Model" : "Edit Model")
+              .toUpperCase()),
           leading: IconButton(
             icon: const Icon(Icons.close),
             onPressed: () {
@@ -187,8 +267,13 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                                         isOriginal: false),
                                   );
                                 } else {
+                                  if (widget.model == null) {
+                                    return const Center(
+                                      child: Text("Upload image"),
+                                    );
+                                  }
                                   return CachedNetworkImage(
-                                    imageUrl: widget.image,
+                                    imageUrl: widget.model!.image,
                                     fit: BoxFit.cover,
                                     height: double.infinity,
                                     width: double.infinity,
@@ -232,8 +317,182 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                     child: AEMPLTextField(
-                      controller: controller,
+                      controller: controllers[0],
                       hintText: "Model name",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter name";
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Dimension"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[1],
+                      hintText: "Dimension",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter dimension";
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Weight"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[2],
+                      hintText: "Weight",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter weight";
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Location"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[3],
+                      hintText: "Location",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter location";
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Hour of rent"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[4],
+                      hintText: "Hour of rent",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter hour of rent";
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Manufactured year"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[5],
+                      hintText: "Manufactured year",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter hour of rent";
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Counts"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[6],
+                      hintText: "Counts",
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter counts";
+                      },
+                    ),
+                  ),
+                  Visibility(
+                    visible: widget.model == null,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 20),
+                          child: textFieldText("Price"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 20),
+                          child: AEMPLTextField(
+                            controller: controllers[7],
+                            hintText: "Price",
+                            prefix:
+                                const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                            validator: (value) {
+                              if (value!.isEmpty) return "Please enter price";
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 20),
+                          child: textFieldText("Fuel included price"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 20),
+                          child: AEMPLTextField(
+                            controller: controllers[8],
+                            hintText: "Fuel included price",
+                            prefix:
+                                const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                            validator: (value) {
+                              if (value!.isEmpty) return "Please enter price";
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 20),
+                          child: CheckboxListTile(
+                            value: isVATIncluded,
+                            title: const Text("VAT included rates"),
+                            onChanged: (value) =>
+                                setState(() => isVATIncluded = value!),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Description"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[9],
+                      hintText: "Description",
+                      maxLines: 4,
                       prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) return "Please enter name";
@@ -244,17 +503,45 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                   Center(
                     child: TextButton(
                         onPressed: () async {
-                          EditModel editModel =
-                              EditModel(controller.text, widget.image, image);
-                          if (await editModel.update(context, widget.id)) {
+                          String price = controllers[7].text;
+                          String fuelIncludedRate = controllers[8].text;
+
+                          if (isVATIncluded) {
+                            price = (double.parse(price) / 1.13).toString();
+                            fuelIncludedRate =
+                                (double.parse(fuelIncludedRate) / 1.13)
+                                    .toString();
+                          }
+                          EditModel editModel = EditModel(
+                            name: controllers[0].text,
+                            networkImage:
+                                widget.model == null ? "" : widget.model!.image,
+                            localImage: image,
+                            dimension: controllers[1].text,
+                            weight: controllers[2].text,
+                            description: controllers[9].text,
+                            location: controllers[3].text,
+                            hor: controllers[4].text,
+                            dom: controllers[5].text,
+                            count: controllers[6].text,
+                            price: price,
+                            fuelIncludedRate: fuelIncludedRate,
+                          );
+                          if (await editModel.update(
+                            context,
+                            (widget.model == null) ? null : widget.model!.id,
+                            widget.equipId,
+                          )) {
                             EquipmentDetailModel equipmentDetailModel =
                                 EquipmentDetailModel();
                             await equipmentDetailModel.fetchEquipmentDetail(
-                                context, widget.id);
+                              context,
+                              widget.equipId,
+                            );
                             Navigator.pop(context);
                           }
                         },
-                        child: const Text("Update")),
+                        child: Text(widget.model == null ? "Save" : "Update")),
                   ),
                   const SizedBox(height: 60),
                 ],

@@ -12,7 +12,10 @@ class AllAttachmentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Attachments".toUpperCase())),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text("Attachments".toUpperCase()),
+      ),
       body: FutureBuilder<AllAttachmentsModel>(
           future: _allAttachmentsModel.fetchAllAttractions(),
           builder: (context, asyncSnapshot) {

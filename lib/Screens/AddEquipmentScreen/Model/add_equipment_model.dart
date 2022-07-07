@@ -1,6 +1,5 @@
 // ignore_for_file: unused_field
 
-import 'package:flutter/material.dart';
 import 'package:rental_partners/Blocs/category_bloc.dart';
 
 class AddEquipmentModel {
@@ -29,42 +28,37 @@ class AddEquipmentModel {
   setImagePaths(List<String> images) {
     imagePaths = images;
   }
-
-  void submitEqupment(BuildContext context) {}
 }
 
 class AddEquipmentModelModel {
   final String name;
   final String image;
+  final bool isVATIncluded;
+  final String location,
+      dimension,
+      weight,
+      hor,
+      menufacturedYear,
+      counts,
+      price,
+      fuelIncludedRate,
+      description;
+
   final String imageId;
 
-  List<AddEquipmentSeriesModel> series = [];
-
   AddEquipmentModelModel({
+    required this.imageId,
     required this.name,
     required this.image,
-    required this.imageId,
-  });
-}
-
-class AddEquipmentSeriesModel {
-  final String name,
-      hourOfRenting,
-      equipmentCurrentLocation,
-      frequency,
-      baseRate,
-      feulInclusionRate,
-      description;
-  final DateTime manufactureDate;
-
-  AddEquipmentSeriesModel({
-    required this.name,
-    required this.hourOfRenting,
-    required this.equipmentCurrentLocation,
-    required this.frequency,
-    required this.baseRate,
-    required this.feulInclusionRate,
+    required this.location,
+    required this.dimension,
+    required this.weight,
+    required this.hor,
+    required this.isVATIncluded,
+    required this.menufacturedYear,
+    required this.counts,
+    required this.price,
+    required this.fuelIncludedRate,
     required this.description,
-    required this.manufactureDate,
   });
 }

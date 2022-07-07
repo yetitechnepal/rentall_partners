@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Blocs/category_bloc.dart';
 import 'package:rental_partners/Screens/AddEquipmentScreen/Model/add_equipment_class.dart';
+import 'package:rental_partners/Screens/AddEquipmentScreen/add_equipment_model_screen.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/Utils/text_field.dart';
@@ -120,46 +121,10 @@ class _AddEquipmentScreenState extends State<AddEquipmentScreen> {
                               });
                         },
                       ),
-                      textFieldText("Equipment Dimension and Weight"),
-                      Row(
-                        children: [
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: AEMPLTextField(
-                              margin: 0,
-                              controller: controllers[2],
-                              hintText: "Dimension",
-                              prefix: const AEMPLIcon(AEMPLIcons.dimension,
-                                  size: 20),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please enter dimension";
-                                }
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: AEMPLTextField(
-                              margin: 0,
-                              controller: controllers[3],
-                              hintText: "Weight",
-                              prefix:
-                                  const AEMPLIcon(AEMPLIcons.weight, size: 20),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please enter weight";
-                                }
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                        ],
-                      ),
                       const SizedBox(height: 60),
                       Center(
                         child: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState!.validate()) {
                               if (_selectedCategory == null) {
                                 const snackBar = SnackBar(
@@ -171,11 +136,19 @@ class _AddEquipmentScreenState extends State<AddEquipmentScreen> {
                               } else {
                                 AddEquipment addEquipment = AddEquipment(
                                   name: controllers[0].text,
-                                  dimension: controllers[2].text,
-                                  weight: controllers[3].text,
+                                  dimension: "",
+                                  weight: "",
                                   category: _selectedCategory!,
+                                  description: "",
                                 );
-                                addEquipment.submitEquipment(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AddEquipmentModelScreen(
+                                            addEquipment: addEquipment),
+                                  ),
+                                );
                               }
                             }
                           },

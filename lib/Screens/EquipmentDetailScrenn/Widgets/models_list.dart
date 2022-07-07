@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rental_partners/Screens/EquipmentDetailScrenn/Model/equipment_detail_model.dart';
 import 'package:rental_partners/Screens/EquipmentDetailScrenn/Popups/equipment_model_edit.dart';
-import 'package:rental_partners/Screens/EquipmentDetailScrenn/Popups/equipment_series_edit_popup.dart';
+import 'package:rental_partners/Screens/EquipmentDetailScrenn/Popups/model_detail_popup.dart';
 import 'package:rental_partners/Theme/button.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 import 'package:rental_partners/Widgets/title_box.dart';
@@ -23,7 +23,6 @@ class ModelGrid extends StatefulWidget {
 
 class _ModelGridState extends State<ModelGrid> {
   EquipmentModelModel? _selectedModel;
-  List<EquipmentSeriesModel> series = [];
 
   bool selected = true;
 
@@ -38,24 +37,32 @@ class _ModelGridState extends State<ModelGrid> {
       for (var model in widget.models) {
         if (_selectedModel!.id == model.id) {
           _selectedModel = model;
-          series = model.series;
           setState(() => _selectedModel = model);
-          setState(() => series);
         }
       }
     } else {
       if (widget.models.isNotEmpty) {
         _selectedModel = widget.models.first;
-        series = _selectedModel!.series;
-        setState(() => series);
       }
     }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: TitleBar(title: 'Models'),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TitleBar(
+            title: 'Models',
+            suffix: IconButton(
+              padding: EdgeInsets.zero,
+              visualDensity: VisualDensity.compact,
+              onPressed: () =>
+                  showEquipmentModelEditPopup(context, equipId: widget.id),
+              icon: Icon(
+                Icons.add,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ),
         ),
         SizedBox(
           height: 200,
@@ -72,33 +79,6 @@ class _ModelGridState extends State<ModelGrid> {
                 const SizedBox(width: 12),
           ),
         ),
-        Visibility(
-          visible: selected,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: TitleBar(title: 'Series'),
-              ),
-              SizedBox(
-                height: 160,
-                child: ListView.separated(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 10),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: series.length,
-                  itemBuilder: (context, index) => serieBox(
-                    context,
-                    serie: series[index],
-                  ),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(width: 12),
-                ),
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }
@@ -110,52 +90,48 @@ class _ModelGridState extends State<ModelGrid> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Theme.of(context).scaffoldBackgroundColor,
-        boxShadow: isSelected
-            ? BoxShadows.selectedDropShadow(context)
-            : BoxShadows.dropShadow(context),
+        boxShadow: BoxShadows.dropShadow(context),
       ),
       child: Stack(
         children: [
-          Container(
-            padding: const EdgeInsets.only(top: 13),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: CachedNetworkImage(
-                        imageUrl: model.image,
-                        fit: BoxFit.cover,
-                        height: double.infinity,
-                        width: double.infinity,
-                        placeholder: (context, url) =>
-                            const Center(child: CupertinoActivityIndicator()),
-                        errorWidget: (_, __, ___) =>
-                            Image.asset("assets/images/placeholder.png"),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(10)),
+                  child: CachedNetworkImage(
+                    imageUrl: model.image,
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                    width: double.infinity,
+                    placeholder: (context, url) =>
+                        const Center(child: CupertinoActivityIndicator()),
+                    errorWidget: (_, __, ___) =>
+                        Image.asset("assets/images/placeholder.png"),
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 6,
+                  vertical: 10,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      model.name,
+                      maxLines: 1,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                const Divider(),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 10,
-                  ),
-                  child: Text(
-                    model.name,
-                    maxLines: 1,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           TextButton(
             style: TextButtonStyles.overlayButtonStyle().copyWith(
@@ -168,12 +144,7 @@ class _ModelGridState extends State<ModelGrid> {
                 ),
               ),
             ),
-            onPressed: () {
-              series = model.series;
-              setState(() => _selectedModel = model);
-              setState(() => series);
-              setState(() => selected = true);
-            },
+            onPressed: () => showModelDetailPopup(context, model: model),
             child: const SizedBox(),
           ),
           Positioned(
@@ -191,9 +162,8 @@ class _ModelGridState extends State<ModelGrid> {
                   visualDensity: VisualDensity.compact,
                   onPressed: () => showEquipmentModelEditPopup(
                     context,
-                    id: model.id,
-                    image: model.image,
-                    name: model.name,
+                    model: model,
+                    equipId: widget.id,
                   ),
                   icon: Text(
                     "Edit",
@@ -206,91 +176,6 @@ class _ModelGridState extends State<ModelGrid> {
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget serieBox(BuildContext context, {required EquipmentSeriesModel serie}) {
-    return Container(
-      width: 200,
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(11),
-        boxShadow: BoxShadows.dropShadow(context),
-        color: Theme.of(context).scaffoldBackgroundColor,
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Text(
-                  serie.name,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Material(
-                  color: Colors.transparent,
-                  child: IconButton(
-                    onPressed: () {
-                      showEquipmentSeriesEditPopup(context, serie, widget.id);
-                    },
-                    iconSize: 12,
-                    visualDensity: VisualDensity.compact,
-                    icon: Text(
-                      "Edit",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 8,
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              const Text(
-                "Base Price",
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 10),
-              ),
-              const Spacer(),
-              Text(
-                serie.price,
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 10,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            children: [
-              const Text(
-                "With Fuel",
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 10),
-              ),
-              const Spacer(),
-              Text(
-                serie.fuelIncludedRate,
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 10,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-            ],
           ),
         ],
       ),

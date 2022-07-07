@@ -21,6 +21,7 @@ class DashboardScreen extends StatelessWidget {
                 color: Theme.of(context).primaryColor.withOpacity(0.97)),
             child: AppBar(
               elevation: 0,
+              automaticallyImplyLeading: false,
               backgroundColor: Colors.transparent,
               title: const Text(
                 "DASHBOARD",

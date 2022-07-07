@@ -23,7 +23,7 @@ class LoginModel {
       );
     } else {
       response = await API().post(
-        endPoint: "accounts/operator-login/",
+        endPoint: "operator/login/",
         data: {"email": email, "password": password},
         useToken: false,
       );

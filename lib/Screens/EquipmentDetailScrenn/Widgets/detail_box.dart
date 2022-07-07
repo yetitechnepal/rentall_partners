@@ -4,15 +4,13 @@ import 'package:rental_partners/Theme/dropshadows.dart';
 
 class EquipmentDetailBox extends StatelessWidget {
   final int equipId;
-  final String name, dimension, weight, category;
+  final String name, category;
   final bool isVerified;
 
   const EquipmentDetailBox({
     Key? key,
     required this.equipId,
     required this.name,
-    required this.dimension,
-    required this.weight,
     required this.category,
     required this.isVerified,
   }) : super(key: key);
@@ -45,9 +43,7 @@ class EquipmentDetailBox extends StatelessWidget {
                     context,
                     id: equipId,
                     category: category,
-                    dimension: dimension,
                     name: name,
-                    weight: weight,
                   );
                 },
                 iconSize: 30,
@@ -77,9 +73,6 @@ class EquipmentDetailBox extends StatelessWidget {
               const SizedBox(height: 6),
               _rowText(context, title: "Category", value: category),
               const SizedBox(height: 6),
-              _rowText(context, title: "Weight", value: weight),
-              const SizedBox(height: 6),
-              _rowText(context, title: "Dimension", value: dimension),
             ],
           ),
         )

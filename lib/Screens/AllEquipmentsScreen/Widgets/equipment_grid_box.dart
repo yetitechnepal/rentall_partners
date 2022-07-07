@@ -60,26 +60,27 @@ class EquipmentGridBox extends StatelessWidget {
               ),
               itemCount: equipments.length,
               itemBuilder: (context, index) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: BoxShadows.dropShadow(context),
-                        ),
-                        child: Stack(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8.0),
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: BoxShadows.dropShadow(context),
+                  ),
+                  child: Stack(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color:
                                     Theme.of(context).scaffoldBackgroundColor,
                               ),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(10)),
                                 child: CachedNetworkImage(
                                   imageUrl: equipments[index]!.image,
                                   fit: BoxFit.cover,
@@ -92,42 +93,44 @@ class EquipmentGridBox extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor: Colors.transparent,
-                                elevation: 0,
-                                primary: primaryColor,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                              ),
-                              onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => EquipmentDetailScreen(
-                                        id: equipments[index]!.id)),
-                              ),
-                              child: const SizedBox(
-                                width: double.infinity,
-                                height: double.infinity,
+                          ),
+                          const SizedBox(height: 10),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: Text(
+                              equipments[index]!.name,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ],
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                          primary: primaryColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EquipmentDetailScreen(
+                                  id: equipments[index]!.id)),
+                        ),
+                        child: const SizedBox(
+                          width: double.infinity,
+                          height: double.infinity,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Text(
-                        equipments[index]!.name,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
             ),

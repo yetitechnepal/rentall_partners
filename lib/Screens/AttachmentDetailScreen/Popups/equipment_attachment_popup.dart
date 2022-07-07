@@ -198,7 +198,9 @@ class _EquipmentAttachmentBoxState extends State<_EquipmentAttachmentBox> {
                                   placeholder: (context, url) => const Center(
                                       child: CupertinoActivityIndicator()),
                                   errorWidget: (_, __, ___) => Image.asset(
-                                      "assets/images/placeholder.png"),
+                                    "assets/images/placeholder.png",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),

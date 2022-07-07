@@ -15,7 +15,7 @@ class PasswordChange {
   Future<bool> sendOTP(BuildContext context) async {
     context.loaderOverlay.show();
     Response response = await API().post(
-      endPoint: "v2/accounts/otp/",
+      endPoint: "accounts/otp/",
       data: {"email": email},
       useToken: false,
     );
@@ -36,7 +36,7 @@ class PasswordChange {
   Future<bool> changePassword(BuildContext context) async {
     context.loaderOverlay.show();
     Response response = await API().post(
-      endPoint: "v2/accounts/password-reset/",
+      endPoint: "accounts/password-reset/",
       data: {
         "email": email,
         "new_password1": password,

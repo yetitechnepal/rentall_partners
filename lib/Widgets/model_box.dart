@@ -95,7 +95,6 @@ Widget modelBoxLocal(
   Function()? onEdit,
 }) {
   return Container(
-    padding: const EdgeInsets.only(top: 13),
     decoration: BoxDecoration(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
       color: Theme.of(context).scaffoldBackgroundColor,
@@ -105,17 +104,16 @@ Widget modelBoxLocal(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
             child: Image.file(
               File(model.image),
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
             ),
           ),
         ),
-        const Divider(),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 6),
           child: Row(

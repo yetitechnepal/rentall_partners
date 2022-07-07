@@ -39,8 +39,8 @@ class _SummarySectiionState extends State<SummarySectiion>
           OrdersSummaryModel model = asyncSnapshot.data!;
           return Informationpart(
             title: widget.title,
-            attachmentValue: model.equipmentTotal.toString(),
-            equipmentValue: model.attachmentTotal.toString(),
+            attachmentValue: model.attachmentTotal.toString(),
+            equipmentValue: model.equipmentTotal.toString(),
             isBoth: widget.isBoth,
           );
         } else if (asyncSnapshot.hasError) {

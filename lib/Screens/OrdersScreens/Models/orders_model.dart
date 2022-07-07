@@ -270,11 +270,11 @@ class OrderList {
     if (key == "") {
       response = await API().get(
           endPoint:
-              "v2/payment/my-order/?status=$orderTypeId&category=All&start_date=$startDate&end_date=$endDate");
+              "vendor/my-order/?status=$orderTypeId&category=All&start_date=$startDate&end_date=$endDate");
     } else {
       response = await API().get(
           endPoint:
-              "v2/payment/my-order/?query=$key&status=$orderTypeId&category=All");
+              "vendor/my-order/?query=$key&status=$orderTypeId&category=All");
     }
     if (response.statusCode == 200) {
       orders = [];

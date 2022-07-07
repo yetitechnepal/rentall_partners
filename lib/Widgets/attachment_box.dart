@@ -59,38 +59,39 @@ Widget attachmentBox(BuildContext context,
     ),
     child: Stack(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: CachedNetworkImage(
-                    imageUrl: attachmentModel.image,
-                    fit: BoxFit.cover,
-                    height: double.infinity,
-                    width: double.infinity,
-                    placeholder: (context, url) =>
-                        const Center(child: CupertinoActivityIndicator()),
-                    errorWidget: (_, __, ___) =>
-                        Image.asset("assets/images/placeholder.png"),
-                  ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(10)),
+                child: CachedNetworkImage(
+                  imageUrl: attachmentModel.image,
+                  fit: BoxFit.cover,
+                  height: double.infinity,
+                  width: double.infinity,
+                  placeholder: (context, url) =>
+                      const Center(child: CupertinoActivityIndicator()),
+                  errorWidget: (_, __, ___) =>
+                      Image.asset("assets/images/placeholder.png"),
                 ),
               ),
-              const SizedBox(height: 10),
-              Text(
+            ),
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
                 attachmentModel.name,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w800,
-                  color: Theme.of(context).primaryColor,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 5),
+          ],
         ),
         TextButton(
           style: TextButtonStyles.overlayButtonStyle(),

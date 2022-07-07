@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rental_partners/Theme/colors.dart';
 
 ThemeData lightThemeData = ThemeData(
-  androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
   primarySwatch: primaryColor,
+  useMaterial3: true,
   scaffoldBackgroundColor: Colors.white,
   shadowColor: Colors.black.withOpacity(0.14),
   disabledColor: const Color(0xffE4E4E4),
@@ -12,6 +12,7 @@ ThemeData lightThemeData = ThemeData(
     foregroundColor: Colors.black,
     shadowColor: Colors.black26,
     elevation: 2,
+    surfaceTintColor: Colors.white,
     centerTitle: true,
   ),
   textTheme: const TextTheme(
@@ -41,7 +42,7 @@ ThemeData lightThemeData = ThemeData(
 );
 
 ThemeData darkThemeData = ThemeData(
-  androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
+  useMaterial3: true,
   primarySwatch: primaryColorDark,
   brightness: Brightness.dark,
   scaffoldBackgroundColor: darkColorBgColor,
@@ -53,6 +54,7 @@ ThemeData darkThemeData = ThemeData(
     foregroundColor: Colors.white,
     shadowColor: Colors.white24,
     elevation: 2,
+    surfaceTintColor: darkColorBg,
     centerTitle: true,
   ),
   textTheme: TextTheme(

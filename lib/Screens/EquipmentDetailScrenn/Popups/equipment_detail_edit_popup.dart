@@ -16,8 +16,6 @@ showEquipmentDetailEditPopup(
   required int id,
   required String name,
   required String category,
-  required String dimension,
-  required String weight,
 }) {
   showGeneralDialog(
     context: context,
@@ -26,8 +24,6 @@ showEquipmentDetailEditPopup(
         id: id,
         name: name,
         category: category,
-        dimension: dimension,
-        weight: weight,
         ctx: ctx,
       );
     },
@@ -36,7 +32,7 @@ showEquipmentDetailEditPopup(
 
 class EditDetailBox extends StatefulWidget {
   final BuildContext ctx;
-  final String name, category, dimension, weight;
+  final String name, category;
   final int id;
 
   const EditDetailBox({
@@ -45,8 +41,6 @@ class EditDetailBox extends StatefulWidget {
     required this.id,
     required this.name,
     required this.category,
-    required this.dimension,
-    required this.weight,
   }) : super(key: key);
   @override
   State<EditDetailBox> createState() => _EditDetailBoxState();
@@ -66,10 +60,6 @@ class _EditDetailBoxState extends State<EditDetailBox> {
         return TextEditingController(text: widget.name);
       } else if (index == 1) {
         return TextEditingController(text: widget.category);
-      } else if (index == 2) {
-        return TextEditingController(text: widget.dimension);
-      } else if (index == 3) {
-        return TextEditingController(text: widget.weight);
       } else {
         return TextEditingController(text: "");
       }
@@ -215,42 +205,42 @@ class _EditDetailBoxState extends State<EditDetailBox> {
                               });
                         },
                       ),
-                      textFieldText("Equipment Dimension and Weight"),
-                      Row(
-                        children: [
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: AEMPLTextField(
-                              margin: 0,
-                              controller: controllers[2],
-                              hintText: "Dimension",
-                              prefix: const AEMPLIcon(AEMPLIcons.dimension,
-                                  size: 20),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please enter dimension";
-                                }
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: AEMPLTextField(
-                              margin: 0,
-                              controller: controllers[3],
-                              hintText: "Weight",
-                              prefix:
-                                  const AEMPLIcon(AEMPLIcons.weight, size: 20),
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Please enter weight";
-                                }
-                              },
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                        ],
-                      ),
+                      // textFieldText("Equipment Dimension and Weight"),
+                      // Row(
+                      //   children: [
+                      //     const SizedBox(width: 16),
+                      //     Expanded(
+                      //       child: AEMPLTextField(
+                      //         margin: 0,
+                      //         controller: controllers[2],
+                      //         hintText: "Dimension",
+                      //         prefix: const AEMPLIcon(AEMPLIcons.dimension,
+                      //             size: 20),
+                      //         validator: (value) {
+                      //           if (value!.isEmpty) {
+                      //             return "Please enter dimension";
+                      //           }
+                      //         },
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 10),
+                      //     Expanded(
+                      //       child: AEMPLTextField(
+                      //         margin: 0,
+                      //         controller: controllers[3],
+                      //         hintText: "Weight",
+                      //         prefix:
+                      //             const AEMPLIcon(AEMPLIcons.weight, size: 20),
+                      //         validator: (value) {
+                      //           if (value!.isEmpty) {
+                      //             return "Please enter weight";
+                      //           }
+                      //         },
+                      //       ),
+                      //     ),
+                      //     const SizedBox(width: 16),
+                      //   ],
+                      // ),
                       // textFieldText("Equipment Description"),
                       // AEMPLTextField(
                       //   controller: controllers[4],
@@ -279,8 +269,6 @@ class _EditDetailBoxState extends State<EditDetailBox> {
                                   equipId: widget.id,
                                   categoryId: _selectedCategory!.id,
                                   name: controllers[0].text,
-                                  dimension: controllers[2].text,
-                                  weight: controllers[3].text,
                                 );
                                 if (await equipmentDetailModel
                                     .updateDetail(context)) {

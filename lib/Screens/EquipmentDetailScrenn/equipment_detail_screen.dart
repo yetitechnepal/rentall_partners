@@ -34,8 +34,6 @@ class EquipmentDetailScreen extends StatelessWidget {
                     EquipmentDetailBox(
                       equipId: id,
                       name: state.name,
-                      dimension: state.dimension,
-                      weight: state.weight,
                       category: state.category,
                       isVerified: state.isVerified,
                     ),

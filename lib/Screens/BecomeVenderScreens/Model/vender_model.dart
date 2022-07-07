@@ -91,7 +91,7 @@ class VenderModel {
 
   requestOTP() async {
     Response response = await API().post(
-      endPoint: "v2/accounts/otp/",
+      endPoint: "accounts/otp/",
       data: {"email": primaryEmail},
       useToken: false,
     );
