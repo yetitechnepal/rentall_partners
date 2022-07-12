@@ -226,14 +226,14 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
                 setState(() => manufaturedDate = selectedDate);
               },
             ),
-            textFieldText("Hour of Renting"),
+            textFieldText("Hour meter reading"),
             AEMPLTextField(
               controller: controllers[1],
-              hintText: "Hour of renting",
+              hintText: "Hour meter reading",
               keyboardType: TextInputType.text,
               prefix: const Icon(Icons.lock_clock_outlined, size: 20),
               validator: (value) {
-                if (value!.isEmpty) return "Please enter hours of renting";
+                if (value!.isEmpty) return "Please enter hours meter reading";
               },
             ),
             textFieldText("Series Location"),

@@ -81,7 +81,8 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                           AEMPLTextField(
                             controller: controllers[1],
                             hintText: "Dimension",
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix:
+                                const AEMPLIcon(AEMPLIcons.dimension, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter dimension";
@@ -92,7 +93,8 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                           AEMPLTextField(
                             controller: controllers[2],
                             hintText: "Weight",
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix:
+                                const AEMPLIcon(AEMPLIcons.weight, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) return "Please enter weight";
                             },
@@ -101,7 +103,8 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                           AEMPLTextField(
                             controller: controllers[3],
                             hintText: "Location",
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix:
+                                const AEMPLIcon(AEMPLIcons.location, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter location";
@@ -112,7 +115,7 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                           AEMPLTextField(
                             controller: controllers[4],
                             hintText: "Hours of renting",
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix: const AEMPLIcon(AEMPLIcons.drop, size: 20),
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -125,7 +128,7 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                             controller: controllers[5],
                             hintText: "Manufacture year",
                             keyboardType: TextInputType.number,
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix: const AEMPLIcon(AEMPLIcons.state, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter manufactured year";
@@ -137,7 +140,8 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                             controller: controllers[6],
                             hintText: "Count",
                             keyboardType: TextInputType.number,
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix:
+                                const AEMPLIcon(AEMPLIcons.numbers, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter available counts";
@@ -149,7 +153,7 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                             controller: controllers[7],
                             hintText: "Price",
                             keyboardType: TextInputType.number,
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) return "Please enter rate";
                             },
@@ -159,7 +163,7 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                             controller: controllers[8],
                             hintText: "Fuel included price",
                             keyboardType: TextInputType.number,
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter rate with fuel";
@@ -177,7 +181,8 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                             controller: controllers[9],
                             hintText: "Description",
                             maxLines: 4,
-                            prefix: const AEMPLIcon(AEMPLIcons.model, size: 20),
+                            prefix: const AEMPLIcon(AEMPLIcons.description,
+                                size: 20),
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Please enter description";

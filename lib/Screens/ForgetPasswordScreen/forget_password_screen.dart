@@ -21,7 +21,7 @@ class PasswordChange {
     );
     context.loaderOverlay.hide();
     Fluttertoast.showToast(
-      msg: response.data['message'],
+      msg: "Sending OTP",
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,

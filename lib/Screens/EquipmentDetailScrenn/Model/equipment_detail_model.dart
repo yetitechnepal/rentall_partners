@@ -88,6 +88,9 @@ class EquipmentDetailModel {
         name = data['name'];
         category = data['category'];
         isVerified = data['is_verified'] ?? false;
+        for (var image in data['images']) {
+          images.add(ImageModel.fromMap(image));
+        }
         for (var model in data['model']) {
           images.add(ImageModel.fromMap({"id": 0, "path": model['image']}));
           models.add(EquipmentModelModel.fromJson(model));
@@ -119,8 +122,12 @@ class EquipmentDetailModel {
 
   Future<bool> updateDetail(BuildContext context) async {
     context.loaderOverlay.show();
+    log({
+      "category": catId,
+      "name": name,
+    }.toString());
     Response response =
-        await API().put(endPoint: "equipment/equipment/$id/", data: {
+        await API().put(endPoint: "equipment/$id/update/", data: {
       "category": catId,
       "name": name,
     });

@@ -57,7 +57,7 @@ class NotificationScreen extends StatelessWidget {
     required NotificationModel notification,
   }) {
     return SizedBox(
-      height: 70,
+      height: 100,
       child: Stack(
         children: [
           Container(
@@ -72,8 +72,8 @@ class NotificationScreen extends StatelessWidget {
                 ClipOval(
                   child: CachedNetworkImage(
                     imageUrl: notification.image!,
-                    height: 50,
-                    width: 50,
+                    height: 100,
+                    width: 80,
                     fit: BoxFit.cover,
                     placeholder: (context, url) =>
                         const Center(child: CupertinoActivityIndicator()),

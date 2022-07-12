@@ -205,53 +205,6 @@ class _EditDetailBoxState extends State<EditDetailBox> {
                               });
                         },
                       ),
-                      // textFieldText("Equipment Dimension and Weight"),
-                      // Row(
-                      //   children: [
-                      //     const SizedBox(width: 16),
-                      //     Expanded(
-                      //       child: AEMPLTextField(
-                      //         margin: 0,
-                      //         controller: controllers[2],
-                      //         hintText: "Dimension",
-                      //         prefix: const AEMPLIcon(AEMPLIcons.dimension,
-                      //             size: 20),
-                      //         validator: (value) {
-                      //           if (value!.isEmpty) {
-                      //             return "Please enter dimension";
-                      //           }
-                      //         },
-                      //       ),
-                      //     ),
-                      //     const SizedBox(width: 10),
-                      //     Expanded(
-                      //       child: AEMPLTextField(
-                      //         margin: 0,
-                      //         controller: controllers[3],
-                      //         hintText: "Weight",
-                      //         prefix:
-                      //             const AEMPLIcon(AEMPLIcons.weight, size: 20),
-                      //         validator: (value) {
-                      //           if (value!.isEmpty) {
-                      //             return "Please enter weight";
-                      //           }
-                      //         },
-                      //       ),
-                      //     ),
-                      //     const SizedBox(width: 16),
-                      //   ],
-                      // ),
-                      // textFieldText("Equipment Description"),
-                      // AEMPLTextField(
-                      //   controller: controllers[4],
-                      //   hintText: "Equipment description",
-                      //   keyboardType: TextInputType.multiline,
-                      //   maxLines: 6,
-                      //   prefix: const AEMPLIcon(AEMPLIcons.description, size: 20),
-                      //   validator: (value) {
-                      //     if (value!.isEmpty) return "Please enter detail";
-                      //   },
-                      // ),
                       const SizedBox(height: 60),
                       Center(
                         child: TextButton(

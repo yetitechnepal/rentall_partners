@@ -336,7 +336,7 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                     child: AEMPLTextField(
                       controller: controllers[1],
                       hintText: "Dimension",
-                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      prefix: const AEMPLIcon(AEMPLIcons.dimension, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) return "Please enter dimension";
                       },
@@ -353,7 +353,7 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                     child: AEMPLTextField(
                       controller: controllers[2],
                       hintText: "Weight",
-                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      prefix: const AEMPLIcon(AEMPLIcons.weight, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) return "Please enter weight";
                       },
@@ -370,7 +370,7 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                     child: AEMPLTextField(
                       controller: controllers[3],
                       hintText: "Location",
-                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      prefix: const AEMPLIcon(AEMPLIcons.location, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) return "Please enter location";
                       },
@@ -379,17 +379,20 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                    child: textFieldText("Hour of rent"),
+                    child: textFieldText("Hour meter reading"),
                   ),
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                     child: AEMPLTextField(
                       controller: controllers[4],
-                      hintText: "Hour of rent",
-                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      hintText: "Hour meter reading",
+                      keyboardType: TextInputType.number,
+                      prefix: const AEMPLIcon(AEMPLIcons.drop, size: 20),
                       validator: (value) {
-                        if (value!.isEmpty) return "Please enter hour of rent";
+                        if (value!.isEmpty) {
+                          return "Please enter hour meter reading";
+                        }
                       },
                     ),
                   ),
@@ -403,10 +406,13 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                     child: AEMPLTextField(
                       controller: controllers[5],
-                      hintText: "Manufactured year",
-                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      hintText: "Year of manufactured",
+                      keyboardType: TextInputType.number,
+                      prefix: const AEMPLIcon(AEMPLIcons.state, size: 20),
                       validator: (value) {
-                        if (value!.isEmpty) return "Please enter hour of rent";
+                        if (value!.isEmpty) {
+                          return "Please enter year of manufatured";
+                        }
                       },
                     ),
                   ),
@@ -421,7 +427,8 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                     child: AEMPLTextField(
                       controller: controllers[6],
                       hintText: "Counts",
-                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      keyboardType: TextInputType.number,
+                      prefix: const AEMPLIcon(AEMPLIcons.numbers, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) return "Please enter counts";
                       },
@@ -443,8 +450,8 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                           child: AEMPLTextField(
                             controller: controllers[7],
                             hintText: "Price",
-                            prefix:
-                                const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                            keyboardType: TextInputType.number,
+                            prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) return "Please enter price";
                             },
@@ -461,8 +468,8 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                           child: AEMPLTextField(
                             controller: controllers[8],
                             hintText: "Fuel included price",
-                            prefix:
-                                const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                            keyboardType: TextInputType.number,
+                            prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
                             validator: (value) {
                               if (value!.isEmpty) return "Please enter price";
                             },
@@ -493,7 +500,7 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                       controller: controllers[9],
                       hintText: "Description",
                       maxLines: 4,
-                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      prefix: const AEMPLIcon(AEMPLIcons.description, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) return "Please enter name";
                       },

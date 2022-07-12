@@ -19,7 +19,6 @@ class AccountScreen extends StatelessWidget {
     listernToTheme(context);
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: Text("Account".toUpperCase()),
         actions: [
           IconButton(

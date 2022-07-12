@@ -77,7 +77,7 @@ class AttachmentDetailBox extends StatelessWidget {
               const SizedBox(height: 6),
               _rowText(
                 context,
-                title: "DOM",
+                title: "YOM",
                 value: DateFormat("MMM dd, yyyy")
                     .format(detail.dateOfManufacturing),
               ),

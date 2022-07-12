@@ -178,16 +178,18 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
                       hintText: "Dimension",
                       prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
                       validator: (value) {
-                        if (value!.isEmpty) return "Please enter weight";
+                        if (value!.isEmpty) return "Please enter dimension";
                       },
                     ),
-                    textFieldText("Hour of Renting"),
+                    textFieldText("Hour meter reading"),
                     AEMPLTextField(
                       controller: widget.controllers[3],
-                      hintText: "Hour of renting",
+                      hintText: "Hour meter reading",
                       prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
                       validator: (value) {
-                        if (value!.isEmpty) return "Please enter weight";
+                        if (value!.isEmpty) {
+                          return "Please enter hour meter reading";
+                        }
                       },
                     ),
                     textFieldText("Date of Manufacturing"),
@@ -221,7 +223,7 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
                       hintText: "Location",
                       prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
                       validator: (value) {
-                        if (value!.isEmpty) return "Please enter weight";
+                        if (value!.isEmpty) return "Please enter location";
                       },
                     ),
                     textFieldText("Description"),
@@ -232,7 +234,7 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
                       maxLines: 6,
                       prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
                       validator: (value) {
-                        if (value!.isEmpty) return "Please enter weight";
+                        if (value!.isEmpty) return "Please enter description";
                       },
                     ),
                     const SizedBox(height: 30),

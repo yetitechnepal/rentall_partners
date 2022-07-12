@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:loader_overlay/src/overlay_controller_widget_extension.dart';
 import 'package:rental_partners/Blocs/category_bloc.dart';
 import 'package:rental_partners/Screens/AddEquipmentScreen/Model/add_equipment_model.dart';
+import 'package:rental_partners/Screens/AddEquipmentScreen/add_equipment_photo.dart';
 import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 
@@ -65,11 +66,13 @@ class AddEquipment {
         await API().post(endPoint: "equipment/add-equipment/", data: formData);
 
     context.loaderOverlay.hide();
+    log(response.data.toString());
     if (response.statusCode == 200) {
+      int id = response.data['data'];
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const MainScreen(initialIndex: 1)));
+        context,
+        MaterialPageRoute(builder: (_) => AddEquipmentPhoto(equipId: id)),
+      );
     } else {
       final snackBar = SnackBar(
         content: Text(response.data['message']),

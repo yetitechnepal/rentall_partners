@@ -90,20 +90,21 @@ class EquipmentRateBox extends StatelessWidget {
               const SizedBox(height: 6),
               _rowDetailText(
                 context,
-                title: "DOM",
+                title: "YOM",
                 value: model.dom.toString(),
               ),
               const SizedBox(height: 6),
               _rowDetailText(
                 context,
-                title: "HOR",
+                title: "HMR",
                 value: model.hor.toString(),
               ),
-              const SizedBox(height: 6),
-              _rowDetailText(
-                context,
-                title: "Description",
-                value: model.description.toString(),
+              const SizedBox(height: 10),
+              const Text("Description", style: TextStyle(fontSize: 13)),
+              const SizedBox(height: 3),
+              Text(
+                model.description,
+                style: const TextStyle(fontSize: 13),
               ),
               const SizedBox(height: 6),
             ],
