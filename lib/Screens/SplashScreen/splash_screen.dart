@@ -25,18 +25,18 @@ class _SplashScreenState extends State<SplashScreen> {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (_) => const MainScreen()),
-            (route) => false,
+            (route) => true,
           );
         } else {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (_) => const OperatorDashboardScreen()),
-            (route) => false,
+            (route) => true,
           );
         }
       } else {
         Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (_) => LoginScreen()), (route) => false);
+            MaterialPageRoute(builder: (_) => LoginScreen()), (route) => true);
       }
     });
   }

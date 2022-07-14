@@ -11,6 +11,7 @@ import 'package:rental_partners/Utils/text_field.dart';
 import 'package:rental_partners/Widgets/images_upload.dart';
 import 'package:rental_partners/Widgets/model_box.dart';
 import 'package:rental_partners/Widgets/title_box.dart';
+import 'package:rental_partners/main.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class AddEquipmentModelScreen extends StatefulWidget {
@@ -199,8 +200,15 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                             child: TextButton(
                               onPressed: () async {
                                 if (formKey.currentState!.validate()) {
-                                  AssetEntity image = imageKey
-                                      .currentState!.selectedImages.first;
+                                  List<AssetEntity> images =
+                                      imageKey.currentState!.selectedImages;
+                                  if (images.isEmpty) {
+                                    scaffoldMessageKey.currentState!
+                                        .showSnackBar(const SnackBar(
+                                            content: Text("Please add image")));
+                                    return;
+                                  }
+                                  AssetEntity image = images.first;
                                   String imagePath = (await image.file)!.path;
                                   String imageId = image.id;
                                   String price = controllers[7].text;

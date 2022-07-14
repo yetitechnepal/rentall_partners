@@ -38,7 +38,7 @@ class AddEquipmentImages {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (_) => const MainScreen(initialIndex: 1)),
-        (route) => false,
+        (route) => true,
       );
     } else {
       final snackBar = SnackBar(

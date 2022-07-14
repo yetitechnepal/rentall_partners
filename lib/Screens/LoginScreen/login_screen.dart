@@ -184,7 +184,7 @@ class LoginScreen extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (_) => const MainScreen()),
-                                      (route) => false,
+                                      (route) => true,
                                     );
                                   } else {
                                     Navigator.pushAndRemoveUntil(
@@ -192,7 +192,7 @@ class LoginScreen extends StatelessWidget {
                                       MaterialPageRoute(
                                           builder: (_) =>
                                               const OperatorDashboardScreen()),
-                                      (route) => false,
+                                      (route) => true,
                                     );
                                   }
                                 }

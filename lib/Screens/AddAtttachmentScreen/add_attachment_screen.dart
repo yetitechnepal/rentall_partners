@@ -269,7 +269,7 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                                     MaterialPageRoute(
                                         builder: (_) =>
                                             const MainScreen(initialIndex: 2)),
-                                    (route) => false,
+                                    (route) => true,
                                   );
                                 } else {
                                   Fluttertoast.showToast(

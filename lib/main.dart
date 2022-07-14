@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
         builder: (theme, darkTheme) {
           return GetMaterialApp(
             title: 'AEMPL Group',
+            debugShowCheckedModeBanner: false,
             scaffoldMessengerKey: scaffoldMessageKey,
             theme: theme,
             darkTheme: darkTheme,

@@ -40,7 +40,7 @@ class AccountScreen extends StatelessWidget {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (_) => LoginScreen()),
-                          (route) => false,
+                          (route) => true,
                         );
                       },
                     ),

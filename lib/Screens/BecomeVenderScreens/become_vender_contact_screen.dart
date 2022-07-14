@@ -236,7 +236,7 @@ class BecomeVenderContactScreen extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (_) => const MainScreen()),
-                      (route) => false,
+                      (route) => true,
                     );
                     Navigator.push(
                       context,

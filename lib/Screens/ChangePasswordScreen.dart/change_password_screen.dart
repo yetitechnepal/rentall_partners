@@ -32,7 +32,7 @@ changePassword(
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (_) => LoginScreen()),
-      (route) => false,
+      (route) => true,
     );
   }
 }
