@@ -214,7 +214,7 @@ class Order {
   Future<void> fetchOrderDetail(BuildContext context, int id) async {
     context.loaderOverlay.show();
     Response response =
-        await API().get(endPoint: "payment/invoice/$id/details/");
+        await API().get(endPoint: "superuser/invoice/$id/details/");
     context.loaderOverlay.hide();
     if (response.statusCode == 200) {
       var data = response.data['data'];

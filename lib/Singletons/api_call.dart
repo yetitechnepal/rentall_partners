@@ -88,8 +88,6 @@ class API {
           return;
         } else if (res.statusCode == 403) {
           await refreshToken();
-          var ress = await _retry(res.requestOptions);
-          dioError.response = ress;
           e.next(dioError);
           return;
         } else if (res.statusCode == 500) {
@@ -129,21 +127,25 @@ class API {
     ),
   );
 
+  Map<String, String> _getHeader(bool useToken) {
+    if (useToken) {
+      return {
+        "Authorization": "Bearer " + LoginSession().accessToken!,
+        "Content-Type": "application/json"
+      };
+    } else {
+      return {"Content-Type": "application/json"};
+    }
+  }
+
   Future<Response> get({required String endPoint, bool useToken = true}) async {
     Response response;
     log(dio.options.baseUrl + endPoint);
     log(LoginSession().accessToken.toString());
-    if (useToken) {
-      response = await dio.get(
-        endPoint,
-        options: Options(
-          headers: {"Authorization": "Bearer " + LoginSession().accessToken!},
-        ),
-      );
-    } else {
-      response = await dio.get(endPoint);
-    }
-    log(response.data.toString());
+    response = await dio.get(
+      endPoint,
+      options: Options(headers: _getHeader(useToken)),
+    );
     return response;
   }
 
@@ -151,26 +153,11 @@ class API {
       {required String endPoint, dynamic data, bool useToken = true}) async {
     Response response;
     log(dio.options.baseUrl + endPoint);
-    try {
-      if (useToken) {
-        response = await dio.post(
-          endPoint,
-          data: data,
-          options: Options(
-            headers: {"Authorization": "Bearer " + LoginSession().accessToken!},
-          ),
-        );
-      } else {
-        response = await dio.post(
-          endPoint,
-          data: data,
-        );
-      }
-    } on DioError catch (e) {
-      response = e.response!;
-    }
-
-    log(response.data.toString());
+    response = await dio.post(
+      endPoint,
+      data: data,
+      options: Options(headers: _getHeader(useToken)),
+    );
     return response;
   }
 
@@ -178,26 +165,11 @@ class API {
       {required String endPoint, dynamic data, bool useToken = true}) async {
     Response response;
     log(dio.options.baseUrl + endPoint);
-    try {
-      if (useToken) {
-        response = await dio.delete(
-          endPoint,
-          data: data,
-          options: Options(
-            headers: {"Authorization": "Bearer " + LoginSession().accessToken!},
-          ),
-        );
-      } else {
-        response = await dio.delete(
-          endPoint,
-          data: data,
-        );
-      }
-    } on DioError catch (e) {
-      response = e.response!;
-    }
-
-    log(response.data.toString());
+    response = await dio.delete(
+      endPoint,
+      data: data,
+      options: Options(headers: _getHeader(useToken)),
+    );
     return response;
   }
 
@@ -205,26 +177,11 @@ class API {
       {required String endPoint, dynamic data, bool useToken = true}) async {
     Response response;
     log(dio.options.baseUrl + endPoint);
-    try {
-      if (useToken) {
-        response = await dio.put(
-          endPoint,
-          data: data,
-          options: Options(
-            headers: {"Authorization": "Bearer " + LoginSession().accessToken!},
-          ),
-        );
-      } else {
-        response = await dio.put(
-          endPoint,
-          data: data,
-        );
-      }
-    } on DioError catch (e) {
-      response = e.response!;
-    }
-
-    log(response.data.toString());
+    response = await dio.put(
+      endPoint,
+      data: data,
+      options: Options(headers: _getHeader(useToken)),
+    );
     return response;
   }
 
@@ -232,25 +189,11 @@ class API {
       {required String endPoint, dynamic data, bool useToken = true}) async {
     Response response;
     log(dio.options.baseUrl + endPoint);
-    try {
-      if (useToken) {
-        response = await dio.patch(
-          endPoint,
-          data: data,
-          options: Options(
-            headers: {"Authorization": "Bearer " + LoginSession().accessToken!},
-          ),
-        );
-      } else {
-        response = await dio.patch(
-          endPoint,
-          data: data,
-        );
-      }
-    } on DioError catch (e) {
-      response = e.response!;
-    }
-    log(response.data.toString());
+    response = await dio.patch(
+      endPoint,
+      data: data,
+      options: Options(headers: _getHeader(useToken)),
+    );
     return response;
   }
 }
