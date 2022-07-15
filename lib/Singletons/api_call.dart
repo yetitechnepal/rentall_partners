@@ -12,26 +12,6 @@ class API {
 
   factory API() => _api;
 
-  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
-    Response response;
-    if (requestOptions.method == "get") {
-      response = await get(endPoint: requestOptions.path);
-    } else if (requestOptions.method == "post") {
-      response =
-          await post(endPoint: requestOptions.path, data: requestOptions.data);
-    } else if (requestOptions.method == "put") {
-      response =
-          await put(endPoint: requestOptions.path, data: requestOptions.data);
-    } else if (requestOptions.method == "delete") {
-      response = await delete(
-          endPoint: requestOptions.path, data: requestOptions.data);
-    } else {
-      response =
-          await patch(endPoint: requestOptions.path, data: requestOptions.data);
-    }
-    return response;
-  }
-
 //Handles token expiration
   refreshToken({BuildContext? context, onCallback}) async {
     Response response;

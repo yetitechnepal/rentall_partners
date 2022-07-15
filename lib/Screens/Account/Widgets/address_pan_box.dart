@@ -7,6 +7,7 @@ import 'package:rental_partners/OperatorScreen/OperatorExperienceScreen/operator
 import 'package:rental_partners/Screens/Account/PopUps/address_edit_popup.dart';
 import 'package:rental_partners/Screens/ChangePasswordScreen.dart/change_password_screen.dart';
 import 'package:rental_partners/Screens/DocumentsScreen/documents_screen.dart';
+import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 
@@ -135,6 +136,49 @@ class AddressPanBox extends StatelessWidget {
             context,
             MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
           ),
+        ),
+        const SizedBox(height: 15),
+        _viewTextButton(
+          context,
+          value: "Logout and delete user data",
+          onPressed: () {
+            showCupertinoDialog(
+              context: context,
+              builder: (ctx) => CupertinoAlertDialog(
+                title:
+                    const Text("Are you sure to logout and delete user data?"),
+                actions: [
+                  CupertinoDialogAction(
+                    child: Text(
+                      "Yes, logout",
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    onPressed: () async {
+                      LoginSession().logout();
+                      await API().delete(
+                        endPoint: "accounts/delete-user/",
+                        useToken: true,
+                      );
+                    },
+                  ),
+                  CupertinoDialogAction(
+                    child: const Text(
+                      "No",
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
         ),
         const SizedBox(height: 15),
         _viewTextButton(context, value: "About", onPressed: () async {

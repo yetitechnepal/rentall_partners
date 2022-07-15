@@ -38,11 +38,10 @@ class LoginScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: const Color(0xffED1A25),
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             toolbarHeight: 0,
             systemOverlayStyle: SystemUiOverlayStyle.light,
           ),
-          backgroundColor: const Color(0xffED1A25),
           body: SingleChildScrollView(
             child: Container(
               alignment: Alignment.topCenter,
@@ -59,7 +58,9 @@ class LoginScreen extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        Image.asset("assets/images/logo.png", height: 160),
+                        const SizedBox(height: 100),
+                        Image.asset("assets/images/Rental.png", height: 80),
+                        const SizedBox(height: 40),
                         StatefulBuilder(
                           builder: (context, setState) => AEMPLPopUpButton(
                             hintText: "Select login type",
@@ -165,8 +166,8 @@ class LoginScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              backgroundColor: Colors.white.withOpacity(01),
-                              primary: Colors.white38,
+                              // backgroundColor: Colors.white.withOpacity(01),
+                              // primary: Colors.white38,
                               elevation: 0,
                             ),
                             onPressed: () async {
@@ -200,7 +201,8 @@ class LoginScreen extends StatelessWidget {
                             },
                             child: const Text(
                               "Login",
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255)),
                             ),
                           ),
                         ),
@@ -274,7 +276,6 @@ class LoginScreen extends StatelessWidget {
         child: Text(
           title,
           style: const TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
