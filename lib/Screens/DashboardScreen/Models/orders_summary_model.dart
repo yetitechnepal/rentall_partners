@@ -87,7 +87,6 @@ class OrdersSummaryModel {
 
   Future<OrdersSummaryModel> fetchOperatorsComplatedOrder() async {
     Response response = await API().get(endPoint: "book/order2complete/");
-
     if (response.statusCode == 200) {
       var data = response.data['total_count'];
       value = data;

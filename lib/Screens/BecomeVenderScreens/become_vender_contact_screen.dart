@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:rental_partners/OperatorScreen/OperatorDashboardScreen/operator_dashboard_screen.dart';
 import 'package:rental_partners/Screens/BecomeVenderScreens/Model/vender_model.dart';
 import 'package:rental_partners/Screens/BecomeVenderScreens/Widgets/experience_list_widget.dart';
 import 'package:rental_partners/Screens/DocumentsScreen/documents_screen.dart';
@@ -232,12 +233,25 @@ class BecomeVenderContactScreen extends StatelessWidget {
                       const SnackBar(
                           content: Text("Please upload your legal documents")),
                     );
+
                     context.read<VenderModelCubit>().resetData();
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (_) => const MainScreen()),
-                      (route) => true,
-                    );
+
+                    LoginType loginType =
+                        context.read<VenderModelCubit>().state.loginType;
+                    if (loginType == LoginType.vender) {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => const MainScreen()),
+                        (route) => true,
+                      );
+                    } else {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const OperatorDashboardScreen()),
+                        (route) => true,
+                      );
+                    }
                     Navigator.push(
                       context,
                       MaterialPageRoute(

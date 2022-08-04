@@ -146,14 +146,14 @@ class VenderModel {
     }
     log(data.toString());
     Response response = await API().post(
-        endPoint: "accounts/partner-registration/",
-        data: data,
-        useToken: false);
-
+      endPoint: "accounts/partner-registration/",
+      data: data,
+      useToken: false,
+    );
     context.loaderOverlay.hide();
     scaffoldMessageKey.currentState!
         .showSnackBar(SnackBar(content: Text(response.data['message'])));
-    log(response.data.toString());
+
     if (response.statusCode == 200) {
       var data = response.data['data'];
       String access = data['access_token'];

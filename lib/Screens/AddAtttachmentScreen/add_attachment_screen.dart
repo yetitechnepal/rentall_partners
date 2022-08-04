@@ -20,12 +20,11 @@ class AddAttachmentScreen extends StatefulWidget {
 }
 
 class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
-  final controllers = List.generate(10, (index) => TextEditingController());
+  final controllers = List.generate(11, (index) => TextEditingController());
 
   final formKey = GlobalKey<FormState>();
 
-  DateTime? dateOfManufacture;
-
+  TextEditingController yearManufactureController = TextEditingController();
   bool isVATIncluded = false;
 
   final imageuploadKey = GlobalKey<ImagesUploadSectionState>();
@@ -138,29 +137,16 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                           }
                         },
                       ),
-                      textFieldText("Date of Manufacturing"),
-                      AEMPLPopUpButton(
-                        hintText: "Date of manufacturing",
-                        value: dateOfManufacture != null
-                            ? DateFormat("MMMM dd, yyyy")
-                                .format(dateOfManufacture!)
-                            : null,
+                      textFieldText("Year of Manufacturing"),
+                      AEMPLTextField(
+                        controller: controllers[8],
+                        hintText: "Year of manufacturing",
+                        paddingRight: 4,
+                        keyboardType: TextInputType.number,
                         prefix: const Icon(Icons.calendar_today, size: 20),
-                        onPressed: () async {
-                          DateTime? selectedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1950),
-                            lastDate: DateTime.now(),
-                            builder: (context, child) {
-                              return Theme(
-                                data: datePickerTheme(context),
-                                child: child!,
-                              );
-                            },
-                          );
-                          if (selectedDate != null) {
-                            setState(() => dateOfManufacture = selectedDate);
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter year of manufacturing";
                           }
                         },
                       ),
@@ -246,8 +232,7 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                                 weight: controllers[3].text,
                                 count: controllers[4].text,
                                 hourOfRenting: controllers[5].text,
-                                manufacturedYear: DateFormat("yyyy-MM-dd")
-                                    .format(dateOfManufacture!),
+                                manufacturedYear: controllers[8].text,
                                 location: controllers[7].text,
                                 baseRate: baseRate.toStringAsFixed(2),
                                 feulIncludedRate:

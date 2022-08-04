@@ -1,10 +1,6 @@
-// ignore_for_file: body_might_complete_normally_nullable
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:rental_partners/Screens/AddEquipmentScreen/Model/add_model_class.dart';
 import 'package:rental_partners/Theme/button.dart';
-import 'package:rental_partners/Theme/date_picker_theme.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/text_field.dart';
@@ -169,11 +165,9 @@ class AddSeriesPopupBox extends StatefulWidget {
 }
 
 class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
-  final controllers = List.generate(7, (index) => TextEditingController());
+  final controllers = List.generate(8, (index) => TextEditingController());
   final formKey = GlobalKey<FormState>();
   bool isVATIncluded = false;
-
-  DateTime? manufaturedDate;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -202,28 +196,14 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
                 if (value!.isEmpty) return "Please enter series name";
               },
             ),
-            textFieldText("Date of Manufacture"),
-            AEMPLPopUpButton(
-              hintText: "Select Date",
-              prefix: const Icon(Icons.calendar_today_outlined),
-              value: manufaturedDate == null
-                  ? null
-                  : DateFormat("MMM dd, yyyy").format(manufaturedDate!),
-              onPressed: () async {
-                DateTime? selectedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate:
-                      DateTime.now().subtract(const Duration(days: 365 * 100)),
-                  lastDate: DateTime.now(),
-                  builder: (context, child) {
-                    return Theme(
-                      data: datePickerTheme(context),
-                      child: child!,
-                    );
-                  },
-                );
-                setState(() => manufaturedDate = selectedDate);
+            textFieldText("Year of Manufacture"),
+            AEMPLTextField(
+              controller: controllers[7],
+              hintText: "Year of Manufature",
+              keyboardType: TextInputType.number,
+              prefix: const AEMPLIcon(AEMPLIcons.attachment, size: 20),
+              validator: (value) {
+                if (value!.isEmpty) return "Please enter year";
               },
             ),
             textFieldText("Hour meter reading"),
@@ -325,8 +305,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
                       equipment: widget.equip,
                       model: widget.modelId,
                       modelName: widget.modelName,
-                      menufatureDate:
-                          DateFormat("yyyy-MM-dd").format(manufaturedDate!),
+                      menufatureDate: controllers[7].text,
                     );
                     widget.onSeriesAdd!(seriesModel);
                   }

@@ -171,9 +171,9 @@
 //                         if (value!.isEmpty) return "Please enter series detail";
 //                       },
 //                     ),
-//                     textFieldText("Date of Manufacture"),
+//                     textFieldText("Year of Manufacture"),
 //                     AEMPLPopUpButton(
-//                       hintText: "Select Date",
+//                       hintText: "Select Year",
 //                       prefix: const Icon(Icons.calendar_today_sharp),
 //                       value: manufaturedDate == null
 //                           ? null

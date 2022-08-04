@@ -31,11 +31,21 @@ class AttachmentDetailBox extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 5),
-                Image.asset(
-                  detail.isVerified
-                      ? "assets/icons/verified.png"
-                      : "assets/icons/forbidden.png",
-                  height: 15,
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: detail.isVerified ? Colors.green : Colors.red,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    detail.isVerified ? "VERIFIED" : "NOT VERIFIED",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 8,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
                 const Spacer(),
                 IconButton(

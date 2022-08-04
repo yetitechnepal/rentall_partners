@@ -92,11 +92,9 @@ class AttachmentDetailEditPopup extends StatefulWidget {
 }
 
 class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
-  late DateTime manufacturedDate;
-
+  TextEditingController yearManufactureController = TextEditingController();
   @override
   void initState() {
-    manufacturedDate = widget.detail.dateOfManufacturing;
     super.initState();
   }
 
@@ -185,6 +183,7 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
                     AEMPLTextField(
                       controller: widget.controllers[3],
                       hintText: "Hour meter reading",
+                      keyboardType: TextInputType.number,
                       prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -192,28 +191,15 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
                         }
                       },
                     ),
-                    textFieldText("Date of Manufacturing"),
-                    AEMPLPopUpButton(
-                      hintText: "Date of manufacturing",
-                      value: manufacturedDate != null
-                          ? DateFormat("MMMM dd, yyyy").format(manufacturedDate)
-                          : null,
-                      prefix: const AEMPLIcon(AEMPLIcons.price, size: 20),
-                      onPressed: () async {
-                        DateTime? selectedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1950),
-                          lastDate: DateTime.now(),
-                          builder: (context, child) {
-                            return Theme(
-                              data: datePickerTheme(context),
-                              child: child!,
-                            );
-                          },
-                        );
-                        if (selectedDate != null) {
-                          setState(() => manufacturedDate = selectedDate);
+                    textFieldText("Year of Manufacturing"),
+                    AEMPLTextField(
+                      controller: yearManufactureController,
+                      hintText: "Year of manufacture",
+                      keyboardType: TextInputType.number,
+                      prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter year of manufacture";
                         }
                       },
                     ),
@@ -247,8 +233,7 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
                             weight: widget.controllers[1].text,
                             dimension: widget.controllers[2].text,
                             hor: widget.controllers[3].text,
-                            dom: DateFormat("yyyy-MM-dd")
-                                .format(manufacturedDate),
+                            dom: yearManufactureController.text,
                             location: widget.controllers[5].text,
                             description: widget.controllers[6].text,
                             isVerified: widget.detail.isVerified,

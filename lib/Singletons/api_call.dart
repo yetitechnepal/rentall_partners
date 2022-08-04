@@ -62,13 +62,12 @@ class API {
       },
       onError: (error, e) async {
         var res = error.response!;
-        DioError dioError = error;
         if (res.requestOptions.path == "accounts/refresh/") {
           Get.offAll(() => LoginScreen());
           return;
         } else if (res.statusCode == 403) {
           await refreshToken();
-          e.next(dioError);
+          e.next(error);
           return;
         } else if (res.statusCode == 500) {
           scaffoldMessageKey.currentState!.showSnackBar(
@@ -84,10 +83,10 @@ class API {
               dismissDirection: DismissDirection.horizontal,
             ),
           );
-          e.next(dioError);
+          e.resolve(res);
           return;
         } else {
-          e.next(dioError);
+          e.resolve(res);
           return;
         }
       },
@@ -101,7 +100,7 @@ class API {
           // "http://192.168.137.160:5000/",
           // 'http://192.168.1.71:4000/',
           // 'http://192.168.116.122:4000/',
-          'https://partners.rentallsolutions.com/',
+          'https://api.rentallsolutions.com/',
       connectTimeout: 10000,
       receiveTimeout: 10000,
     ),
