@@ -9,7 +9,7 @@ import 'package:loader_overlay/src/overlay_controller_widget_extension.dart';
 import 'package:rental_partners/Blocs/category_bloc.dart';
 import 'package:rental_partners/Screens/AddEquipmentScreen/Model/add_equipment_model.dart';
 import 'package:rental_partners/Screens/AddEquipmentScreen/add_equipment_photo.dart';
-import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
+
 import 'package:rental_partners/Singletons/api_call.dart';
 
 class AddEquipment {

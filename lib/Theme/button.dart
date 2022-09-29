@@ -4,7 +4,7 @@ import 'package:rental_partners/Theme/colors.dart';
 class TextButtonStyles {
   static ButtonStyle overlayButtonStyle() {
     return TextButton.styleFrom(
-      primary: primaryColor,
+      foregroundColor: primaryColor,
       padding: EdgeInsets.zero,
       elevation: 0,
       backgroundColor: Colors.transparent,
@@ -14,7 +14,7 @@ class TextButtonStyles {
 
   static ButtonStyle overlayOrderDetailButtonStyle({bool isRedColor = false}) {
     return TextButton.styleFrom(
-      primary: primaryColor,
+      foregroundColor: primaryColor,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       elevation: 3,
       backgroundColor: isRedColor ? primaryColor : const Color(0xff47C678),

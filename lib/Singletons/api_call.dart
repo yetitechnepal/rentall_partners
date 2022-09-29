@@ -32,6 +32,8 @@ class API {
           loginType: LoginSession().loginType,
         );
         await LoginSession().saveSession();
+      } else {
+        Get.offAll(() => LoginScreen());
       }
     } on DioError {
       Get.offAll(() => LoginScreen());
@@ -65,7 +67,7 @@ class API {
         if (res.requestOptions.path == "accounts/refresh/") {
           Get.offAll(() => LoginScreen());
           return;
-        } else if (res.statusCode == 403) {
+        } else if (res.statusCode == 403 || res.statusCode == 401) {
           await refreshToken();
           e.next(error);
           return;

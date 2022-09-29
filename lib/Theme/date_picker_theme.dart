@@ -11,7 +11,7 @@ datePickerTheme(BuildContext context) {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          primary: Colors.red,
+          foregroundColor: Colors.red,
           padding: const EdgeInsets.all(5),
           visualDensity: VisualDensity.compact,
           textStyle: TextStyle(
@@ -29,7 +29,7 @@ datePickerTheme(BuildContext context) {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          primary: Colors.red,
+          foregroundColor: Colors.red,
           padding: const EdgeInsets.all(5),
           visualDensity: VisualDensity.compact,
           textStyle: TextStyle(

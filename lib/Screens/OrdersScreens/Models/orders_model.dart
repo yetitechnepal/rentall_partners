@@ -169,6 +169,8 @@ class Order {
       orderType = OrderTypes.confirmed;
     } else if (status == "Completed") {
       orderType = OrderTypes.completed;
+    } else if (status == "Batch Closed") {
+      orderType = OrderTypes.batchclosed;
     } else {
       orderType = OrderTypes.cancelled;
     }

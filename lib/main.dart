@@ -18,6 +18,7 @@ import 'package:rental_partners/Screens/SplashScreen/splash_screen.dart';
 import 'package:rental_partners/Theme/themes.dart';
 
 GlobalKey<ScaffoldMessengerState> scaffoldMessageKey = GlobalKey();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         builder: (theme, darkTheme) {
           return GetMaterialApp(
             title: 'AEMPL Group',
+            navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             scaffoldMessengerKey: scaffoldMessageKey,
             theme: theme,

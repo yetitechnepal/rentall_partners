@@ -42,7 +42,7 @@ class OrdersListSection extends StatelessWidget {
             builder: (context) => OrdersDetailScreen(order: order)),
       ),
       style: TextButton.styleFrom(
-        primary: primaryColor,
+        foregroundColor: primaryColor,
         padding: const EdgeInsets.all(20),
         shape: const RoundedRectangleBorder(),
         backgroundColor: Theme.of(context).brightness == Brightness.light

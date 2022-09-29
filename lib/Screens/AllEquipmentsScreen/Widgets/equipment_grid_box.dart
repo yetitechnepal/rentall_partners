@@ -112,9 +112,9 @@ class EquipmentGridBox extends StatelessWidget {
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
+                          foregroundColor: primaryColor,
                           backgroundColor: Colors.transparent,
                           elevation: 0,
-                          primary: primaryColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                         ),

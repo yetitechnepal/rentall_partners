@@ -3,12 +3,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Screens/AttachmentDetailScreen/Models/attachment_details_model.dart';
 import 'package:rental_partners/Screens/AttachmentDetailScreen/Models/atttachment_detail_model.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
-import 'package:rental_partners/Theme/date_picker_theme.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/Utils/text_field.dart';

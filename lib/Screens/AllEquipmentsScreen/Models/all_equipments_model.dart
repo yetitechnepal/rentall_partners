@@ -14,7 +14,8 @@ class Equipment {
 class AllEquipmentModel {
   List<Equipment> equipments = [];
   Future<AllEquipmentModel> fetchAllEquipments() async {
-    Response response = await API().get(endPoint: "vendor/all-listing/");
+    Response response = await API()
+        .get(endPoint: "vendor/all-listing/?page_size=10000&page_number=1");
     if (response.statusCode == 200) {
       equipments = [];
       var data = response.data['data'];

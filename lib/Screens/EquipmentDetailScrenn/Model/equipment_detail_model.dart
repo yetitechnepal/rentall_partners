@@ -92,7 +92,6 @@ class EquipmentDetailModel {
           images.add(ImageModel.fromMap(image));
         }
         for (var model in data['model']) {
-          images.add(ImageModel.fromMap({"id": 0, "path": model['image']}));
           models.add(EquipmentModelModel.fromJson(model));
         }
         for (int index = 0;
@@ -122,10 +121,7 @@ class EquipmentDetailModel {
 
   Future<bool> updateDetail(BuildContext context) async {
     context.loaderOverlay.show();
-    log({
-      "category": catId,
-      "name": name,
-    }.toString());
+
     Response response =
         await API().put(endPoint: "equipment/$id/update/", data: {
       "category": catId,

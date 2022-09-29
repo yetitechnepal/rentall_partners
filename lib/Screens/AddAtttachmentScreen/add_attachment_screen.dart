@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Screens/AddAtttachmentScreen/Model/add_attachment_model.dart';
 import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
-import 'package:rental_partners/Theme/date_picker_theme.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/Widgets/images_upload.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
@@ -165,7 +163,7 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                       ),
                       textFieldText("Base rate per hour"),
                       AEMPLTextField(
-                        controller: controllers[8],
+                        controller: controllers[10],
                         hintText: "Base rate per hour",
                         prefix: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -215,7 +213,7 @@ class _AddAttachmentScreenState extends State<AddAttachmentScreen> {
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
                               double baseRate =
-                                  double.parse(controllers[8].text);
+                                  double.parse(controllers[10].text);
                               double fuelIncludedRate =
                                   double.parse(controllers[9].text);
 

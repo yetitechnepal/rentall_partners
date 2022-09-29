@@ -194,6 +194,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               prefix: const AEMPLIcon(AEMPLIcons.attachment, size: 20),
               validator: (value) {
                 if (value!.isEmpty) return "Please enter series name";
+                return null;
               },
             ),
             textFieldText("Year of Manufacture"),
@@ -204,6 +205,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               prefix: const AEMPLIcon(AEMPLIcons.attachment, size: 20),
               validator: (value) {
                 if (value!.isEmpty) return "Please enter year";
+                return null;
               },
             ),
             textFieldText("Hour meter reading"),
@@ -214,6 +216,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               prefix: const Icon(Icons.lock_clock_outlined, size: 20),
               validator: (value) {
                 if (value!.isEmpty) return "Please enter hours meter reading";
+                return null;
               },
             ),
             textFieldText("Series Location"),
@@ -224,6 +227,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               prefix: const AEMPLIcon(AEMPLIcons.location, size: 20),
               validator: (value) {
                 if (value!.isEmpty) return "Please enter series location";
+                return null;
               },
             ),
             textFieldText("Frequency"),
@@ -234,6 +238,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               prefix: const AEMPLIcon(AEMPLIcons.numbers, size: 20),
               validator: (value) {
                 if (value!.isEmpty) return "Please enter frequency";
+                return null;
               },
             ),
             textFieldText("Base Rate per hour"),
@@ -248,6 +253,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
                 } else if (double.tryParse(value) == null) {
                   return "Please enter number only";
                 }
+                return null;
               },
             ),
             textFieldText("Feul Included Rate per hour"),
@@ -262,6 +268,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
                 } else if (double.tryParse(value) == null) {
                   return "Please enter number only";
                 }
+                return null;
               },
             ),
             const SizedBox(height: 10),
@@ -280,6 +287,7 @@ class _AddSeriesPopupBoxState extends State<AddSeriesPopupBox> {
               prefix: const AEMPLIcon(AEMPLIcons.description, size: 20),
               validator: (value) {
                 if (value!.isEmpty) return "Please enter series detail";
+                return null;
               },
             ),
             const SizedBox(height: 10),
