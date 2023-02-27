@@ -14,11 +14,35 @@
       },
       "oauth_client": [
         {
+          "client_id": "77506248560-58uc2ltrds4uu2726ner1j8jopf6dq2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theyetitech.equipmental",
+            "certificate_hash": "2260b04325ba35a84ac21672f03acc0ea3d1801e"
+          }
+        },
+        {
+          "client_id": "77506248560-6lti4m1gm30i225ucs0mjkt994a1paph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theyetitech.equipmental",
+            "certificate_hash": "942dd82d355c8e18c6abc7347952473c2b685fa5"
+          }
+        },
+        {
           "client_id": "77506248560-9i0fttmb7lm903kqlt1dqckbgq9r1c5m.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.theyetitech.equipmental",
             "certificate_hash": "a4f6722addedb1c4044bf5a0b5ea5745cb19d715"
+          }
+        },
+        {
+          "client_id": "77506248560-r004831t6t5721k375go6cs8clu2s4r9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theyetitech.equipmental",
+            "certificate_hash": "342e151df2bd6fc6e41944b58f5203ed575ccaf4"
           }
         },
         {
@@ -57,6 +81,38 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "77506248560-acs9tsbu9388tq7trsb9lt24asvlednd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yetitech.rentallpartners",
+            "certificate_hash": "342e151df2bd6fc6e41944b58f5203ed575ccaf4"
+          }
+        },
+        {
+          "client_id": "77506248560-do4kgcahthv1jt507abi39kuudc28pvg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yetitech.rentallpartners",
+            "certificate_hash": "a4f6722addedb1c4044bf5a0b5ea5745cb19d715"
+          }
+        },
+        {
+          "client_id": "77506248560-fe19i1934rtcd45eu49vr0a3stfg151r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yetitech.rentallpartners",
+            "certificate_hash": "928e4c3148b3eee682083ee71ccf9a7122fec364"
+          }
+        },
+        {
+          "client_id": "77506248560-p2unl6sdvtam6c21fug0pdsu81qvuvm5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yetitech.rentallpartners",
+            "certificate_hash": "2260b04325ba35a84ac21672f03acc0ea3d1801e"
+          }
+        },
         {
           "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
           "client_type": 3

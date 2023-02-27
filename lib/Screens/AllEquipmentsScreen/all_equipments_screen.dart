@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rental_partners/Screens/AddEquipmentScreen/add_equipment_screen.dart';
+import 'package:rental_partners/Screens/AddEquipmentScreen/add_equipment_model_screen.dart';
 import 'package:rental_partners/Screens/AllEquipmentsScreen/Models/all_equipments_model.dart';
 import 'package:rental_partners/Screens/AllEquipmentsScreen/Widgets/equipment_grid_box.dart';
 
@@ -35,7 +35,8 @@ class AllEquipmentsScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const AddEquipmentScreen()),
+          MaterialPageRoute(
+              builder: (context) => const AddEquipmentModelScreen()),
         ),
         backgroundColor: Theme.of(context).primaryColor,
         child: const Icon(Icons.add),

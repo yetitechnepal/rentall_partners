@@ -50,7 +50,7 @@ class OperatorExperienceScreen extends StatelessWidget {
                             experience.skill,
                             style: TextStyle(
                               color:
-                                  Theme.of(context).textTheme.bodyText1!.color,
+                                  Theme.of(context).textTheme.bodyLarge!.color,
                               fontWeight: FontWeight.w800,
                               fontSize: 14,
                             ),
@@ -60,7 +60,7 @@ class OperatorExperienceScreen extends StatelessWidget {
                             experience.companyName,
                             style: TextStyle(
                               color:
-                                  Theme.of(context).textTheme.bodyText2!.color,
+                                  Theme.of(context).textTheme.bodyMedium!.color,
                               fontWeight: FontWeight.w700,
                               fontSize: 13,
                             ),
@@ -76,7 +76,7 @@ class OperatorExperienceScreen extends StatelessWidget {
                                         .format(experience.endDate!)),
                             style: TextStyle(
                               color:
-                                  Theme.of(context).textTheme.bodyText2!.color,
+                                  Theme.of(context).textTheme.bodyMedium!.color,
                               fontWeight: FontWeight.w600,
                               fontSize: 13,
                             ),

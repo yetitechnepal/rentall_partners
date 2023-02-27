@@ -91,7 +91,7 @@ class LoginSession {
         },
         useToken: true,
       );
-      listenToFCMNotification();
+      NotiService().listenToFCMNotification();
     });
   }
 }

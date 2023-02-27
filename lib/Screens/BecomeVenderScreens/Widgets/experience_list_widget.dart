@@ -73,7 +73,7 @@ class ExperienceListBoxState extends State<ExperienceListBox>
                         Text(
                           experience.skillName,
                           style: TextStyle(
-                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            color: Theme.of(context).textTheme.bodyLarge!.color,
                             fontWeight: FontWeight.w800,
                             fontSize: 14,
                           ),
@@ -82,7 +82,8 @@ class ExperienceListBoxState extends State<ExperienceListBox>
                         Text(
                           experience.companyName,
                           style: TextStyle(
-                            color: Theme.of(context).textTheme.bodyText2!.color,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color,
                             fontWeight: FontWeight.w700,
                             fontSize: 13,
                           ),
@@ -97,7 +98,8 @@ class ExperienceListBoxState extends State<ExperienceListBox>
                                   : DateFormat("MMM dd, yyy")
                                       .format(experience.endDate!)),
                           style: TextStyle(
-                            color: Theme.of(context).textTheme.bodyText2!.color,
+                            color:
+                                Theme.of(context).textTheme.bodyMedium!.color,
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),

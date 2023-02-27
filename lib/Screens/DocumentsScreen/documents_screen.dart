@@ -32,7 +32,7 @@ class DocumentsScreen extends StatelessWidget {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           padding: const EdgeInsets.all(16),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 400,
+            maxCrossAxisExtent: 350,
             childAspectRatio: 1.1,
             crossAxisSpacing: 20,
             mainAxisSpacing: 20,

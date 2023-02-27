@@ -128,7 +128,7 @@ class AEMPLPopUpButton extends StatelessWidget {
         onPressed: onPressed,
         style: TextButtonStyles.overlayButtonStyle().copyWith(
           foregroundColor: MaterialStateProperty.all(
-            Theme.of(context).textTheme.bodyText1!.color,
+            Theme.of(context).textTheme.bodyLarge!.color,
           ),
         ),
         child: Padding(
@@ -145,7 +145,7 @@ class AEMPLPopUpButton extends StatelessWidget {
                   style: TextStyle(
                     color: value == null
                         ? Colors.grey[700]
-                        : Theme.of(context).textTheme.bodyText1!.color,
+                        : Theme.of(context).textTheme.bodyLarge!.color,
                   ),
                 ),
               ),

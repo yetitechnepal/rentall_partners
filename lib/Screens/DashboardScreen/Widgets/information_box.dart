@@ -39,13 +39,13 @@ class InformationBox extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 36,
-                      color: Theme.of(context).textTheme.bodyText1!.color!,
+                      color: Theme.of(context).textTheme.bodyLarge!.color!,
                     ),
                   ),
                   AEMPLIcon(
                     icon,
                     size: 26,
-                    color: Theme.of(context).textTheme.bodyText1!.color!,
+                    color: Theme.of(context).textTheme.bodyLarge!.color!,
                   ),
                 ],
               ),
@@ -54,7 +54,7 @@ class InformationBox extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Theme.of(context).textTheme.bodyText2!.color!,
+                  color: Theme.of(context).textTheme.bodyMedium!.color!,
                 ),
               ),
             ],

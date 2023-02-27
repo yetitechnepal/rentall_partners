@@ -88,7 +88,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
                       Text(
                         "Items",
                         style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -188,7 +188,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
                       Text(
                         "Correction",
                         style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -254,7 +254,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
                       Text(
                         "Breakdown",
                         style: TextStyle(
-                          color: Theme.of(context).textTheme.bodyText1!.color,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -372,7 +372,7 @@ class _InvoiceBoxState extends State<InvoiceBox> {
               textAlign: TextAlign.right,
               style: TextStyle(
                 fontSize: 14,
-                color: Theme.of(context).textTheme.bodyText1!.color,
+                color: Theme.of(context).textTheme.bodyLarge!.color,
                 fontWeight: isBold ? FontWeight.bold : FontWeight.w500,
               ),
             ),

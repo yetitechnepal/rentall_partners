@@ -37,7 +37,10 @@ class EquipmentModelModel {
       price,
       fuelIncludedRate,
       dimension,
-      weight;
+      weight,
+      brand,
+      capacity,
+      application;
   late int counts;
   EquipmentModelModel.fromJson(map) {
     id = map['id'] ?? 0;
@@ -45,7 +48,6 @@ class EquipmentModelModel {
     image = map['image'] ?? "";
     dimension = map['dimension'] ?? "";
     weight = map['weight'] ?? "";
-
     description = map['description'] ?? "";
     location = map['location'] ?? "";
     hor = map['hor'] ?? "";
@@ -53,6 +55,9 @@ class EquipmentModelModel {
     price = map['price'] ?? "";
     fuelIncludedRate = map['fuel_included_rate'] ?? "";
     counts = map['count'] ?? 0;
+    brand = map['brand_name'] ?? "";
+    capacity = map['capacity'] ?? "";
+    application = map['application'] ?? "";
   }
 }
 

@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Screens/AttachmentDetailScreen/Models/attachment_details_model.dart';
 import 'package:rental_partners/Screens/AttachmentDetailScreen/Models/atttachment_detail_model.dart';
@@ -75,7 +76,8 @@ class AttachmentDetailEditPopup extends StatefulWidget {
       } else if (index == 3) {
         return TextEditingController(text: detail.hourOfRenting);
       } else if (index == 4) {
-        return TextEditingController(text: "");
+        var dom = DateFormat('yyyy-MM-dd').format(detail.dateOfManufacturing);
+        return TextEditingController(text: dom);
       } else if (index == 5) {
         return TextEditingController(text: detail.location);
       } else {
@@ -90,7 +92,6 @@ class AttachmentDetailEditPopup extends StatefulWidget {
 }
 
 class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
-  TextEditingController yearManufactureController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -191,7 +192,7 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
                     ),
                     textFieldText("Year of Manufacturing"),
                     AEMPLTextField(
-                      controller: yearManufactureController,
+                      controller: widget.controllers[4],
                       hintText: "Year of manufacture",
                       keyboardType: TextInputType.number,
                       prefix: const AEMPLIcon(AEMPLIcons.equipment, size: 20),
@@ -231,7 +232,7 @@ class _AttachmentDetailEditPopupState extends State<AttachmentDetailEditPopup> {
                             weight: widget.controllers[1].text,
                             dimension: widget.controllers[2].text,
                             hor: widget.controllers[3].text,
-                            dom: yearManufactureController.text,
+                            dom: widget.controllers[4].text,
                             location: widget.controllers[5].text,
                             description: widget.controllers[6].text,
                             isVerified: widget.detail.isVerified,

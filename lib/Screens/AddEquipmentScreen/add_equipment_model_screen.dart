@@ -1,6 +1,9 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Screens/AddEquipmentScreen/Model/add_equipment_class.dart';
 import 'package:rental_partners/Screens/AddEquipmentScreen/Model/add_equipment_model.dart';
@@ -14,12 +17,11 @@ import 'package:rental_partners/Widgets/title_box.dart';
 import 'package:rental_partners/main.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
-class AddEquipmentModelScreen extends StatefulWidget {
-  final AddEquipment addEquipment;
+import '../../Blocs/category_bloc.dart';
 
+class AddEquipmentModelScreen extends StatefulWidget {
   const AddEquipmentModelScreen({
     Key? key,
-    required this.addEquipment,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,8 @@ class AddEquipmentModelScreen extends StatefulWidget {
 }
 
 class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
-  final controllers = List.generate(10, (index) => TextEditingController());
+  final controllers = List.generate(14, (index) => TextEditingController());
+  final equipmentController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
 
@@ -36,6 +39,30 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
 
   List<AddEquipmentModelModel> models = [];
   bool isVATIncluded = false;
+
+  final ScrollController _scrollController = ScrollController();
+  Category? _selectedCategory;
+
+  void _scrollToTop() {
+    _scrollController.animateTo(0,
+        duration: const Duration(milliseconds: 400), curve: Curves.linear);
+    for (TextEditingController controller in controllers) {
+      controller.clear();
+    }
+    imageKey.currentState!.resetSelection();
+    setState(() {
+      isVATIncluded = false;
+      models = models;
+    });
+    Navigator.of(context).pop();
+  }
+
+  String equipmentName = "";
+  @override
+  void dispose() {
+    _scrollController.dispose(); // dispose the controller
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +74,123 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
+            controller: _scrollController,
             child: Form(
               key: formKey,
               child: ListView(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
+                  Container(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 16),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Theme.of(context).scaffoldBackgroundColor,
+                            boxShadow: BoxShadows.dropShadow(context),
+                          ),
+                          constraints: const BoxConstraints(maxWidth: 500),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              textFieldText("Equipment Name"),
+                              AEMPLTextField(
+                                controller: equipmentController,
+                                hintText: "Equipment name",
+                                prefix: const AEMPLIcon(AEMPLIcons.equipment,
+                                    size: 20),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Please enter equipment name";
+                                  }
+                                },
+                              ),
+                              textFieldText("Equipment Category"),
+                              AEMPLPopUpButton(
+                                value: _selectedCategory == null
+                                    ? null
+                                    : _selectedCategory!.name,
+                                hintText: "Select Equipment category",
+                                prefix: const AEMPLIcon(AEMPLIcons.category,
+                                    size: 20),
+                                onPressed: () {
+                                  context
+                                      .read<CategoriesCubit>()
+                                      .fetchCategories();
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Dialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Container(
+                                            constraints: const BoxConstraints(
+                                                maxWidth: 500),
+                                            child: BlocBuilder<CategoriesCubit,
+                                                    CategoriesModel>(
+                                                builder: (ctx, state) {
+                                              return ListView.builder(
+                                                shrinkWrap: true,
+                                                itemCount:
+                                                    state.categories.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return ListTile(
+                                                    leading: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: state
+                                                            .categories[index]
+                                                            .image,
+                                                        width: 60,
+                                                        height: 60,
+                                                        fit: BoxFit.cover,
+                                                        placeholder: (context,
+                                                                url) =>
+                                                            const Center(
+                                                                child:
+                                                                    CupertinoActivityIndicator()),
+                                                        errorWidget: (_, __,
+                                                                ___) =>
+                                                            Image.asset(
+                                                                "assets/images/placeholder.png"),
+                                                      ),
+                                                    ),
+                                                    title: Text(state
+                                                        .categories[index]
+                                                        .name),
+                                                    subtitle: Text(
+                                                      state.categories[index]
+                                                          .description,
+                                                      maxLines: 1,
+                                                    ),
+                                                    onTap: () {
+                                                      setState(() =>
+                                                          _selectedCategory =
+                                                              state.categories[
+                                                                  index]);
+                                                      Navigator.pop(ctx);
+                                                    },
+                                                  );
+                                                },
+                                              );
+                                            }),
+                                          ),
+                                        );
+                                      });
+                                },
+                              ),
+                            ],
+                          ))),
                   Container(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -116,7 +254,7 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                           AEMPLTextField(
                             controller: controllers[4],
                             hintText: "Hours of renting",
-                            prefix: const AEMPLIcon(AEMPLIcons.drop, size: 20),
+                            prefix: const AEMPLIcon(AEMPLIcons.hmr, size: 20),
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -171,6 +309,41 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                               }
                             },
                           ),
+                          textFieldText("Brand"),
+                          AEMPLTextField(
+                            controller: controllers[10],
+                            hintText: "Brand",
+                            prefix: const AEMPLIcon(AEMPLIcons.brand, size: 20),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter brand";
+                              }
+                            },
+                          ),
+                          textFieldText("Capacity"),
+                          AEMPLTextField(
+                            controller: controllers[11],
+                            hintText: "Capacity",
+                            prefix:
+                                const AEMPLIcon(AEMPLIcons.capacity, size: 20),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter capacity";
+                              }
+                            },
+                          ),
+                          textFieldText("Application"),
+                          AEMPLTextField(
+                            controller: controllers[12],
+                            hintText: "Application",
+                            prefix: const AEMPLIcon(AEMPLIcons.application,
+                                size: 20),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please enter application";
+                              }
+                            },
+                          ),
                           CheckboxListTile(
                             value: isVATIncluded,
                             title: const Text("VAT included rates"),
@@ -200,6 +373,15 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                             child: TextButton(
                               onPressed: () async {
                                 if (formKey.currentState!.validate()) {
+                                  if (_selectedCategory == null) {
+                                    const snackBar = SnackBar(
+                                      content: Text('Please select category'),
+                                    );
+
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                    return;
+                                  }
                                   List<AssetEntity> images =
                                       imageKey.currentState!.selectedImages;
                                   if (images.isEmpty) {
@@ -213,6 +395,7 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                                   String imageId = image.id;
                                   String price = controllers[7].text;
                                   String fuelprice = controllers[8].text;
+                                  equipmentName = equipmentController.text;
                                   if (isVATIncluded) {
                                     price =
                                         (double.parse(price) / 1.13).toString();
@@ -235,17 +418,61 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                                     fuelIncludedRate: fuelprice,
                                     isVATIncluded: isVATIncluded,
                                     description: controllers[9].text,
+                                    brand: controllers[10].text,
+                                    capacity: controllers[11].text,
+                                    application: controllers[12].text,
                                   );
                                   models.add(addEquipmentModelModel);
-                                  for (TextEditingController controller
-                                      in controllers) {
-                                    controller.clear();
-                                  }
-                                  imageKey.currentState!.resetSelection();
-                                  setState(() {
-                                    isVATIncluded = false;
-                                    models = models;
-                                  });
+                                  showCupertinoDialog(
+                                    context: context,
+                                    builder: (ctx) => CupertinoAlertDialog(
+                                      title: const Text(
+                                          "Do you want to add another model?"),
+                                      actions: [
+                                        CupertinoDialogAction(
+                                          child: const Text(
+                                            "Yes",
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                          onPressed: () => _scrollToTop(),
+                                        ),
+                                        CupertinoDialogAction(
+                                          child: const Text(
+                                            "No",
+                                            style:
+                                                TextStyle(color: Colors.green),
+                                          ),
+                                          onPressed: () {
+                                            AddEquipment addEquipment =
+                                                AddEquipment(
+                                              name: equipmentName,
+                                              dimension: "",
+                                              weight: "",
+                                              category: _selectedCategory!,
+                                              description: "",
+                                            );
+                                            Navigator.of(context).pop();
+                                            addEquipment.models = models;
+                                            addEquipment
+                                                .submitEquipment(context);
+                                            for (TextEditingController controller
+                                                in controllers) {
+                                              controller.clear();
+                                            }
+                                            imageKey.currentState!
+                                                .resetSelection();
+                                            // _selectedCategory = null;
+                                            setState(() {
+                                              _selectedCategory = null;
+                                              equipmentController.clear();
+                                              isVATIncluded = false;
+                                              models = models;
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
                                 }
                               },
                               child: const Text("Add Model"),
@@ -299,10 +526,14 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                       controllers[7].text = price;
                       controllers[8].text = fuelIncludedRate;
                       controllers[9].text = models[index].description;
+                      controllers[10].text = models[index].brand;
+                      controllers[11].text = models[index].capacity;
+                      controllers[12].text = models[index].application;
 
                       imageKey.currentState!.setImage([image]);
                       models.removeAt(index);
                       setState(() {
+                        controllers[13].text = equipmentName;
                         isVATIncluded = isVatIncluded;
                         models = models;
                       });
@@ -312,8 +543,16 @@ class _AddEquipmentModelScreenState extends State<AddEquipmentModelScreen> {
                   Center(
                     child: TextButton(
                       onPressed: () {
-                        widget.addEquipment.models = models;
-                        widget.addEquipment.submitEquipment(context);
+                        AddEquipment addEquipment = AddEquipment(
+                          name: equipmentController.text,
+                          dimension: "",
+                          weight: "",
+                          category: _selectedCategory!,
+                          description: "",
+                        );
+
+                        addEquipment.models = models;
+                        addEquipment.submitEquipment(context);
                       },
                       child: const Text("Next"),
                     ),

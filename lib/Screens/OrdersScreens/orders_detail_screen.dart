@@ -351,48 +351,50 @@ class _OrdersDetailScreenState extends State<OrdersDetailScreen> {
           child: const Text("Complete"),
         ),
       );
-    } else if (type == OrderTypes.confirmed) {
-      return Center(
-        child: TextButton(
-          style: TextButtonStyles.overlayOrderDetailButtonStyle(),
-          onPressed: () {
-            showCupertinoDialog(
-              context: context,
-              builder: (ctx) => CupertinoAlertDialog(
-                title: const Text("Are you sure to dispatch order?"),
-                actions: [
-                  CupertinoDialogAction(
-                    child: const Text(
-                      "Yes",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    onPressed: () async {
-                      Navigator.pop(ctx);
-                      if (await order.dispatch(context)) {
-                        setState(() => order = order);
-                      }
-                    },
-                  ),
-                  CupertinoDialogAction(
-                    child: const Text(
-                      "No",
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                    },
-                  ),
-                ],
-              ),
-            );
-          },
-          child: const Text("Dispatch"),
-        ),
-      );
-    } else if (type == OrderTypes.completed) {
+    }
+    //else if (type == OrderTypes.confirmed) {
+    // return Center(
+    //   child: TextButton(
+    //     style: TextButtonStyles.overlayOrderDetailButtonStyle(),
+    //     onPressed: () {
+    //       showCupertinoDialog(
+    //         context: context,
+    //         builder: (ctx) => CupertinoAlertDialog(
+    //           title: const Text("Are you sure to dispatch order?"),
+    //           actions: [
+    //             CupertinoDialogAction(
+    //               child: const Text(
+    //                 "Yes",
+    //                 style: TextStyle(
+    //                   color: Colors.green,
+    //                   fontWeight: FontWeight.bold,
+    //                 ),
+    //               ),
+    //               onPressed: () async {
+    //                 Navigator.pop(ctx);
+    //                 if (await order.dispatch(context)) {
+    //                   setState(() => order = order);
+    //                 }
+    //               },
+    //             ),
+    //             CupertinoDialogAction(
+    //               child: const Text(
+    //                 "No",
+    //                 style: TextStyle(color: Colors.red),
+    //               ),
+    //               onPressed: () {
+    //                 Navigator.pop(ctx);
+    //               },
+    //             ),
+    //           ],
+    //         ),
+    //       );
+    //     },
+    //     child: const Text("Dispatch"),
+    //   ),
+    // );
+    //}
+    else if (type == OrderTypes.completed) {
       return Center(
         child: TextButton(
           style: TextButtonStyles.overlayOrderDetailButtonStyle(),

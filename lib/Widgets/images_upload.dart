@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rental_partners/Theme/dropshadows.dart';
 import 'package:rental_partners/Utils/add_button.dart';
 import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
 class ImagesUploadSection extends StatefulWidget {
   final int max;
@@ -24,6 +25,8 @@ class ImagesUploadSectionState extends State<ImagesUploadSection>
     }
     return images;
   }
+
+  String? imagePath;
 
   setImage(List<AssetEntity> images) => setState(() => selectedImages = images);
 
@@ -49,30 +52,69 @@ class ImagesUploadSectionState extends State<ImagesUploadSection>
         itemCount: selectedImages.length + 1,
         itemBuilder: (context, index) {
           if (index == selectedImages.length) {
-            return addButton(context, onPressed: () async {
-              await checkImagePermission(context);
-              final List<AssetEntity>? result = await AssetPicker.pickAssets(
-                context,
-                pickerConfig: AssetPickerConfig(
-                  selectedAssets: selectedImages,
-                  maxAssets: widget.max,
-                  gridCount: MediaQuery.of(context).size.width ~/ 80,
-                  pageSize: 100,
-                  requestType: RequestType.image,
-                  // specialPickerType: widget.max == 1
-                  //     ? SpecialPickerType.noPreview
-                  //     : SpecialPickerType.,
-                ),
-              );
-              if (result == null) return;
-              setState(() => selectedImages = result);
+            return addButton(context, onPressed: () {
+              showCupertinoDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (context) => CupertinoAlertDialog(
+                        actions: [
+                          CupertinoButton(
+                              child: const Text('Use Camera'),
+                              onPressed: () async {
+                                if (selectedImages.isEmpty) {
+                                  Navigator.of(context).pop();
+                                  final AssetEntity? entity =
+                                      await CameraPicker.pickFromCamera(
+                                    context,
+                                    pickerConfig: const CameraPickerConfig(
+                                        textDelegate:
+                                            EnglishCameraPickerTextDelegate()),
+                                  );
+                                  if (entity == null) return;
+                                  setState(() => selectedImages.add(entity));
+                                } else {
+                                  resetSelection();
+                                  Navigator.of(context).pop();
+                                  final AssetEntity? entity =
+                                      await CameraPicker.pickFromCamera(
+                                    context,
+                                    pickerConfig: const CameraPickerConfig(
+                                        textDelegate:
+                                            EnglishCameraPickerTextDelegate()),
+                                  );
+                                  if (entity == null) return;
+                                  setState(() => selectedImages.add(entity));
+                                }
+                              }),
+                          CupertinoButton(
+                              child: const Text('Select from Gallary'),
+                              onPressed: () async {
+                                Navigator.of(context).pop();
+                                await checkImagePermission(context);
+                                final List<AssetEntity>? result =
+                                    await AssetPicker.pickAssets(
+                                  context,
+                                  pickerConfig: AssetPickerConfig(
+                                    selectedAssets: selectedImages,
+                                    maxAssets: widget.max,
+                                    gridCount:
+                                        MediaQuery.of(context).size.width ~/ 80,
+                                    pageSize: 100,
+                                    requestType: RequestType.image,
+                                  ),
+                                );
+                                if (result == null) return;
+                                setState(() => selectedImages = result);
+                              }),
+                        ],
+                      ));
             });
           }
+
           return Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: BoxShadows.dropShadow(context),
-            ),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.black12)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image(

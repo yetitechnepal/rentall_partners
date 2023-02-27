@@ -48,6 +48,9 @@ class AddEquipment {
         "count": model.counts,
         "price": model.price,
         "fuel_included_rate": model.fuelIncludedRate,
+        "brand_name": model.brand,
+        "capacity": model.capacity,
+        "application": model.application,
       });
     }
 
@@ -74,6 +77,7 @@ class AddEquipment {
         MaterialPageRoute(builder: (_) => AddEquipmentPhoto(equipId: id)),
       );
     } else {
+      log(response.statusCode.toString());
       final snackBar = SnackBar(
         content: Text(response.data['message']),
       );

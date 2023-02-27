@@ -9,6 +9,7 @@ import 'package:rental_partners/Screens/ChangePasswordScreen.dart/change_passwor
 import 'package:rental_partners/Screens/DocumentsScreen/documents_screen.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
+import 'package:rental_partners/Theme/colors.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 
 class AddressPanBox extends StatelessWidget {
@@ -33,21 +34,6 @@ class AddressPanBox extends StatelessWidget {
         _viewText(
           context,
           value: profile.pan,
-          backgroundColor: Theme.of(context).disabledColor,
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: const Text(
-            "Markup %",
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        _viewText(
-          context,
-          value: profile.commisionPercentage,
           backgroundColor: Theme.of(context).disabledColor,
         ),
         Visibility(
@@ -348,6 +334,8 @@ class AddressPanBox extends StatelessWidget {
             valueListenable: AdaptiveTheme.of(context).modeChangeNotifier,
             builder: (_, mode, child) {
               return ToggleButtons(
+                selectedColor: Colors.white.withOpacity(0.9),
+                fillColor: primaryColor,
                 borderRadius: BorderRadius.circular(6),
                 constraints: const BoxConstraints(minHeight: 40, minWidth: 40),
                 children: [

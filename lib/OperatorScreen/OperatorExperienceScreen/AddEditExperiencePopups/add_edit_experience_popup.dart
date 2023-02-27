@@ -152,7 +152,7 @@ class _ExperiencePopupState extends State<ExperiencePopup> {
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context)
                                             .textTheme
-                                            .bodyText1!
+                                            .bodyLarge!
                                             .color,
                                       ),
                                     ),

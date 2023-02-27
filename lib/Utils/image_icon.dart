@@ -30,6 +30,10 @@ enum AEMPLIcons {
   numbers,
   notification,
   operator,
+  brand,
+  capacity,
+  application,
+  hmr,
 }
 
 _getAssetImage(AEMPLIcons icon) {
@@ -92,6 +96,14 @@ _getAssetImage(AEMPLIcons icon) {
     imagePath = "assets/icons/notification.png";
   } else if (icon == AEMPLIcons.operator) {
     imagePath = "assets/icons/operator.png";
+  } else if (icon == AEMPLIcons.brand) {
+    imagePath = "assets/icons/brand.png";
+  } else if (icon == AEMPLIcons.capacity) {
+    imagePath = "assets/icons/capacity.png";
+  } else if (icon == AEMPLIcons.application) {
+    imagePath = "assets/icons/application.png";
+  } else if (icon == AEMPLIcons.hmr) {
+    imagePath = "assets/icons/speedometer.png";
   }
 
   return AssetImage(imagePath);

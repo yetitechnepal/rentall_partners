@@ -190,16 +190,12 @@ class _ImageDisplaySliderState extends State<ImageDisplaySlider> {
                             );
                           },
                           color: primaryColor,
-                          iconSize: 30,
+                          iconSize: 15,
                           icon: Container(
                             padding: const EdgeInsets.all(6),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(100),
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1,
-                              ),
                               boxShadow: BoxShadows.dropShadow(context),
                             ),
                             child: const AEMPLIcon(AEMPLIcons.trash),

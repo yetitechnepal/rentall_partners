@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rental_partners/Theme/colors.dart';
 
 ThemeData lightThemeData = ThemeData(
+  primaryColor: primaryColor,
   primarySwatch: primaryColor,
   useMaterial3: true,
   scaffoldBackgroundColor: Colors.white,
@@ -16,11 +17,11 @@ ThemeData lightThemeData = ThemeData(
     centerTitle: true,
   ),
   textTheme: const TextTheme(
-    bodyText1: TextStyle(color: Colors.black),
-    bodyText2: TextStyle(color: Color(0xff717171)),
+    bodyLarge: TextStyle(color: Colors.black),
+    bodyMedium: TextStyle(color: Color(0xff717171)),
   ),
-  floatingActionButtonTheme:
-      FloatingActionButtonThemeData(backgroundColor: primaryColor),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: primaryColor, foregroundColor: Colors.white),
   textButtonTheme: TextButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all(primaryColor),
@@ -58,8 +59,8 @@ ThemeData darkThemeData = ThemeData(
     centerTitle: true,
   ),
   textTheme: TextTheme(
-    bodyText1: TextStyle(color: Colors.white.withOpacity(0.8)),
-    bodyText2: TextStyle(color: Colors.white.withOpacity(0.6)),
+    bodyLarge: TextStyle(color: Colors.white.withOpacity(0.8)),
+    bodyMedium: TextStyle(color: Colors.white.withOpacity(0.6)),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: primaryColor,

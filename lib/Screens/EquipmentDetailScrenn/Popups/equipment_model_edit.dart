@@ -28,7 +28,10 @@ class EditModel {
       dom,
       count,
       price,
-      fuelIncludedRate;
+      fuelIncludedRate,
+      brand,
+      capacity,
+      application;
   final String networkImage;
   AssetEntity? localImage;
 
@@ -45,6 +48,9 @@ class EditModel {
     required this.count,
     required this.price,
     required this.fuelIncludedRate,
+    required this.brand,
+    required this.capacity,
+    required this.application,
   });
 
   Future<bool> update(BuildContext context, int? id, int equipId) async {
@@ -59,6 +65,9 @@ class EditModel {
       "count": count,
       // "rate": price,
       // "fuel_included_rate": fuelIncludedRate,
+      "brand_name": brand,
+      "capacity": capacity,
+      "application": application,
     });
     if (localImage == null) {
       formData.fields.add(MapEntry("image", networkImage));
@@ -129,7 +138,7 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
 
   @override
   initState() {
-    controllers = List.generate(10, (index) {
+    controllers = List.generate(13, (index) {
       String value = "";
       if (widget.model != null) {
         switch (index) {
@@ -162,6 +171,15 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
             break;
           case 9:
             value = widget.model!.description;
+            break;
+          case 10:
+            value = widget.model!.brand;
+            break;
+          case 11:
+            value = widget.model!.capacity;
+            break;
+          case 12:
+            value = widget.model!.application;
             break;
         }
       }
@@ -388,7 +406,7 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                       controller: controllers[4],
                       hintText: "Hour meter reading",
                       keyboardType: TextInputType.number,
-                      prefix: const AEMPLIcon(AEMPLIcons.drop, size: 20),
+                      prefix: const AEMPLIcon(AEMPLIcons.hmr, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Please enter hour meter reading";
@@ -431,6 +449,61 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                       prefix: const AEMPLIcon(AEMPLIcons.numbers, size: 20),
                       validator: (value) {
                         if (value!.isEmpty) return "Please enter counts";
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Brand"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[10],
+                      hintText: "Brand",
+                      prefix: const AEMPLIcon(AEMPLIcons.brand, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) return "Please enter brand";
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Capacity"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[11],
+                      hintText: "Capacity",
+                      prefix: const AEMPLIcon(AEMPLIcons.capacity, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter capacity";
+                        }
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: textFieldText("Application"),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: AEMPLTextField(
+                      controller: controllers[12],
+                      hintText: "Application",
+                      prefix: const AEMPLIcon(AEMPLIcons.application, size: 20),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Please enter application";
+                        }
                       },
                     ),
                   ),
@@ -533,6 +606,9 @@ class _EquipmentModelEditState extends State<_EquipmentModelEdit> {
                             count: controllers[6].text,
                             price: price,
                             fuelIncludedRate: fuelIncludedRate,
+                            brand: controllers[10].text,
+                            capacity: controllers[11].text,
+                            application: controllers[12].text,
                           );
                           if (await editModel.update(
                             context,

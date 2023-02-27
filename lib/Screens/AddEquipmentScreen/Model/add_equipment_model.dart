@@ -42,7 +42,10 @@ class AddEquipmentModelModel {
       counts,
       price,
       fuelIncludedRate,
-      description;
+      description,
+      brand,
+      capacity,
+      application;
 
   final String imageId;
 
@@ -60,5 +63,8 @@ class AddEquipmentModelModel {
     required this.price,
     required this.fuelIncludedRate,
     required this.description,
+    required this.brand,
+    required this.capacity,
+    required this.application,
   });
 }

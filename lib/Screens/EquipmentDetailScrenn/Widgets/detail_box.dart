@@ -103,7 +103,7 @@ class EquipmentDetailBox extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: const TextStyle(fontSize: 13),
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
           ),
         ),
         const SizedBox(width: 20),

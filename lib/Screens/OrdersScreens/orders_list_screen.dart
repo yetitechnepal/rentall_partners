@@ -8,7 +8,6 @@ import 'package:rental_partners/Blocs/order_status_bloc.dart';
 import 'package:rental_partners/Screens/OrdersScreens/Models/orders_model.dart';
 import 'package:rental_partners/Screens/OrdersScreens/Widgets/orders_list_widgets.dart';
 import 'package:rental_partners/Theme/date_picker_theme.dart';
-
 import 'package:rental_partners/Theme/dropshadows.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
 import 'package:rental_partners/Utils/text_field.dart';
@@ -136,7 +135,7 @@ class OrdersListScreen extends StatelessWidget {
           foregroundColor: MaterialStateProperty.all(
             isSelected
                 ? Colors.white
-                : Theme.of(context).textTheme.bodyText1!.color,
+                : Theme.of(context).textTheme.bodyLarge!.color,
           ),
         ),
         child: Text(title),

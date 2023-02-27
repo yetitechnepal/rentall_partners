@@ -106,7 +106,7 @@ class ProfileInfoBox extends StatelessWidget {
       ),
       child: Text(
         value,
-        style: TextStyle(color: Theme.of(context).textTheme.bodyText1!.color),
+        style: TextStyle(color: Theme.of(context).textTheme.bodyLarge!.color),
       ),
     );
   }

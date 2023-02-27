@@ -102,6 +102,7 @@ class API {
           // "http://192.168.137.160:5000/",
           // 'http://192.168.1.71:4000/',
           // 'http://192.168.116.122:4000/',
+          // 'http://192.168.1.67:8000/',
           'https://api.rentallsolutions.com/',
       connectTimeout: 10000,
       receiveTimeout: 10000,

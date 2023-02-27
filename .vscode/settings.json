@@ -1,0 +1,162 @@
+{
+    // "dart.flutterSdkPath": ".fvm/flutter_sdk",
+    // "search.exclude": {
+    //   "**/node_modules": true,
+    //   "**/bower_components": true,
+    //   "**/*.code-search": true,
+    //   "**/.fvm": true
+    // },
+    // "files.watcherExclude": {
+    //   "**/.fvm": true
+    // },
+    // "workbench.iconTheme": "helium-icon-theme",
+    // "terminal.integrated.fontFamily": "jetbrains mono",
+    // "editor.fontFamily": "Menlo",
+    "editor.fontLigatures": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.fixAll.eslint": true
+    },
+    // "editor.fontWeight": "600",
+    "dart.openDevTools": "flutter",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    // "debug.console.fontFamily": "cascadia mono",
+    "[dart]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+            "quickfix.add.required": true,
+            "quickfix.add.required.multi": true,
+            "quickFix.create.constructorForFinalFields": true,
+            "source.fixAll": true,
+        },
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false,
+        "editor.defaultFormatter": "Dart-Code.dart-code",
+    },
+    // "dart.flutterSdkPath": ".fvm/flutter_sdk",
+    // // Remove .fvm files from search
+    // "search.exclude": {
+    //   "**/.fvm": true
+    // },
+    // // Remove from file watching
+    // "files.watcherExclude": {
+    //   "**/.fvm": true
+    // },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": [
+                    "comment",
+                    "variables",
+                    "functions",
+                    "strings",
+                    "numbers",
+                    "entity.name.type.class",
+                    "keyword",
+                    "constant",
+                    "storage.modifier",
+                    "comment.block.documentation",
+                    "storage.type.class.js"
+                ],
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    },
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}",
+    "files.autoSave": "onFocusChange",
+    "explorer.confirmDelete": false,
+    "scm.inputFontFamily": "Victor Mono",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#232323",
+        "statusBar.noFolderBackground": "#212121",
+        "statusBar.debuggingBackground": "#424548",
+        "terminal.foreground": "#FFFFFF"
+    },
+    "explorer.confirmDragAndDrop": false,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "XXX",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "dart.debugSdkLibraries": true,
+    "emmet.excludeLanguages": [
+        "markdown"
+    ],
+    "emmet.extensionsPath": [],
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "vue-html": "html",
+        "razor": "html",
+        "plaintext": "jade"
+    },
+    "emmet.optimizeStylesheetParsing": true,
+    "emmet.preferences": {},
+    "emmet.showAbbreviationSuggestions": true,
+    "emmet.showExpandedAbbreviation": "always",
+    "emmet.showSuggestionsAsSnippets": false,
+    "emmet.syntaxProfiles": {},
+    "emmet.triggerExpansionOnTab": true,
+    "html.autoClosingTags": true,
+    "emmet.variables": {},
+    "editor.wordWrap": "on",
+    // "[html]": {
+    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // },
+    // "[typescript]": {
+    //     "editor.defaultFormatter": "vscode.typescript-language-features"
+    // },
+    // "[json]": {
+    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // },
+    "editor.suggestSelection": "first",
+    // "[javascript]": {
+    //     "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // },
+    "workbench.editor.highlightModifiedTabs": true,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "redhat.telemetry.enabled": false,
+    "editor.linkedEditing": true,
+    "editor.inlineSuggest.enabled": true,
+    "workbench.startupEditor": "none",
+    "editor.cursorBlinking": "phase",
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml",
+        ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
+        "readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
+        "*.dart": "$(capture).g.dart, $(capture).freezed.dart"
+    },
+    "typescript.inlayHints.parameterNames.enabled": "all",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "dart.debugExternalPackageLibraries": true,
+    "editor.cursorStyle": "block",
+    "audioCues.lineHasWarning": "on",
+    "workbench.sideBar.location": "left",
+    "dart.runPubGetOnPubspecChanges": "prompt",
+    "editor.stickyScroll.enabled": true,
+    // "workbench.colorTheme": "Palenight Operator",
+}

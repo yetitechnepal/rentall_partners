@@ -99,8 +99,27 @@ class EquipmentRateBox extends StatelessWidget {
                 title: "HMR",
                 value: model.hor.toString(),
               ),
+              const SizedBox(height: 6),
+              _rowDetailText(
+                context,
+                title: "Brand",
+                value: model.brand.toString(),
+              ),
+              const SizedBox(height: 6),
+              _rowDetailText(
+                context,
+                title: "Capacity",
+                value: model.capacity.toString(),
+              ),
+              const SizedBox(height: 6),
+              _rowDetailText(
+                context,
+                title: "Application",
+                value: model.application.toString(),
+              ),
               const SizedBox(height: 10),
-              const Text("Description", style: TextStyle(fontSize: 13)),
+              const Text("Description",
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
               const SizedBox(height: 3),
               Text(
                 model.description,
@@ -214,6 +233,7 @@ class EquipmentRateBox extends StatelessWidget {
 
   Widget _rowDetailText(BuildContext context,
       {required String title, required String value}) {
+    final GlobalKey<TooltipState> tooltipkey = GlobalKey<TooltipState>();
     return Row(
       children: [
         Container(
@@ -223,9 +243,36 @@ class EquipmentRateBox extends StatelessWidget {
               right: BorderSide(width: 1.0, color: Color(0xffDCDCDC)),
             ),
           ),
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 13),
+          child: Row(
+            children: [
+              Text(
+                title,
+                style:
+                    const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              title == 'HMR' || title == 'YOM'
+                  ? Tooltip(
+                      key: tooltipkey,
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      message: title == 'HMR'
+                          ? 'Hour meter reading'
+                          : 'Year of manufacture',
+                      child: InkWell(
+                        onTap: () {
+                          tooltipkey.currentState?.ensureTooltipVisible();
+                        },
+                        child: const Icon(
+                          Icons.info_outline_rounded,
+                          size: 16,
+                          color: Color(0xff717171),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
+            ],
           ),
         ),
         const SizedBox(width: 20),

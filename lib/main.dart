@@ -11,11 +11,11 @@ import 'package:rental_partners/Blocs/order_status_bloc.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/Screens/AttachmentDetailScreen/Models/attachment_details_model.dart';
 import 'package:rental_partners/Screens/BecomeVenderScreens/Model/vender_model.dart';
-
 import 'package:rental_partners/Screens/EquipmentDetailScrenn/Model/equipment_detail_model.dart';
 import 'package:rental_partners/Screens/OrdersScreens/Models/orders_model.dart';
 import 'package:rental_partners/Screens/SplashScreen/splash_screen.dart';
 import 'package:rental_partners/Theme/themes.dart';
+import 'package:rental_partners/Utils/notification_listener.dart';
 
 GlobalKey<ScaffoldMessengerState> scaffoldMessageKey = GlobalKey();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    NotiService().init();
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProfileCubit>(create: (context) => ProfileCubit()),
