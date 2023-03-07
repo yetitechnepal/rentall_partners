@@ -32,7 +32,8 @@ class VenderModel {
   String? imagePath;
   String state = "", district = "", ward = "", tole = "", country = "";
   String primaryEmail = "", primaryPhone = "", secondaryPhone = "";
-  String password = "", otp = "";
+  String password = "";
+  int otp = 0;
   List<Experience> experiences = [];
   LoginType loginType = LoginType.vender;
 
@@ -99,7 +100,7 @@ class VenderModel {
         .showSnackBar(SnackBar(content: Text(response.data['message'])));
   }
 
-  setPassword({required String password, required String otp}) {
+  setPassword({required String password, required int otp}) {
     this.password = password;
     this.otp = otp;
   }

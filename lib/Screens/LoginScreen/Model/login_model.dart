@@ -48,9 +48,9 @@ class LoginModel {
       return true;
     } else {
       scaffoldMessageKey.currentState!.showSnackBar(
-        const SnackBar(
-          content: Text('Cannot login check your credentials'),
-          duration: Duration(seconds: 1),
+        SnackBar(
+          content: Text(response.data['message'].toString()),
+          duration: const Duration(seconds: 1),
         ),
       );
       return false;

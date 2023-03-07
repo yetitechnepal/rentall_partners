@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:rental_partners/OperatorScreen/OperatorDashboardScreen/operator_dashboard_screen.dart';
 import 'package:rental_partners/Screens/BecomeVenderScreens/Model/vender_model.dart';
 import 'package:rental_partners/Screens/BecomeVenderScreens/Widgets/experience_list_widget.dart';
-import 'package:rental_partners/Screens/DocumentsScreen/documents_screen.dart';
 import 'package:rental_partners/Screens/LoginScreen/login_screen.dart';
-import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/Utils/text_field.dart';
-import 'package:rental_partners/main.dart';
+
+import '../../OperatorScreen/OperatorDashboardScreen/operator_dashboard_screen.dart';
+import '../../main.dart';
+import '../DocumentsScreen/documents_screen.dart';
+import '../MainScreen/main_screen.dart';
 
 class BecomeVenderContactScreen extends StatelessWidget {
   late List<TextEditingController> controllers;
@@ -192,6 +193,7 @@ class BecomeVenderContactScreen extends StatelessWidget {
                   controller: otpController,
                   placeholder: "Enter OTP",
                   maxLength: 4,
+                  keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 10),
                 CupertinoTextField(
@@ -221,9 +223,10 @@ class BecomeVenderContactScreen extends StatelessWidget {
                   }
 
                   Navigator.pop(ctx);
+
                   await context.read<VenderModelCubit>().state.setPassword(
                         password: passwordController.text,
-                        otp: otpController.text,
+                        otp: int.parse(otpController.text),
                       );
                   if (await context
                       .read<VenderModelCubit>()

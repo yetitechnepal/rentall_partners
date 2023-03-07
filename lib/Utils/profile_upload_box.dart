@@ -1,13 +1,13 @@
 // ignore_for_file: implementation_imports
 
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:rental_partners/Theme/button.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
 import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:rental_partners/Utils/image_icon.dart';
-import 'package:rental_partners/Utils/image_viewer.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 Future<String?>? uploadImage(BuildContext context) async {
@@ -111,12 +111,14 @@ class ProfileUploadBoxState extends State<ProfileUploadBox>
                           borderRadius: BorderRadius.circular(100)),
                     ),
                   ),
-                  onPressed: () => showImageBox(
-                    context,
-                    imagePaths: [],
-                    index: 0,
-                    heroTag: "profile Image",
-                  ),
+                  onPressed: () {
+                    // showImageBox(
+                    //   context,
+                    //   imagePaths: [],
+                    //   index: 0,
+                    //   heroTag: "profile Image",
+                    // );
+                  },
                   child: const SizedBox(
                     height: double.infinity,
                     width: double.infinity,
