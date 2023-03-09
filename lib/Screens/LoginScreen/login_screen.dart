@@ -16,6 +16,7 @@ import 'package:rental_partners/Screens/LoginScreen/Model/login_model.dart';
 import 'package:rental_partners/Screens/MainScreen/main_screen.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/Utils/text_field.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 enum LoginType { vender, operator }
 
@@ -206,6 +207,32 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Check our ",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                launchUrl(
+                                  Uri.parse(
+                                      "https://rentallsolutions.com/rental-privacy-policy.html"),
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              },
+                              child: const Text(
+                                "Terms and Conditions",
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 12),
+                              ),
+                            ),
+                          ],
+                        ),
                         const SizedBox(height: 20),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -292,7 +319,7 @@ class LoginScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (ctx) => BecomeVenderScreen(),
+        builder: (ctx) => const BecomeVenderScreen(),
       ),
     );
   }

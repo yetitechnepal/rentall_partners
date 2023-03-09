@@ -11,8 +11,9 @@ class AEMPLTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final int? maxLines;
   final String? Function(String?)? validator;
-  final bool obscureText, autofocus, disabled;
+  final bool obscureText, autofocus, disabled, readOnly;
   final Function(String)? onSubmit, onChanged;
+  final VoidCallback? onTap;
   final int? maxLength;
 
   const AEMPLTextField({
@@ -33,6 +34,8 @@ class AEMPLTextField extends StatelessWidget {
     this.onChanged,
     this.disabled = false,
     this.maxLength,
+    this.onTap,
+    this.readOnly = false,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -46,6 +49,7 @@ class AEMPLTextField extends StatelessWidget {
         boxShadow: BoxShadows.dropShadow(context),
       ),
       child: TextFormField(
+        onTap: onTap,
         controller: controller,
         keyboardType: keyboardType,
         maxLines: obscureText ? 1 : null,
@@ -53,6 +57,7 @@ class AEMPLTextField extends StatelessWidget {
         textInputAction: textInputAction,
         autofocus: autofocus,
         enabled: !disabled,
+        readOnly: readOnly,
         textAlignVertical: TextAlignVertical.top,
         decoration: InputDecoration(
           border: InputBorder.none,

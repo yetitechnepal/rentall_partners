@@ -18,49 +18,32 @@ class DashboardTopBar extends StatelessWidget {
     return Positioned(
       top: -80,
       child: BlocBuilder<ProfileCubit, ProfileModel>(builder: (context, state) {
-        return Center(
-          child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const AccountScreen(),
-              ));
-            },
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    boxShadow: BoxShadows.selectedDropShadow(context),
-                  ),
-                  child: ClipOval(
-                    child: CachedNetworkImage(
-                      imageUrl: state.profile,
-                      height: 100,
-                      width: 100,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          const Center(child: CupertinoActivityIndicator()),
-                      errorWidget: (_, __, ___) =>
-                          Image.asset("assets/images/placeholder.png"),
-                    ),
-                  ),
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const AccountScreen(),
+            ));
+          },
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                color: Theme.of(context).scaffoldBackgroundColor,
+                boxShadow: BoxShadows.selectedDropShadow(context),
+              ),
+              child: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: state.profile,
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      const Center(child: CupertinoActivityIndicator()),
+                  errorWidget: (_, __, ___) =>
+                      Image.asset("assets/images/placeholder.png"),
                 ),
-                const SizedBox(height: 8),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                  child: Text(
-                    state.name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         );

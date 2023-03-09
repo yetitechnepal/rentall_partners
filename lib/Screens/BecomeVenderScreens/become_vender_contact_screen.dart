@@ -88,12 +88,12 @@ class BecomeVenderContactScreen extends StatelessWidget {
                       hintText: "Secondary phone number",
                       prefix: const Icon(Icons.phone_android_rounded),
                       keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Enter phone number";
-                        }
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value!.isEmpty) {
+                      //     return "Enter phone number";
+                      //   }
+                      //   return null;
+                      // },
                     ),
                     const SizedBox(height: 30),
                     Visibility(

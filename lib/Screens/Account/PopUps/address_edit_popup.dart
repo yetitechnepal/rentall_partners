@@ -1,5 +1,6 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
@@ -97,8 +98,40 @@ class AddressEditPopup extends StatelessWidget {
                       controller: controllers[4],
                       prefix: const AEMPLIcon(AEMPLIcons.country),
                       hintText: "Country name",
+                      readOnly: true,
                       validator: (value) {
                         if (value!.isEmpty) return "Please enter country";
+                      },
+                      onTap: () {
+                        showCountryPicker(
+                          context: context,
+                          countryListTheme: CountryListThemeData(
+                            flagSize: 25,
+                            backgroundColor: Colors.white,
+                            textStyle: const TextStyle(
+                                fontSize: 16, color: Colors.blueGrey),
+                            bottomSheetHeight: 600,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(20.0),
+                              topRight: Radius.circular(20.0),
+                            ),
+                            inputDecoration: InputDecoration(
+                              labelText: 'Search',
+                              hintText: 'Start typing to search',
+                              prefixIcon: const Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: const Color(0xFF8C98A8)
+                                        .withOpacity(0.2),
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20))),
+                            ),
+                          ),
+                          onSelect: (Country country) {
+                            controllers[4].text = country.name;
+                          },
+                        );
                       },
                     ),
                     const SizedBox(height: 20),

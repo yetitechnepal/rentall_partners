@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, body_might_complete_normally_nullable
 
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,12 +11,18 @@ import 'package:rental_partners/Utils/profile_upload_box.dart';
 import 'package:rental_partners/Utils/text_field.dart';
 import 'package:rental_partners/main.dart';
 
-class BecomeVenderScreen extends StatelessWidget {
-  BecomeVenderScreen({Key? key}) : super(key: key);
+class BecomeVenderScreen extends StatefulWidget {
+  const BecomeVenderScreen({Key? key}) : super(key: key);
 
+  @override
+  State<BecomeVenderScreen> createState() => _BecomeVenderScreenState();
+}
+
+class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
   late List<TextEditingController> controllers;
 
   final formKey = GlobalKey<FormState>();
+
   final imageKey = GlobalKey<ProfileUploadBoxState>();
 
   @override
@@ -41,7 +48,6 @@ class BecomeVenderScreen extends StatelessWidget {
       }
       return TextEditingController(text: value);
     });
-
     LoginType loginType = context.read<VenderModelCubit>().state.loginType;
     bool isVender = loginType == LoginType.vender;
     return Scaffold(
@@ -147,10 +153,10 @@ class BecomeVenderScreen extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 10),
-                  textFieldText("Ward"),
+                  textFieldText("Ward No."),
                   AEMPLTextField(
                     controller: controllers[5],
-                    hintText: "Ward",
+                    hintText: "Ward No.",
                     prefix: const Icon(Icons.location_on),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -176,6 +182,38 @@ class BecomeVenderScreen extends StatelessWidget {
                     controller: controllers[7],
                     hintText: "Country",
                     prefix: const Icon(CupertinoIcons.globe),
+                    readOnly: true,
+                    onTap: () {
+                      showCountryPicker(
+                        context: context,
+                        countryListTheme: CountryListThemeData(
+                          flagSize: 25,
+                          backgroundColor: Colors.white,
+                          textStyle: const TextStyle(
+                              fontSize: 16, color: Colors.blueGrey),
+                          bottomSheetHeight: 600,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            topRight: Radius.circular(20.0),
+                          ),
+                          inputDecoration: InputDecoration(
+                            labelText: 'Search',
+                            hintText: 'Start typing to search',
+                            prefixIcon: const Icon(Icons.search),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color:
+                                      const Color(0xFF8C98A8).withOpacity(0.2),
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(20))),
+                          ),
+                        ),
+                        onSelect: (Country country) {
+                          controllers[7].text = country.name;
+                        },
+                      );
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Enter Country";
