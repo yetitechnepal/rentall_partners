@@ -168,11 +168,11 @@ class _ExperiencePopupState extends State<ExperiencePopup> {
                     controller: companyNameController,
                     hintText: "Company name",
                     prefix: const Icon(Icons.home_outlined),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Enter company name";
-                      }
-                    },
+                    // validator: (value) {
+                    //   if (value!.isEmpty) {
+                    //     return "Enter company name";
+                    //   }
+                    // },
                   ),
                   const SizedBox(height: 10),
                   Visibility(

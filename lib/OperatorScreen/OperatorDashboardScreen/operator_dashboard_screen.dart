@@ -18,7 +18,7 @@ class OperatorDashboardScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        leadingWidth: 70,
+        leadingWidth: 80,
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5.0),
           child: Row(

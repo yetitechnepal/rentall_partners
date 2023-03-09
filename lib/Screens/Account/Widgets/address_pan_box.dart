@@ -143,7 +143,7 @@ class AddressPanBox extends StatelessWidget {
                     ),
                     onPressed: () async {
                       LoginSession().logout();
-                      await API().delete(
+                      await API().post(
                         endPoint: "accounts/delete-user/",
                         useToken: true,
                       );

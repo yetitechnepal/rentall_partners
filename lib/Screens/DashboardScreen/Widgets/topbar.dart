@@ -15,39 +15,36 @@ class DashboardTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<ProfileCubit>().fetchProfile();
-    return Positioned(
-      top: -80,
-      child: BlocBuilder<ProfileCubit, ProfileModel>(builder: (context, state) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const AccountScreen(),
-            ));
-          },
-          child: Center(
-            child: Container(
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Theme.of(context).scaffoldBackgroundColor,
-                boxShadow: BoxShadows.selectedDropShadow(context),
-              ),
-              child: ClipOval(
-                child: CachedNetworkImage(
-                  imageUrl: state.profile,
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                      const Center(child: CupertinoActivityIndicator()),
-                  errorWidget: (_, __, ___) =>
-                      Image.asset("assets/images/placeholder.png"),
-                ),
+    return BlocBuilder<ProfileCubit, ProfileModel>(builder: (context, state) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const AccountScreen(),
+          ));
+        },
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: Theme.of(context).scaffoldBackgroundColor,
+              boxShadow: BoxShadows.selectedDropShadow(context),
+            ),
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: state.profile,
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+                placeholder: (context, url) =>
+                    const Center(child: CupertinoActivityIndicator()),
+                errorWidget: (_, __, ___) =>
+                    Image.asset("assets/images/placeholder.png"),
               ),
             ),
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

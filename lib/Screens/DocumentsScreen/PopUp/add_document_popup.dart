@@ -5,12 +5,10 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/src/provider.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
-import 'package:rental_partners/Theme/date_picker_theme.dart';
 import 'package:rental_partners/Utils/check_permission.dart';
 import 'package:rental_partners/Utils/loading_widget.dart';
 import 'package:rental_partners/Utils/text_field.dart';
@@ -40,16 +38,21 @@ class DocTypes {
 }
 
 class Document {
-  final String image, docType, docId, expiryDate;
+  final String image, docType, docId;
+  // expiryDate;
 
-  Document(this.image, this.docType, this.docId, this.expiryDate);
+  Document(
+    this.image,
+    this.docType,
+    this.docId,
+  );
 
   Future<bool> addDoc(BuildContext context) async {
     context.loaderOverlay.show();
     FormData formData = FormData.fromMap({
       "type": docType,
       "document_id": docId,
-      "expire_date": expiryDate,
+      // "expire_date": expiryDate,
     });
     formData.files.add(
       MapEntry(
@@ -115,7 +118,7 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  textFieldText("Document Type"),
+                  textFieldText("Document Type *"),
                   AEMPLPopUpButton(
                     value: docType == null ? null : docType!.value,
                     hintText: "Select document type",
@@ -161,41 +164,41 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
                       );
                     },
                   ),
-                  textFieldText("Document Number"),
+                  textFieldText("Document Number *"),
                   AEMPLTextField(
                     controller: controller,
                     hintText: "Document identity number",
                     prefix: const Icon(Icons.info_outline),
                   ),
-                  textFieldText("Expiration date"),
-                  AEMPLPopUpButton(
-                    value: expiryDate == null
-                        ? null
-                        : DateFormat("MMM dd, yyyy").format(expiryDate!),
-                    hintText: "Select date of expiration",
-                    prefix: const Icon(
-                      Icons.calendar_today_outlined,
-                      // color: Color(0xffF8F8F8),
-                    ),
-                    onPressed: () async {
-                      DateTime? selectedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime.now()
-                            .subtract(const Duration(days: 1000 * 365)),
-                        lastDate: DateTime.now()
-                            .add(const Duration(days: 1000 * 365)),
-                        builder: (context, child) {
-                          return Theme(
-                            data: datePickerTheme(context),
-                            child: child!,
-                          );
-                        },
-                      );
-                      if (selectedDate == null) return;
-                      setState(() => expiryDate = selectedDate);
-                    },
-                  ),
+                  // textFieldText("Expiration date"),
+                  // AEMPLPopUpButton(
+                  //   value: expiryDate == null
+                  //       ? null
+                  //       : DateFormat("MMM dd, yyyy").format(expiryDate!),
+                  //   hintText: "Select date of expiration",
+                  //   prefix: const Icon(
+                  //     Icons.calendar_today_outlined,
+                  //     // color: Color(0xffF8F8F8),
+                  //   ),
+                  //   onPressed: () async {
+                  //     DateTime? selectedDate = await showDatePicker(
+                  //       context: context,
+                  //       initialDate: DateTime.now(),
+                  //       firstDate: DateTime.now()
+                  //           .subtract(const Duration(days: 1000 * 365)),
+                  //       lastDate: DateTime.now()
+                  //           .add(const Duration(days: 1000 * 365)),
+                  //       builder: (context, child) {
+                  //         return Theme(
+                  //           data: datePickerTheme(context),
+                  //           child: child!,
+                  //         );
+                  //       },
+                  //     );
+                  //     if (selectedDate == null) return;
+                  //     setState(() => expiryDate = selectedDate);
+                  //   },
+                  // ),
                   textFieldText("Image File(The file must be less than 1MB)"),
                   Builder(
                     builder: (ctx) {
@@ -269,7 +272,6 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
                       onPressed: () async {
                         if (controller.text.isEmpty ||
                             image == null ||
-                            expiryDate == null ||
                             docType == null) {
                           scaffoldMessageKey.currentState!.showSnackBar(
                             const SnackBar(
@@ -280,7 +282,7 @@ class _AddDocumentBoxState extends State<AddDocumentBox> {
                             (await image!.file)!.path,
                             docType!.id.toString(),
                             controller.text,
-                            DateFormat("yyyy-MM-dd").format(expiryDate!),
+                            // DateFormat("yyyy-MM-dd").format(expiryDate!),
                           );
                           if (await document.addDoc(context)) {
                             Navigator.pop(context);

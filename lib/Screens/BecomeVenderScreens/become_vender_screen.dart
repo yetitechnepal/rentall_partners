@@ -31,9 +31,11 @@ class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
       String value = "";
       if (index == 0) {
         value = context.read<VenderModelCubit>().state.companyName;
-      } else if (index == 1) {
-        value = context.read<VenderModelCubit>().state.pan;
-      } else if (index == 2) {
+      }
+      // else if (index == 1) {
+      //   value = context.read<VenderModelCubit>().state.pan;
+      // }
+      else if (index == 2) {
         value = context.read<VenderModelCubit>().state.information;
       } else if (index == 3) {
         value = context.read<VenderModelCubit>().state.state;
@@ -78,7 +80,8 @@ class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
                     fontSize: 20,
                     color: Theme.of(context).primaryColor,
                   ),
-                  textFieldText(isVender ? "Company Name" : "Operator Name"),
+                  textFieldText(
+                      isVender ? "Company Name *" : "Operator Name *"),
                   AEMPLTextField(
                     controller: controllers[0],
                     hintText: isVender ? "Company name" : "Operator name",
@@ -93,20 +96,24 @@ class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  textFieldText("Personal Account Number"),
-                  AEMPLTextField(
-                    controller: controllers[1],
-                    hintText: "PAN",
-                    prefix: const Icon(Icons.card_giftcard),
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Enter PAN";
-                      }
-                      return null;
-                    },
-                  ),
+                  // textFieldText("Personal Account Number"),
+                  // AEMPLTextField(
+                  //   controller: controllers[1],
+                  //   hintText: "PAN",
+                  //   prefix: const Icon(Icons.card_giftcard),
+                  //   validator: (value) {
+                  //     if (isVender) {
+                  //       if (value!.isEmpty) {
+                  //         return "Enter PAN";
+                  //       }
+                  //     }
+
+                  //     return null;
+                  //   },
+                  // ),
                   const SizedBox(height: 10),
-                  textFieldText(isVender ? "About Company" : "About Operator"),
+                  textFieldText(
+                      isVender ? "About Company *" : "About Operator *"),
                   AEMPLTextField(
                     controller: controllers[2],
                     hintText: isVender
@@ -129,7 +136,7 @@ class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
                     fontSize: 20,
                     color: Theme.of(context).primaryColor,
                   ),
-                  textFieldText("State"),
+                  textFieldText("State *"),
                   AEMPLTextField(
                     controller: controllers[3],
                     hintText: "State",
@@ -141,7 +148,7 @@ class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  textFieldText("District"),
+                  textFieldText("District *"),
                   AEMPLTextField(
                     controller: controllers[4],
                     hintText: "District",
@@ -153,11 +160,12 @@ class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  textFieldText("Ward No."),
+                  textFieldText("Ward No. *"),
                   AEMPLTextField(
                     controller: controllers[5],
                     hintText: "Ward No.",
                     prefix: const Icon(Icons.location_on),
+                    keyboardType: TextInputType.number,
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Enter Ward";
@@ -165,7 +173,7 @@ class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  textFieldText("Tole"),
+                  textFieldText("Tole *"),
                   AEMPLTextField(
                     controller: controllers[6],
                     hintText: "Tole",
@@ -177,7 +185,7 @@ class _BecomeVenderScreenState extends State<BecomeVenderScreen> {
                     },
                   ),
                   const SizedBox(height: 10),
-                  textFieldText("Country"),
+                  textFieldText("Country *"),
                   AEMPLTextField(
                     controller: controllers[7],
                     hintText: "Country",

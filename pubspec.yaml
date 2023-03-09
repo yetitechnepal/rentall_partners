@@ -62,6 +62,7 @@ dependencies:
   wechat_camera_picker: ^3.7.0
   url_launcher: ^6.0.10
   country_picker: ^2.0.20
+  defer_pointer: ^0.0.2
 
 dev_dependencies:
   flutter_test:

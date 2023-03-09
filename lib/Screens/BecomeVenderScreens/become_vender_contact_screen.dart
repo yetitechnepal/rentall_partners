@@ -54,7 +54,7 @@ class BecomeVenderContactScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10),
-                    textFieldText("Primary Email"),
+                    textFieldText("Primary Email *"),
                     AEMPLTextField(
                       controller: controllers[0],
                       hintText: "Primary email",
@@ -68,7 +68,7 @@ class BecomeVenderContactScreen extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 10),
-                    textFieldText("Primary Phone Number"),
+                    textFieldText("Primary Phone Number *"),
                     AEMPLTextField(
                       controller: controllers[1],
                       hintText: "Primary phone number",

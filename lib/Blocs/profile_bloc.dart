@@ -78,11 +78,11 @@ class ProfileContact {
 
 class ProfileDocument {
   late String type, docId, image;
-  late DateTime? expireDate;
+  // late DateTime? expireDate;
   ProfileDocument.fromMap(map) {
     type = map['type'];
     image = map['image'];
-    expireDate = DateTime.tryParse(map['expire_date']);
+    // expireDate = DateTime.tryParse(map['expire_date']);
     docId = map["document_id"];
   }
 }

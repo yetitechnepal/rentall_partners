@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/Screens/DocumentsScreen/PopUp/add_document_popup.dart';
 import 'package:rental_partners/Theme/button.dart';
@@ -99,19 +98,19 @@ class DocumentsScreen extends StatelessWidget {
                           fontSize: 12, color: Color(0xff707070)),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      "Expiration",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    // const Text(
+                    //   "Expiration",
+                    //   style: TextStyle(
+                    //     fontSize: 13,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
                     const SizedBox(height: 3),
-                    Text(
-                      DateFormat("MMM dd, yyyy").format(doc.expireDate!),
-                      style: const TextStyle(
-                          fontSize: 12, color: Color(0xff707070)),
-                    ),
+                    // Text(
+                    //   DateFormat("MMM dd, yyyy").format(doc.expireDate!),
+                    //   style: const TextStyle(
+                    //       fontSize: 12, color: Color(0xff707070)),
+                    // ),
                     const SizedBox(height: 10),
                   ],
                 ),
