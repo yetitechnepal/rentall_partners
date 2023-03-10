@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rental_partners/Screens/LoginScreen/login_screen.dart';
 import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Utils/notification_listener.dart';
@@ -67,13 +69,29 @@ class LoginSession {
     return true;
   }
 
-  logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
-    accessToken == null;
-    refreshToken == null;
-    uuid == null;
-    loginType = null;
+  Future<bool> logout() async {
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+    String? fcmToken;
+    await _firebaseMessaging.getToken().then((token) async {
+      fcmToken = token;
+    });
+    Response response = await API().post(
+      endPoint: "accounts/logout/",
+      useToken: true,
+      data: {"fcm": fcmToken},
+    );
+    if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.clear();
+      accessToken == null;
+      refreshToken == null;
+      uuid == null;
+      loginType = null;
+      return true;
+    } else {
+      Fluttertoast.showToast(msg: "Couldn't logout");
+      return false;
+    }
   }
 
   bool isVender() {

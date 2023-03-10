@@ -35,13 +35,15 @@ class AccountScreen extends StatelessWidget {
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
-                      onPressed: () {
-                        LoginSession().logout();
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (_) => LoginScreen()),
-                          (route) => true,
-                        );
+                      onPressed: () async {
+                        var check = await LoginSession().logout();
+                        if (check) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (_) => LoginScreen()),
+                            (route) => true,
+                          );
+                        }
                       },
                     ),
                     CupertinoDialogAction(
