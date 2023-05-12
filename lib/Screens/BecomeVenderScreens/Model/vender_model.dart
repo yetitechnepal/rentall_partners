@@ -146,11 +146,24 @@ class VenderModel {
       data.addAll({"experience": expMaps});
     }
     log(data.toString());
+    // FormData formData = FormData.fromMap(data);
+    // formData.files.add(MapEntry(
+    //   "profile",
+    //   await MultipartFile.fromFile(
+    //     imagePath!,
+    //     filename: "profile-" +
+    //         DateTime.now().millisecondsSinceEpoch.toString() +
+    //         '.jpg',
+    //   ),
+    // ));
     Response response = await API().post(
       endPoint: "accounts/partner-registration/",
       data: data,
       useToken: false,
     );
+    // log(formData.fields.toString());
+    // log(formData.files.toString());
+    log(response.statusCode.toString());
     context.loaderOverlay.hide();
     scaffoldMessageKey.currentState!
         .showSnackBar(SnackBar(content: Text(response.data['message'])));
@@ -167,6 +180,18 @@ class VenderModel {
         loginType: LoginType.vender,
       );
       LoginSession().saveSession();
+      FormData formData = FormData();
+      formData.files.add(MapEntry(
+        "image",
+        await MultipartFile.fromFile(
+          imagePath!,
+          filename: "profile-" +
+              DateTime.now().millisecondsSinceEpoch.toString() +
+              '.jpg',
+        ),
+      ));
+      Response profileResponse = await API()
+          .post(endPoint: "accounts/profile-change/", data: formData);
       return true;
     } else {
       return false;

@@ -313,9 +313,9 @@ Future<bool> saveExperience(
   };
   if (id != null) {
     data.addAll({"id": id});
-    response = await API().put(endPoint: "accounts/experience/", data: data);
+    response = await API().put(endPoint: "operator/experience/", data: data);
   } else {
-    response = await API().post(endPoint: "accounts/experience/", data: data);
+    response = await API().post(endPoint: "operator/experience/", data: data);
   }
 
   scaffoldMessageKey.currentState!

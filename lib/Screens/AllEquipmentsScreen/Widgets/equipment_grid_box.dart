@@ -31,8 +31,10 @@ class EquipmentGridBox extends StatelessWidget {
           Container(
             constraints: const BoxConstraints(maxWidth: 500),
             child: AEMPLTextField(
-              onSubmit: (value) => setState(() => keyWord = value),
-              onChanged: (value) => setState(() => keyWord = value),
+              onSubmit: (value) =>
+                  setState(() => keyWord = value.toLowerCase()),
+              onChanged: (value) =>
+                  setState(() => keyWord = value.toLowerCase()),
               hintText: "Search....",
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.search,

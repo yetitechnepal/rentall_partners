@@ -1,6 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rental_partners/Blocs/profile_bloc.dart';
 import 'package:rental_partners/OperatorScreen/OperatorExperienceScreen/operator_experince_screen.dart';
@@ -11,6 +12,9 @@ import 'package:rental_partners/Singletons/api_call.dart';
 import 'package:rental_partners/Singletons/login_session.dart';
 import 'package:rental_partners/Theme/colors.dart';
 import 'package:rental_partners/Theme/dropshadows.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../LoginScreen/login_screen.dart';
 
 class AddressPanBox extends StatelessWidget {
   final ProfileModel profile;
@@ -142,11 +146,25 @@ class AddressPanBox extends StatelessWidget {
                       ),
                     ),
                     onPressed: () async {
-                      LoginSession().logout();
-                      await API().post(
+                      var response = await API().post(
                         endPoint: "accounts/delete-user/",
                         useToken: true,
                       );
+                      if (response.statusCode == 200) {
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.clear();
+                        LoginSession().accessToken == null;
+                        LoginSession().refreshToken == null;
+                        LoginSession().uuid == null;
+                        LoginSession().loginType = null;
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (_) => LoginScreen()),
+                          (route) => true,
+                        );
+                      } else {
+                        Fluttertoast.showToast(msg: "Couldn't delete account.");
+                      }
                     },
                   ),
                   CupertinoDialogAction(
