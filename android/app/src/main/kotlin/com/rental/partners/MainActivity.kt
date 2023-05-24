@@ -1,4 +1,4 @@
-package com.yetitech.rentallpartners
+package com.rental.partners
 
 import io.flutter.embedding.android.FlutterActivity
 

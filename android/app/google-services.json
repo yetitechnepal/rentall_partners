@@ -7,6 +7,158 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:77506248560:android:96bc8c25889225af4bd9b5",
+        "android_client_info": {
+          "package_name": "com.rental.partners"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77506248560-05477eqen51mjudm01v232b3fpi53qiv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.partners",
+            "certificate_hash": "bc7ed3d897b870fa59650c410aa651d6a03619ba"
+          }
+        },
+        {
+          "client_id": "77506248560-4r6usk2sgkvra0luv5ccoirvklio4g18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.partners",
+            "certificate_hash": "2260b04325ba35a84ac21672f03acc0ea3d1801e"
+          }
+        },
+        {
+          "client_id": "77506248560-ck5vd13oajedgeadcfh6sfgrk2me4j9t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.partners",
+            "certificate_hash": "928e4c3148b3eee682083ee71ccf9a7122fec364"
+          }
+        },
+        {
+          "client_id": "77506248560-menc8asi0555imlnim2p1s8bvvj5t2gj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.partners",
+            "certificate_hash": "a4f6722addedb1c4044bf5a0b5ea5745cb19d715"
+          }
+        },
+        {
+          "client_id": "77506248560-nfc6di9bbtcrd9oqoph08okj8afvfo4o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.partners",
+            "certificate_hash": "342e151df2bd6fc6e41944b58f5203ed575ccaf4"
+          }
+        },
+        {
+          "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy_GqUEon9SVA4pV5OlIAz6H2nj73Zj_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77506248560-ajnr78mir980roshm6it9747r1qcebf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yetitech.rentallpartners"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77506248560:android:c737aae09d66b76b4bd9b5",
+        "android_client_info": {
+          "package_name": "com.rental.solutions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77506248560-18hq5cvsu23v012epij145i3f9njspd6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.solutions",
+            "certificate_hash": "2260b04325ba35a84ac21672f03acc0ea3d1801e"
+          }
+        },
+        {
+          "client_id": "77506248560-44b1pibp139vcpcucddq2oehrg2mta5f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.solutions",
+            "certificate_hash": "bc7ed3d897b870fa59650c410aa651d6a03619ba"
+          }
+        },
+        {
+          "client_id": "77506248560-5v560vgm3bmsgofc3mdnk8pv7q78djls.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.solutions",
+            "certificate_hash": "342e151df2bd6fc6e41944b58f5203ed575ccaf4"
+          }
+        },
+        {
+          "client_id": "77506248560-6njemid5iicc59mdtt6ln1e3kstec6do.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.solutions",
+            "certificate_hash": "942dd82d355c8e18c6abc7347952473c2b685fa5"
+          }
+        },
+        {
+          "client_id": "77506248560-6teg5kc4fn8stv5e8t4e9jvuni68smrl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rental.solutions",
+            "certificate_hash": "a4f6722addedb1c4044bf5a0b5ea5745cb19d715"
+          }
+        },
+        {
+          "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy_GqUEon9SVA4pV5OlIAz6H2nj73Zj_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77506248560-7iiqpnc0rs1mks50te4jlkfh99ops57a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77506248560-ajnr78mir980roshm6it9747r1qcebf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yetitech.rentallpartners"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:77506248560:android:8cc7c1474ee2b9f74bd9b5",
         "android_client_info": {
           "package_name": "com.theyetitech.equipmental"
