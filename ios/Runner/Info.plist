@@ -37,6 +37,8 @@
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Upload images of equipments and attachments. This will be used as gallery for the equipments and attachments.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To capture profile, equipments and attachments photos</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
