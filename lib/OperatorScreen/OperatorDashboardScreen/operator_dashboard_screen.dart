@@ -56,8 +56,12 @@ class OperatorDashboardScreen extends StatelessWidget {
                             width: 60,
                             placeholder: (context, url) => const Center(
                                 child: CupertinoActivityIndicator()),
-                            errorWidget: (_, __, ___) =>
-                                Image.asset("assets/images/placeholder.png"),
+                            errorWidget: (_, __, ___) => Image.asset(
+                              "assets/images/placeholder.png",
+                              height: 60,
+                              width: 60,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

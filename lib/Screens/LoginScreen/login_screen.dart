@@ -221,7 +221,7 @@ class LoginScreen extends StatelessWidget {
                               onTap: () {
                                 launchUrl(
                                   Uri.parse(
-                                      "https://rentallsolutions.com/rental-privacy-policy.html"),
+                                      "https://super.rentallsolutions.com/rental-privacy-policy.html"),
                                   mode: LaunchMode.externalApplication,
                                 );
                               },

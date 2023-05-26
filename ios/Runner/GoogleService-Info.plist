@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>77506248560-ajnr78mir980roshm6it9747r1qcebf7.apps.googleusercontent.com</string>
+	<string>77506248560-p0onjshthqp8cv46l6iaeopch1qm0737.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.77506248560-ajnr78mir980roshm6it9747r1qcebf7</string>
+	<string>com.googleusercontent.apps.77506248560-p0onjshthqp8cv46l6iaeopch1qm0737</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>77506248560-0rcj37hip73hl5h4aht0faucqmspqmkv.apps.googleusercontent.com</string>
+	<string>77506248560-05477eqen51mjudm01v232b3fpi53qiv.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDW3GjqWz0YngkNh1ZQXrjQEiyLrVe0lPc</string>
 	<key>GCM_SENDER_ID</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.yetitech.rentallpartners</string>
+	<string>com.rental.partners</string>
 	<key>PROJECT_ID</key>
 	<string>equipment-rental-app</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:77506248560:ios:cdad3d646ffb51d84bd9b5</string>
+	<string>1:77506248560:ios:a7264a415fdf3cc24bd9b5</string>
 </dict>
 </plist>

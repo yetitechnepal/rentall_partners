@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '77506248560',
     projectId: 'equipment-rental-app',
     storageBucket: 'equipment-rental-app.appspot.com',
-    androidClientId: '77506248560-0rcj37hip73hl5h4aht0faucqmspqmkv.apps.googleusercontent.com',
+    androidClientId: '77506248560-05477eqen51mjudm01v232b3fpi53qiv.apps.googleusercontent.com',
     iosClientId: '77506248560-p0onjshthqp8cv46l6iaeopch1qm0737.apps.googleusercontent.com',
     iosBundleId: 'com.rental.partners',
   );
